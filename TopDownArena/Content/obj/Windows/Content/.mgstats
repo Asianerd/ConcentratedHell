@@ -1,3 +1,7 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"D:/GithubRepos/TopDownArena/TopDownArena/Content/Blank.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Content/Blank.xnb","TextureProcessor","Texture2DContent",220,16469,0.1246611
+"D:/GithubRepos/TopDownArena/TopDownArena/Content/EyeBlink/EyeBlink1.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Content/EyeBlink/EyeBlink1.xnb","TextureProcessor","Texture2DContent",154,16469,0.2374806
+"D:/GithubRepos/TopDownArena/TopDownArena/Content/EyeBlink/EyeBlink2.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Content/EyeBlink/EyeBlink2.xnb","TextureProcessor","Texture2DContent",138,16469,0.0017009
+"D:/GithubRepos/TopDownArena/TopDownArena/Content/EyeBlink/EyeBlink3.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Content/EyeBlink/EyeBlink3.xnb","TextureProcessor","Texture2DContent",131,16469,0.0016672
 "D:/GithubRepos/TopDownArena/TopDownArena/Content/Player.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Content/Player.xnb","TextureProcessor","Texture2DContent",289,16469,0.1170029
 "D:/GithubRepos/TopDownArena/TopDownArena/Content/PlayerEyes.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Content/PlayerEyes.xnb","TextureProcessor","Texture2DContent",154,16469,0.2271664

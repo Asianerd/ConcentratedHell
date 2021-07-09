@@ -36,3 +36,7 @@ D:\GithubRepos\TopDownArena\TopDownArena\obj\Debug\netcoreapp3.1\TopDownArena.pd
 D:\GithubRepos\TopDownArena\TopDownArena\obj\Debug\netcoreapp3.1\TopDownArena.genruntimeconfig.cache
 D:\GithubRepos\TopDownArena\TopDownArena\bin\Debug\netcoreapp3.1\Content\Player.xnb
 D:\GithubRepos\TopDownArena\TopDownArena\bin\Debug\netcoreapp3.1\Content\PlayerEyes.xnb
+D:\GithubRepos\TopDownArena\TopDownArena\bin\Debug\netcoreapp3.1\Content\Blank.xnb
+D:\GithubRepos\TopDownArena\TopDownArena\bin\Debug\netcoreapp3.1\Content\EyeBlink\EyeBlink1.xnb
+D:\GithubRepos\TopDownArena\TopDownArena\bin\Debug\netcoreapp3.1\Content\EyeBlink\EyeBlink2.xnb
+D:\GithubRepos\TopDownArena\TopDownArena\bin\Debug\netcoreapp3.1\Content\EyeBlink\EyeBlink3.xnb

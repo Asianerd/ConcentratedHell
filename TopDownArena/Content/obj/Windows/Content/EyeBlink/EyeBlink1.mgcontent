@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>D:/GithubRepos/TopDownArena/TopDownArena/Content/PlayerEyes.png</SourceFile>
-  <SourceTime>2021-07-09T09:50:04.7025965+08:00</SourceTime>
-  <DestFile>D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/PlayerEyes.xnb</DestFile>
-  <DestTime>2021-07-09T21:35:31.9628724+08:00</DestTime>
+  <SourceFile>D:/GithubRepos/TopDownArena/TopDownArena/Content/EyeBlink/EyeBlink1.png</SourceFile>
+  <SourceTime>2021-07-09T21:32:02.2282627+08:00</SourceTime>
+  <DestFile>D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Content/EyeBlink/EyeBlink1.xnb</DestFile>
+  <DestTime>2021-07-09T21:35:30.8618335+08:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+08:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

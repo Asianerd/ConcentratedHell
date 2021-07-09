@@ -4,10 +4,18 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>D:/GithubRepos/TopDownArena/TopDownArena/Content/Blank.png</File>
+    <File>D:/GithubRepos/TopDownArena/TopDownArena/Content/EyeBlink/EyeBlink1.png</File>
+    <File>D:/GithubRepos/TopDownArena/TopDownArena/Content/EyeBlink/EyeBlink2.png</File>
+    <File>D:/GithubRepos/TopDownArena/TopDownArena/Content/EyeBlink/EyeBlink3.png</File>
     <File>D:/GithubRepos/TopDownArena/TopDownArena/Content/Player.png</File>
     <File>D:/GithubRepos/TopDownArena/TopDownArena/Content/PlayerEyes.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
