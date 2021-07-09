@@ -1,0 +1,3 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"D:/GithubRepos/TopDownArena/TopDownArena/Content/Player.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Player.xnb","TextureProcessor","Texture2DContent",289,16469,0.119926
+"D:/GithubRepos/TopDownArena/TopDownArena/Content/PlayerEyes.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/PlayerEyes.xnb","TextureProcessor","Texture2DContent",154,16469,0.0018152

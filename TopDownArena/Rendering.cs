@@ -14,8 +14,20 @@ namespace TopDownArena
         public static SpriteBatch PlayerSpriteBatch;
         public static SpriteBatch EntitySpriteBatch;
 
+        public static int SizingScale = 64;
+        /* So that sprites are rendered to the proper size
+         */
+
+        public static void Initialize(SpriteBatch _playerSpriteBatch, SpriteBatch _entitySpriteBatch)
+        {
+            PlayerSpriteBatch = _playerSpriteBatch;
+            EntitySpriteBatch = _entitySpriteBatch;
+        }
+
         public static void RenderObjects()
         {
+            PlayerSpriteBatch.Begin();
+            EntitySpriteBatch.Begin();
             if (DrawEntities != null)
             {
                 DrawEntities(PlayerSpriteBatch);
@@ -24,6 +36,8 @@ namespace TopDownArena
             {
                 DrawPlayer(EntitySpriteBatch);
             }
+            PlayerSpriteBatch.End();
+            EntitySpriteBatch.End();
         }
     }
 }
