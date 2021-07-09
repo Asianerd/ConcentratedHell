@@ -6,6 +6,7 @@ namespace TopDownArena
 {
     public static class Universe
     {
+        public static Random RANDOM = new Random();
         public static int SCALE = 1;
         /* Scale
          * 1 = 1 scale : 1 pixel
