@@ -8,12 +8,15 @@ namespace TopDownArena
 {
     class PlayerEyes
     {
-        public Texture2D Sprite;
+        public Texture2D NeutralSprite;
+        public List<Texture2D> BlinkSprites;
         public float EyeDistance = 5f;
+        public int EyeState;
 
         public PlayerEyes(Texture2D _sprite)
         {
-            Sprite = _sprite;
+            NeutralSprite = _sprite;
+            EyeState = Universe.RANDOM.Next(0, 300);
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 _position, Vector2 _size)
@@ -24,7 +27,7 @@ namespace TopDownArena
                 );
 
             spriteBatch.Draw(
-                Sprite,
+                NeutralSprite,
                 _position+_offsetPosition,
                 null,
                 Color.White,

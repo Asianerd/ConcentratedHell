@@ -14,14 +14,24 @@ namespace TopDownArena
 
         public static void Initialize(Texture2D _bodySprite, Texture2D _eyeSprite)
         {
-            Instance = new Player(new Vector2(0, 0));
-            BodySprite = _bodySprite;
-            
-            Instance.Size = new Vector2(64, 64); // size in pixels
-            Rendering.DrawPlayer += Instance.Draw;
-            Main.UpdateEvent += Instance.Update;
+            Instance = new Player(Main.screenSize / 2);
+            Instance.__privateInit__(_bodySprite, _eyeSprite);
+        }
 
-            Instance.Eyes = new PlayerEyes(_eyeSprite);
+        void __privateInit__(Texture2D _bodySprite, Texture2D _eyeSprite)
+        {
+            BodySprite = _bodySprite;
+
+            Size = new Vector2(64, 64); // size in pixels
+            Rendering.DrawPlayer += Draw;
+            Main.UpdateEvent += Update;
+
+            Eyes = new PlayerEyes(_eyeSprite);
+
+            #region Game attributes
+            Health = new GameValue("Health", 0, 100, 0.1);
+            Stamina = new GameValue("Stamina", 0, 500, 2);
+            #endregion
         }
         #endregion
 
@@ -52,8 +62,8 @@ namespace TopDownArena
         #endregion
 
         #region Game attributes
-        public int Health;
-        public int Stamina;
+        public GameValue Health;
+        public GameValue Stamina;
         #endregion
         #endregion
 
@@ -72,7 +82,11 @@ namespace TopDownArena
         public void Move()
         {
             var _kInput = Keyboard.GetState();
-            float _speed = _kInput.IsKeyDown(Keys.LeftShift) ? SprintMultiplier * Speed: Speed;
+            bool _sprinting = _kInput.IsKeyDown(Keys.LeftShift);
+
+            float _speed = _sprinting && (Stamina.I > 0) ? SprintMultiplier * Speed : Speed;
+
+            Vector2 _startingPosition = Position;
             if (_kInput.IsKeyDown(Keys.W))
             {
                 Position.Y -= _speed;
@@ -89,7 +103,20 @@ namespace TopDownArena
             {
                 Position.X += _speed;
             }
+            Vector2 _endingPosition = Position;
+
+            if (_sprinting && ((_startingPosition-_endingPosition) != Vector2.Zero))
+            {
+                Stamina.AffectValue(-7);
+            }
+            else
+            {
+                Stamina.Regenerate();
+            }
+
+            Health.Regenerate();
         }
+
 
         public void Draw(SpriteBatch spriteBatch)
         {
