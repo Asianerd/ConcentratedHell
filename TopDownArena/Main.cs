@@ -7,12 +7,17 @@ namespace TopDownArena
     public class Main : Game
     {
         private GraphicsDeviceManager _graphics;
+        public static Vector2 screenSize = new Vector2(1920, 1080);
         public delegate void MainEvents();
         public static event MainEvents UpdateEvent;
 
         public Main()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.PreferredBackBufferWidth = (int)screenSize.X;
+            _graphics.PreferredBackBufferHeight = (int)screenSize.Y;
+            _graphics.IsFullScreen = true;
+
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -20,6 +25,7 @@ namespace TopDownArena
         protected override void Initialize()
         {
             Player.Initialize(Content.Load<Texture2D>("Player"),Content.Load<Texture2D>("PlayerEyes"));
+            UI.Initialize(new SpriteBatch(GraphicsDevice), Content.Load<Texture2D>("Blank"));
             base.Initialize();
         }
 
@@ -38,6 +44,8 @@ namespace TopDownArena
                 UpdateEvent();
             }
 
+            System.Diagnostics.Debug.WriteLine(1 / (float)gameTime.ElapsedGameTime.TotalSeconds);
+
             base.Update(gameTime);
         }
 
@@ -46,6 +54,7 @@ namespace TopDownArena
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             Rendering.RenderObjects();
+            UI.Instance.Draw();
 
             base.Draw(gameTime);
         }
