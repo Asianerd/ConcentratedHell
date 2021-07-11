@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 
-namespace TopDownArena
+namespace ConcentratedHell
 {
     class Player
     {
@@ -39,16 +39,17 @@ namespace TopDownArena
         #region Fields
         #region Physics
         public Vector2 Position;
-        public Vector2 Origin
+        Vector2 DrawnOffset;
+        public Vector2 DrawPosition
         {
             get
             {
-                return Position + (Size/2);
+                return Position - DrawnOffset;
             }
         }
         public float Speed = 5f;
         public float SprintMultiplier = 2f;
-        public Vector2 Size;
+        public Vector2 Size = new Vector2(64 , 64);
         #endregion
 
         #region Assets
@@ -70,12 +71,13 @@ namespace TopDownArena
         Player(Vector2 position)
         {
             Position = position;
+            DrawnOffset = Size / 2;
         }
         
         public void Update()
         {
             MousePosition = Mouse.GetState().Position.ToVector2();
-            DegreesToMouse = Universe.ANGLETO(Origin, MousePosition);
+            DegreesToMouse = Universe.ANGLETO(Position, MousePosition);
             Move();
         }
 
@@ -87,22 +89,29 @@ namespace TopDownArena
             float _speed = _sprinting && (Stamina.I > 0) ? SprintMultiplier * Speed : Speed;
 
             Vector2 _startingPosition = Position;
+            Vector2 MovingDirection = new Vector2(0, 0);
             if (_kInput.IsKeyDown(Keys.W))
             {
-                Position.Y -= _speed;
+                MovingDirection.Y = -1;
             }
             if (_kInput.IsKeyDown(Keys.S))
             {
-                Position.Y += _speed;
+                MovingDirection.Y = 1;
             }
             if (_kInput.IsKeyDown(Keys.A))
             {
-                Position.X -= _speed;
+                MovingDirection.X = -1;
             }
             if (_kInput.IsKeyDown(Keys.D))
             {
-                Position.X += _speed;
+                MovingDirection.X = 1;
             }
+            if (MovingDirection != Vector2.Zero)
+            {
+                MovingDirection.Normalize();
+            }
+            Position += MovingDirection * _speed;
+
             Vector2 _endingPosition = Position;
 
             if (_sprinting && ((_startingPosition-_endingPosition) != Vector2.Zero))
@@ -120,10 +129,11 @@ namespace TopDownArena
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Vector2 _renderedPosition = new Vector2((float)(Position.X * Universe.SCALE), (float)(Position.Y * Universe.SCALE));
+            //Vector2 _renderedPosition = new Vector2((float)(Position.X * Universe.SCALE), (float)(Position.Y * Universe.SCALE));
+            
             spriteBatch.Draw(
                 BodySprite,
-                _renderedPosition,
+                DrawPosition,
                 null,
                 Color.White,
                 0f,
@@ -132,7 +142,7 @@ namespace TopDownArena
                 SpriteEffects.None,
                 0f
                 );
-            Eyes.Draw(spriteBatch, _renderedPosition, Size);
+            Eyes.Draw(spriteBatch, DrawPosition, Size);
         }
     }
 }
