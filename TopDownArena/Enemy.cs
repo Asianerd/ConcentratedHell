@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace TopDownArena
+namespace ConcentratedHell
 {
     class Enemy
     {
@@ -12,13 +12,15 @@ namespace TopDownArena
 
         public static Texture2D Sprite;
         public Vector2 Position;
-        public Vector2 Origin
+        Vector2 DrawnOffset;
+        public Vector2 DrawnPosition
         {
             get
             {
-                return Position + (Size / 2);
+                return Position - DrawnOffset;
             }
         }
+
         public Vector2 Size;
         public EnemyEyes Eyes;
 
@@ -41,20 +43,21 @@ namespace TopDownArena
 
             Enemies.Add(this);
             Size = new Vector2(64, 64);
+            DrawnOffset = (Size / 2);
             Eyes = new EnemyEyes(this);
             AngleToPlayer = MathHelper.ToRadians(Universe.RANDOM.Next(0, 360));
         }
 
         void Update()
         {
-            if((Vector2.Distance(Player.Instance.Origin, Origin) <= TriggerDistance) && !Angry)
+            if((Vector2.Distance(Player.Instance.Position, Position) <= TriggerDistance) && !Angry)
             {
                 Angry = true;
                 Eyes.SpriteUsed = EnemyEyes.AngrySprite;
             }
             if (Angry)
             {
-                AngleToPlayer = Universe.ANGLETO(Origin, Player.Instance.Origin, false);
+                AngleToPlayer = Universe.ANGLETO(Position, Player.Instance.Position, false);
                 Move();
             }
         }
@@ -66,8 +69,8 @@ namespace TopDownArena
 
         void Draw(SpriteBatch _spriteBatch)
         {
-            _spriteBatch.Draw(Sprite, Position, Color.White);
-            Eyes.Draw(_spriteBatch, Position, Size);
+            _spriteBatch.Draw(Sprite, DrawnPosition, Color.White);
+            Eyes.Draw(_spriteBatch, DrawnPosition, Size);
         }
     }
 }
