@@ -4,12 +4,12 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace TopDownArena
+namespace ConcentratedHell
 {
     class PlayerEyes
     {
         public Texture2D NeutralSprite;
-        public List<Texture2D> BlinkSprites;
+        //public List<Texture2D> BlinkSprites;
         public float EyeDistance = 5f;
         public int EyeState;
 

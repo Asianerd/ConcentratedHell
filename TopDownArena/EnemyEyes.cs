@@ -4,13 +4,13 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace TopDownArena
+namespace ConcentratedHell
 {
     class EnemyEyes
     {
         public static Texture2D PassiveSprite;
         public static Texture2D AngrySprite;
-        public static List<Texture2D> BlinkSprites;
+        //public static List<Texture2D> BlinkSprites;
         public Texture2D SpriteUsed; // To avoid an if statement every frame
         public float EyeDistance = 5f;
         public int EyeState;

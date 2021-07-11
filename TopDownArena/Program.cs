@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TopDownArena
+namespace ConcentratedHell
 {
     public static class Program
     {
