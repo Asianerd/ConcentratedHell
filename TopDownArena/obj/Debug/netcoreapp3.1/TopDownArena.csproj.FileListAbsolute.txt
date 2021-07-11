@@ -40,3 +40,5 @@ D:\GithubRepos\TopDownArena\TopDownArena\bin\Debug\netcoreapp3.1\Content\Blank.x
 D:\GithubRepos\TopDownArena\TopDownArena\bin\Debug\netcoreapp3.1\Content\EyeBlink\EyeBlink1.xnb
 D:\GithubRepos\TopDownArena\TopDownArena\bin\Debug\netcoreapp3.1\Content\EyeBlink\EyeBlink2.xnb
 D:\GithubRepos\TopDownArena\TopDownArena\bin\Debug\netcoreapp3.1\Content\EyeBlink\EyeBlink3.xnb
+D:\GithubRepos\TopDownArena\TopDownArena\bin\Debug\netcoreapp3.1\Content\Enemy.xnb
+D:\GithubRepos\TopDownArena\TopDownArena\bin\Debug\netcoreapp3.1\Content\EnemyEyes.xnb
