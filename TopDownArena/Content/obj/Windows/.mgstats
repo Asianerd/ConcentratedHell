@@ -1,9 +1,10 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"D:/GithubRepos/TopDownArena/TopDownArena/Content/Blank.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Blank.xnb","TextureProcessor","Texture2DContent",220,16469,0.1397956
-"D:/GithubRepos/TopDownArena/TopDownArena/Content/Enemy.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Enemy.xnb","TextureProcessor","Texture2DContent",283,16469,0.0055053
-"D:/GithubRepos/TopDownArena/TopDownArena/Content/EnemyEyes.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/EnemyEyes.xnb","TextureProcessor","Texture2DContent",165,16469,0.0040545
-"D:/GithubRepos/TopDownArena/TopDownArena/Content/EyeBlink/EyeBlink1.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/EyeBlink/EyeBlink1.xnb","TextureProcessor","Texture2DContent",154,16469,0.0024131
-"D:/GithubRepos/TopDownArena/TopDownArena/Content/EyeBlink/EyeBlink2.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/EyeBlink/EyeBlink2.xnb","TextureProcessor","Texture2DContent",138,16469,0.0064057
-"D:/GithubRepos/TopDownArena/TopDownArena/Content/EyeBlink/EyeBlink3.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/EyeBlink/EyeBlink3.xnb","TextureProcessor","Texture2DContent",131,16469,0.0028328
-"D:/GithubRepos/TopDownArena/TopDownArena/Content/Player.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Player.xnb","TextureProcessor","Texture2DContent",289,16469,0.0102431
-"D:/GithubRepos/TopDownArena/TopDownArena/Content/PlayerEyes.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/PlayerEyes.xnb","TextureProcessor","Texture2DContent",154,16469,0.023036
+"D:/GithubRepos/TopDownArena/TopDownArena/Content/Blank.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Blank.xnb","TextureProcessor","Texture2DContent",220,16469,0.118947
+"D:/GithubRepos/TopDownArena/TopDownArena/Content/Bullet.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Bullet.xnb","TextureProcessor","Texture2DContent",258,16469,0.0016651
+"D:/GithubRepos/TopDownArena/TopDownArena/Content/Enemy.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Enemy.xnb","TextureProcessor","Texture2DContent",283,16469,0.0016864
+"D:/GithubRepos/TopDownArena/TopDownArena/Content/EnemyEyes.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/EnemyEyes.xnb","TextureProcessor","Texture2DContent",165,16469,0.0055466
+"D:/GithubRepos/TopDownArena/TopDownArena/Content/EyeBlink/EyeBlink1.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/EyeBlink/EyeBlink1.xnb","TextureProcessor","Texture2DContent",154,16469,0.0036917
+"D:/GithubRepos/TopDownArena/TopDownArena/Content/EyeBlink/EyeBlink2.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/EyeBlink/EyeBlink2.xnb","TextureProcessor","Texture2DContent",138,16469,0.0039064
+"D:/GithubRepos/TopDownArena/TopDownArena/Content/EyeBlink/EyeBlink3.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/EyeBlink/EyeBlink3.xnb","TextureProcessor","Texture2DContent",131,16469,0.0020865
+"D:/GithubRepos/TopDownArena/TopDownArena/Content/Player.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Player.xnb","TextureProcessor","Texture2DContent",289,16469,0.0031041
+"D:/GithubRepos/TopDownArena/TopDownArena/Content/PlayerEyes.png","D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/PlayerEyes.xnb","TextureProcessor","Texture2DContent",154,16469,0.0021778

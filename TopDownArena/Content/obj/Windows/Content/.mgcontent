@@ -5,6 +5,7 @@
   <Config />
   <SourceFiles>
     <File>D:/GithubRepos/TopDownArena/TopDownArena/Content/Blank.png</File>
+    <File>D:/GithubRepos/TopDownArena/TopDownArena/Content/Bullet.png</File>
     <File>D:/GithubRepos/TopDownArena/TopDownArena/Content/Enemy.png</File>
     <File>D:/GithubRepos/TopDownArena/TopDownArena/Content/EnemyEyes.png</File>
     <File>D:/GithubRepos/TopDownArena/TopDownArena/Content/EyeBlink/EyeBlink1.png</File>
@@ -14,6 +15,7 @@
     <File>D:/GithubRepos/TopDownArena/TopDownArena/Content/PlayerEyes.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

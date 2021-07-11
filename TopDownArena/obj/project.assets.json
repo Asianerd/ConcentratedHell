@@ -7328,9 +7328,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GithubRepos\\TopDownArena\\TopDownArena\\TopDownArena.csproj",
-      "projectName": "TopDownArena",
-      "projectPath": "D:\\GithubRepos\\TopDownArena\\TopDownArena\\TopDownArena.csproj",
+      "projectUniqueName": "D:\\GithubRepos\\TopDownArena\\TopDownArena\\ConcentratedHell.csproj",
+      "projectName": "ConcentratedHell",
+      "projectPath": "D:\\GithubRepos\\TopDownArena\\TopDownArena\\ConcentratedHell.csproj",
       "packagesPath": "C:\\Users\\ironr\\.nuget\\packages\\",
       "outputPath": "D:\\GithubRepos\\TopDownArena\\TopDownArena\\obj\\",
       "projectStyle": "PackageReference",

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>D:/GithubRepos/TopDownArena/TopDownArena/Content/Enemy.png</SourceFile>
-  <SourceTime>2021-07-11T15:14:08.0532257+08:00</SourceTime>
-  <DestFile>D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Enemy.xnb</DestFile>
-  <DestTime>2021-07-12T06:22:16.0298461+08:00</DestTime>
+  <SourceFile>D:/GithubRepos/TopDownArena/TopDownArena/Content/Bullet.png</SourceFile>
+  <SourceTime>2021-07-12T06:22:12.112935+08:00</SourceTime>
+  <DestFile>D:/GithubRepos/TopDownArena/TopDownArena/Content/bin/Windows/Bullet.xnb</DestFile>
+  <DestTime>2021-07-12T06:22:16.0288445+08:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+08:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
