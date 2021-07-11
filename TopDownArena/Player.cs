@@ -75,7 +75,7 @@ namespace TopDownArena
         public void Update()
         {
             MousePosition = Mouse.GetState().Position.ToVector2();
-            DegreesToMouse = MathHelper.ToDegrees((float)Math.Atan2(MousePosition.Y - Origin.Y, MousePosition.X - Origin.X));
+            DegreesToMouse = Universe.ANGLETO(Origin, MousePosition);
             Move();
         }
 
