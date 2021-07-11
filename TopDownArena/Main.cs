@@ -1,8 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace TopDownArena
+namespace ConcentratedHell
 {
     public class Main : Game
     {
@@ -27,10 +28,16 @@ namespace TopDownArena
             Player.Initialize(Content.Load<Texture2D>("Player"),Content.Load<Texture2D>("PlayerEyes"));
             UI.Initialize(new SpriteBatch(GraphicsDevice), Content.Load<Texture2D>("Blank"));
             Enemy.Initialize(Content.Load<Texture2D>("Enemy"), Content.Load<Texture2D>("PlayerEyes"), Content.Load<Texture2D>("EnemyEyes"));
+            Projectile.Initialize(new Dictionary<Projectile.ProjectileType, Texture2D> {
+                { Projectile.ProjectileType.Bullet , Content.Load<Texture2D>("Bullet") }
+                /*{ Projectile.ProjectileType.Arrow , Content.Load<Texture2D>("Arrow") }*/
+            });
             base.Initialize();
 
             Enemy.Enemies.Add(new Enemy(new Vector2(100, 100)));
             Enemy.Enemies.Add(new Enemy(new Vector2(300, 300)));
+
+            Bullet x = new Bullet(90f, new Vector2(500, 500), 1f);
         }
 
         protected override void LoadContent()
@@ -47,8 +54,6 @@ namespace TopDownArena
             {
                 UpdateEvent();
             }
-
-            System.Diagnostics.Debug.WriteLine(1 / (float)gameTime.ElapsedGameTime.TotalSeconds);
 
             base.Update(gameTime);
         }
