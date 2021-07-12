@@ -47,38 +47,5 @@ namespace ConcentratedHell
 
             SpriteBatch.End();
         }
-
-        class Bar
-        {
-            Vector2 Start;
-            Vector2 End;
-            int Height;
-            Color Color;
-
-            public Bar(Vector2 _start, Vector2 _end, Color _color, int _height)
-            {
-                Start = _start;
-                End = _end;
-                Color = _color;
-                Height = _height;
-            }
-
-            public float Lerp(float _percentage)
-            {
-                return ((End.X - Start.X) * _percentage);
-            }
-
-            public void Draw(SpriteBatch spriteBatch, float value)
-            {
-                spriteBatch.Draw(BlankState,
-                    new Rectangle(
-                        (int)Start.X,
-                        (int)Start.Y,
-                        (int)Lerp(value),
-                        Height),
-                    Color
-                    );
-            }
-        }
     }
 }
