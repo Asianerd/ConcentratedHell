@@ -30,15 +30,13 @@ namespace ConcentratedHell
             Cursor.Initialize(Content.Load<Texture2D>("Cursor"));
             Player.Initialize(Content.Load<Texture2D>("Player"),Content.Load<Texture2D>("PlayerEyes"));
             UI.Initialize(new SpriteBatch(GraphicsDevice), Content.Load<Texture2D>("Blank"), Content.Load<SpriteFont>("UIFont"));
+            Bar.Initialize(Content.Load<Texture2D>("Blank"));
             Enemy.Initialize(Content.Load<Texture2D>("Enemy"), Content.Load<Texture2D>("PlayerEyes"), Content.Load<Texture2D>("EnemyEyes"));
             Projectile.Initialize(new Dictionary<Projectile.ProjectileType, Texture2D> {
                 { Projectile.ProjectileType.Bullet , Content.Load<Texture2D>("Bullet") }
                 /*{ Projectile.ProjectileType.Arrow , Content.Load<Texture2D>("Arrow") }*/
             });
             base.Initialize();
-
-            Enemy.Enemies.Add(new Enemy(new Vector2(100, 100)));
-            Enemy.Enemies.Add(new Enemy(new Vector2(300, 300)));
         }
 
         protected override void LoadContent()
