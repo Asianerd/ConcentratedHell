@@ -11,6 +11,7 @@ namespace ConcentratedHell
         Texture2D Sprite;
         float Speed = 1f;
         float CollideDistance = 50f;
+        double Damage = 10;
 
         public Bullet(double _direction, Vector2 _position, float _speed) : base(_direction, _position)
         {
@@ -61,7 +62,8 @@ namespace ConcentratedHell
             {
                 if (nearest <= CollideDistance)
                 {
-                    candidate.Destroy();
+                    candidate.Health.AffectValue(-Damage);
+                    candidate.ToggleAnger();
                     Dispose();
                 }
             }
