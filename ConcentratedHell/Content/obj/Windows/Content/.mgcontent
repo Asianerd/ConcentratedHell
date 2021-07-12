@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Blank.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Bullet.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Cursor.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/EnemyEyes.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/EyeBlink/EyeBlink1.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/EyeBlink/EyeBlink2.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/EyeBlink/EyeBlink3.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Player.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/PlayerEyes.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UIFont.spritefont</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
