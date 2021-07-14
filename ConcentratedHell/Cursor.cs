@@ -27,7 +27,7 @@ namespace ConcentratedHell
 
         void __privateInit__()
         {
-            Main.UpdateEvent += Move;
+            Main.PlayerUpdateEvent += Move;
             Rendering.DrawCursor += Draw;
         }
 
@@ -44,7 +44,7 @@ namespace ConcentratedHell
                 null,
                 Color.White,
                 0f,
-                Size / 2,
+                Vector2.Zero,
                 1f,
                 SpriteEffects.None,
                 0f
