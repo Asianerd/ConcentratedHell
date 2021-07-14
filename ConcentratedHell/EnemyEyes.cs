@@ -10,7 +10,6 @@ namespace ConcentratedHell
     {
         public static Texture2D PassiveSprite;
         public static Texture2D AngrySprite;
-        //public static List<Texture2D> BlinkSprites;
         public Texture2D SpriteUsed; // To avoid an if statement every frame
         public float EyeDistance = 5f;
         public int EyeState;
