@@ -6,15 +6,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ConcentratedHell
 {
-    class Bullet : Projectile, Projectile.IProjectiles
+    class Pellet : Projectile, Projectile.IProjectiles
     {
-        public Bullet(double _direction, Vector2 _position, float _speed) : base(_direction, _position)
+        public Pellet(double _direction, Vector2 _position, float _speed) : base(_direction, _position)
         {
             Main.UpdateEvent += Update;
             Rendering.DrawEntities += Draw;
             OnCollide += Destroy;
 
-            Type = ProjectileType.Bullet;
+            Type = ProjectileType.Pellet;
             Sprite = Sprites[Type];
 
             Speed = _speed;
