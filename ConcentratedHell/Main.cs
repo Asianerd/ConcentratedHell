@@ -11,6 +11,7 @@ namespace ConcentratedHell
         public static Vector2 screenSize = new Vector2(1920, 1080);
         public delegate void MainEvents();
         public static event MainEvents UpdateEvent;
+        public static event MainEvents PlayerUpdateEvent;
 
         public static float FPS = 0;
 
@@ -28,14 +29,28 @@ namespace ConcentratedHell
         protected override void Initialize()
         {
             Cursor.Initialize(Content.Load<Texture2D>("Cursor"));
-            Player.Initialize(Content.Load<Texture2D>("Player"),Content.Load<Texture2D>("PlayerEyes"));
+            Gun.Initialize(new Dictionary<Gun.GunType, Texture2D>() {
+                { Gun.GunType.Glock, Content.Load<Texture2D>("Guns/Glock") },
+                { Gun.GunType.Bow, Content.Load<Texture2D>("Guns/Bow") },
+                { Gun.GunType.Shotgun, Content.Load<Texture2D>("Guns/Shotgun")}
+            });
+            Player.Initialize(Content.Load<Texture2D>("Player"), new List<Texture2D>() {
+                Content.Load<Texture2D>("PlayerEyes"),
+                Content.Load<Texture2D>("EyeBlink/EyeBlink1"),
+                Content.Load<Texture2D>("EyeBlink/EyeBlink2"),
+                Content.Load<Texture2D>("EyeBlink/EyeBlink3"),
+                Content.Load<Texture2D>("EyeBlink/EyeBlink2"),
+                Content.Load<Texture2D>("EyeBlink/EyeBlink1")
+            });
             UI.Initialize(new SpriteBatch(GraphicsDevice), Content.Load<Texture2D>("Blank"), Content.Load<SpriteFont>("UIFont"));
             Bar.Initialize(Content.Load<Texture2D>("Blank"));
             Enemy.Initialize(Content.Load<Texture2D>("Enemy"), Content.Load<Texture2D>("PlayerEyes"), Content.Load<Texture2D>("EnemyEyes"));
             Projectile.Initialize(new Dictionary<Projectile.ProjectileType, Texture2D> {
-                { Projectile.ProjectileType.Bullet , Content.Load<Texture2D>("Bullet") }
-                /*{ Projectile.ProjectileType.Arrow , Content.Load<Texture2D>("Arrow") }*/
+                { Projectile.ProjectileType.Bullet , Content.Load<Texture2D>("Bullet") },
+                { Projectile.ProjectileType.Arrow , Content.Load<Texture2D>("Arrow") },
+                { Projectile.ProjectileType.Pellet , Content.Load<Texture2D>("Pellet") }
             });
+
             base.Initialize();
         }
 
@@ -51,7 +66,11 @@ namespace ConcentratedHell
 
             FPS = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (UpdateEvent != null)
+            if(PlayerUpdateEvent!=null)
+            {
+                PlayerUpdateEvent();
+            }
+            if (UpdateEvent != null && !Player.Instance.TimeStopped)
             {
                 UpdateEvent();
             }
