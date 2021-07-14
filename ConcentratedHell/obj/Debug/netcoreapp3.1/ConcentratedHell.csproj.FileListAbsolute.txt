@@ -92,3 +92,8 @@ D:\GithubRepos\ConcentratedHell\ConcentratedHell\obj\Debug\netcoreapp3.1\Concent
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\obj\Debug\netcoreapp3.1\ConcentratedHell.dll
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\obj\Debug\netcoreapp3.1\ConcentratedHell.pdb
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\obj\Debug\netcoreapp3.1\ConcentratedHell.genruntimeconfig.cache
+D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Guns\Glock.xnb
+D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Arrow.xnb
+D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Guns\Bow.xnb
+D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Guns\Shotgun.xnb
+D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Pellet.xnb

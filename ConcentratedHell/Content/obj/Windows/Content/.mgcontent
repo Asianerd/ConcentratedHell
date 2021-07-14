@@ -4,6 +4,7 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Arrow.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Blank.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Bullet.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Cursor.png</File>
@@ -12,11 +13,20 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/EyeBlink/EyeBlink1.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/EyeBlink/EyeBlink2.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/EyeBlink/EyeBlink3.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Guns/Bow.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Guns/Glock.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Guns/Shotgun.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Pellet.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Player.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/PlayerEyes.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UIFont.spritefont</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
