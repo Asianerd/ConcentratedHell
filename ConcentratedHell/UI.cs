@@ -43,7 +43,7 @@ namespace ConcentratedHell
             SpriteBatch.Begin();
             HealthBar.Draw(SpriteBatch, (float)Player.Instance.Health.Percent());
             StaminaBar.Draw(SpriteBatch, (float)Player.Instance.Stamina.Percent());
-            //SpriteBatch.DrawString(UIFont, $"{Main.FPS} :: {Projectile.Projectiles.Count}", Vector2.Zero, Color.White);
+            SpriteBatch.DrawString(UIFont, $"{Main.FPS} :: {Projectile.Projectiles.Count}", Vector2.Zero, Color.White);
 
             SpriteBatch.End();
         }
