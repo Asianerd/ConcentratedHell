@@ -12,23 +12,24 @@ namespace ConcentratedHell
         #region Initialization stuff
         public static Player Instance;
 
-        public static void Initialize(Texture2D _bodySprite, Texture2D _eyeSprite)
+        public static void Initialize(Texture2D _bodySprite, List<Texture2D> _eyeSprites)
         {
             Instance = new Player(Main.screenSize / 2);
-            Instance.__privateInit__(_bodySprite, _eyeSprite);
+            Instance.__privateInit__(_bodySprite, _eyeSprites);
         }
 
-        void __privateInit__(Texture2D _bodySprite, Texture2D _eyeSprite)
+        void __privateInit__(Texture2D _bodySprite, List<Texture2D> _eyeSprite)
         {
             BodySprite = _bodySprite;
 
             Size = new Vector2(64, 64); // size in pixels
             Rendering.DrawPlayer += Draw;
-            Main.UpdateEvent += Update;
+            Main.PlayerUpdateEvent += Update;
 
             Eyes = new PlayerEyes(_eyeSprite);
 
             #region Game attributes
+            GunEquipped = Gun.InstantiateGun(Gun.GunType.Shotgun);
             Health = new GameValue("Health", 0, 100, 0.1);
             Stamina = new GameValue("Stamina", 0, 500, 2);
             #endregion
@@ -51,12 +52,14 @@ namespace ConcentratedHell
 
         #region Math attributes
         public Vector2 MousePosition;
-        public float DegreesToMouse;
+        public float RadiansToMouse;
         #endregion
 
         #region Game attributes
+        public object GunEquipped;
         public GameValue Health;
         public GameValue Stamina;
+        public bool TimeStopped = false;
         #endregion
         #endregion
 
@@ -68,9 +71,10 @@ namespace ConcentratedHell
         public void Update()
         {
             MousePosition = Mouse.GetState().Position.ToVector2();
-            DegreesToMouse = Universe.ANGLETO(Position, MousePosition);
+            RadiansToMouse = Universe.ANGLETO(Position, MousePosition, false);
             Interact();
             Move();
+            Eyes.Update();
         }
 
         public void Move()
@@ -79,6 +83,23 @@ namespace ConcentratedHell
             bool _sprinting = _kInput.IsKeyDown(Keys.LeftShift);
 
             float _speed = _sprinting && (Stamina.I > 0) ? SprintMultiplier * Speed : Speed;
+
+            #region Weapon changing
+            if(_kInput.IsKeyDown(Keys.E))
+            {
+                GunEquipped = Gun.InstantiateGun(Gun.GunType.Glock);
+            }
+            if (_kInput.IsKeyDown(Keys.R))
+            {
+                GunEquipped = Gun.InstantiateGun(Gun.GunType.Bow);
+            }
+            if (_kInput.IsKeyDown(Keys.F))
+            {
+                GunEquipped = Gun.InstantiateGun(Gun.GunType.Shotgun);
+            }
+            #endregion
+
+
 
             #region Movement
             Vector2 _startingPosition = Position;
@@ -125,16 +146,15 @@ namespace ConcentratedHell
         public void Interact()
         {
             var _mInput = Mouse.GetState();
-
-            if(_mInput.LeftButton == ButtonState.Pressed)
-            {
-                var x = new Bullet(DegreesToMouse, Position, 20f);
-            }
+            var _kInput = Keyboard.GetState();
 
             if(_mInput.RightButton == ButtonState.Pressed)
             {
-                var x = new Enemy(new Vector2(Universe.RANDOM.Next(0, (int)Main.screenSize.X), Universe.RANDOM.Next(0, (int)Main.screenSize.Y)));
+                //var x = new Enemy(new Vector2(Universe.RANDOM.Next(0, (int)Main.screenSize.X), Universe.RANDOM.Next(0, (int)Main.screenSize.Y)));
+                var x = new Enemy(MousePosition);
             }
+
+            TimeStopped = _kInput.IsKeyDown(Keys.Space);
         }
 
 
