@@ -29,10 +29,16 @@ namespace ConcentratedHell
             Eyes = new PlayerEyes(_eyeSprite);
 
             #region Game attributes
-            GunEquipped = Gun.InstantiateGun(Gun.GunType.Shotgun);
+            GunEquipped = Gun.InstantiateGun(Gun.GunType.Shotgun, out GunEquppedObject);
             Health = new GameValue("Health", 0, 100, 0.1);
             Stamina = new GameValue("Stamina", 0, 500, 2);
+            foreach(Projectile.ProjectileType x in Enum.GetValues(typeof(Projectile.ProjectileType)))
+            {
+                AmmoInventory[x] = 5;
+            }
             #endregion
+
+            var _x = new Item(Position, Item.ItemClass.Ammo, Projectile.ProjectileType.Arrow);
         }
         #endregion
 
@@ -57,9 +63,11 @@ namespace ConcentratedHell
 
         #region Game attributes
         public object GunEquipped;
+        public Gun GunEquppedObject;
         public GameValue Health;
         public GameValue Stamina;
         public bool TimeStopped = false;
+        public Dictionary<Projectile.ProjectileType, int> AmmoInventory = new Dictionary<Projectile.ProjectileType, int>();
         #endregion
         #endregion
 
@@ -87,15 +95,15 @@ namespace ConcentratedHell
             #region Weapon changing
             if(_kInput.IsKeyDown(Keys.E))
             {
-                GunEquipped = Gun.InstantiateGun(Gun.GunType.Glock);
+                GunEquipped = Gun.InstantiateGun(Gun.GunType.Glock, out GunEquppedObject);
             }
             if (_kInput.IsKeyDown(Keys.R))
             {
-                GunEquipped = Gun.InstantiateGun(Gun.GunType.Bow);
+                GunEquipped = Gun.InstantiateGun(Gun.GunType.Bow, out GunEquppedObject);
             }
             if (_kInput.IsKeyDown(Keys.F))
             {
-                GunEquipped = Gun.InstantiateGun(Gun.GunType.Shotgun);
+                GunEquipped = Gun.InstantiateGun(Gun.GunType.Shotgun, out GunEquppedObject);
             }
             #endregion
 
@@ -132,7 +140,7 @@ namespace ConcentratedHell
             #region Regeneration
             if (_sprinting && ((_startingPosition-_endingPosition) != Vector2.Zero))
             {
-                Stamina.AffectValue(-7);
+                Stamina.AffectValue(-7d);
             }
             else
             {
@@ -156,7 +164,6 @@ namespace ConcentratedHell
 
             TimeStopped = _kInput.IsKeyDown(Keys.Space);
         }
-
 
         public void Draw(SpriteBatch spriteBatch)
         {
