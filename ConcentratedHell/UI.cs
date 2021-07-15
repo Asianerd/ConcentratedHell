@@ -43,8 +43,22 @@ namespace ConcentratedHell
             SpriteBatch.Begin();
             HealthBar.Draw(SpriteBatch, (float)Player.Instance.Health.Percent());
             StaminaBar.Draw(SpriteBatch, (float)Player.Instance.Stamina.Percent());
-            SpriteBatch.DrawString(UIFont, $"{Main.FPS} :: {Projectile.Projectiles.Count}", Vector2.Zero, Color.White);
-
+            //SpriteBatch.DrawString(UIFont, $"{Main.FPS} :: {Projectile.Projectiles.Count}", Vector2.Zero, Color.White);
+            string _ammoText = $"{Player.Instance.GunEquppedObject.AmmoUsage} / {Player.Instance.AmmoInventory[Player.Instance.GunEquppedObject.AmmoType]}";
+            SpriteBatch.DrawString(
+                UIFont,
+                _ammoText,
+                new Vector2(
+                    Main.screenSize.X-(25*_ammoText.Length),
+                    Main.screenSize.Y-50
+                    ),
+                Color.White,
+                0f,
+                Vector2.Zero,
+                1f,
+                SpriteEffects.None,
+                0f
+                );
             SpriteBatch.End();
         }
     }
