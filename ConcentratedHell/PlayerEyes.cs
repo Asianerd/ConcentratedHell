@@ -22,7 +22,7 @@ namespace ConcentratedHell
 
         public void Update()
         {
-            EyeBlink.AffectValue(-5, false);
+            EyeBlink.AffectValue(-5d, false);
             if (EyeBlink.I <= 0)
             {
                 EyeBlink.I = Universe.RANDOM.Next(0, (int)EyeBlink.Max);

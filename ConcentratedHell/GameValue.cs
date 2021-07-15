@@ -39,6 +39,11 @@ namespace ConcentratedHell
             }
         }
 
+        public void AffectValue(float _percent, bool _limit = true)
+        {
+            I = (Max - Min) * _percent; // Percent = 0f - 1f
+        }
+
         public double Percent()
         {
             return I / (Max - Min);
