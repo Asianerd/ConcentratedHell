@@ -23,28 +23,38 @@ namespace ConcentratedHell
         public GameValue Cooldown;
         public Texture2D Sprite;
 
+        public Projectile.ProjectileType AmmoType;
+        public int AmmoUsage = 1;
+
         public static void Initialize(Dictionary<GunType, Texture2D> _gunSprites)
         {
             GunSprites = _gunSprites;
         }
 
-        public static object InstantiateGun(GunType _type)
+        public static object InstantiateGun(GunType _type, out Gun _gunObject)
         {
             if (DestroyEvent != null)
             {
                 DestroyEvent();
             }
-            switch(_type)
+            object final;
+            switch (_type)
             {
                 default:
-                    return new Glock();
+                    final = new Glock();
+                    break;
                 case GunType.Bow:
-                    return new Bow();
+                    final = new Bow();
+                    break;
                 case GunType.Glock:
-                    return new Glock();
+                    final = new Glock();
+                    break;
                 case GunType.Shotgun:
-                    return new Shotgun();
+                    final = new Shotgun();
+                    break;
             }
+            _gunObject = (Gun)final;
+            return final;
         }
 
         public enum GunType
@@ -62,9 +72,12 @@ namespace ConcentratedHell
             var _mInput = Mouse.GetState();
             Position = new Vector2((float)Math.Cos(Player.Instance.RadiansToMouse) * Distance, (float)Math.Sin(Player.Instance.RadiansToMouse) * Distance) + Player.Instance.Position;
 
-            if (_mInput.LeftButton == ButtonState.Pressed && Cooldown.Percent() == 1)
+            if (_mInput.LeftButton == ButtonState.Pressed && 
+                Cooldown.Percent() == 1 && 
+                Player.Instance.AmmoInventory[AmmoType] >= AmmoUsage)
             {
-                Cooldown.AffectValue(-100);
+                Player.Instance.AmmoInventory[AmmoType] -= AmmoUsage;
+                Cooldown.AffectValue(0f);
                 if (FiringEvent != null)
                 {
                     FiringEvent();
