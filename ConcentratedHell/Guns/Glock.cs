@@ -11,7 +11,10 @@ namespace ConcentratedHell
     {
         public Glock()
         {
+            AmmoUsage = 0;
+
             Type = GunType.Glock;
+            AmmoType = Projectile.ProjectileType.Bullet;
             Sprite = GunSprites[Type];
 
             Main.PlayerUpdateEvent += Update;

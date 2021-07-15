@@ -12,14 +12,16 @@ namespace ConcentratedHell
         public Shotgun()
         {
             Type = GunType.Shotgun;
+            AmmoType = Projectile.ProjectileType.Pellet;
             Sprite = GunSprites[Type];
 
             Main.PlayerUpdateEvent += Update;
             Rendering.DrawPlayer += Draw;
             DestroyEvent += Destroy;
 
-            Cooldown = new GameValue("Cooldown", 0, 100, 5);
+            Cooldown = new GameValue("Cooldown", 0, 200, 5, 0);
 
+            AmmoUsage = 3;
             FiringEvent += Fire;
         }
 

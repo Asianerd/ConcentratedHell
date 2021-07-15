@@ -12,13 +12,14 @@ namespace ConcentratedHell
         public Bow()
         {
             Type = GunType.Bow;
+            AmmoType = Projectile.ProjectileType.Arrow;
             Sprite = GunSprites[Type];
 
             Main.PlayerUpdateEvent += Update;
             Rendering.DrawPlayer += Draw;
             DestroyEvent += Destroy;
 
-            Cooldown = new GameValue("Cooldown", 0, 100, 5);
+            Cooldown = new GameValue("Cooldown", 0, 100, 5, 0);
 
             FiringEvent += Fire;
         }
