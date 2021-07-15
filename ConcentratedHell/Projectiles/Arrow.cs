@@ -28,12 +28,12 @@ namespace ConcentratedHell
         {
             if (_type == ProjectileEventType.Hit && !Duplicated)
             {
-                for (int i = 0; i < 50; i++)
+                for (int i = 0; i < 5; i++)
                 {
-                    var x = new Arrow((360 / 50) * i, new Vector2(
+                    var x = new Arrow((360 / 5) * i, new Vector2(
                         (float)Math.Cos(i)*50,
                         (float)Math.Sin(i)*50
-                        )+Position, 10f);
+                        )+Position, 5f);
                     x.Duplicated = true;
                 }
             }
