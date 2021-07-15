@@ -29,6 +29,47 @@ namespace ConcentratedHell
         protected override void Initialize()
         {
             Cursor.Initialize(Content.Load<Texture2D>("Cursor"));
+            Item.Initialize(
+                new Dictionary<Item.ItemClass, Dictionary<object, Texture2D>>()
+                {
+                    {
+                        Item.ItemClass.Ammo,
+                        new Dictionary<object, Texture2D>() {
+                            { Projectile.ProjectileType.Arrow, Content.Load<Texture2D>("Arrow") },
+                            { Projectile.ProjectileType.Bullet, Content.Load<Texture2D>("Bullet") },
+                            { Projectile.ProjectileType.Pellet, Content.Load<Texture2D>("Pellet") }
+                        }
+                    },
+                    {
+                        Item.ItemClass.Equipment,
+                        new Dictionary<object, Texture2D>()
+                        {
+
+                        }
+                    },
+                    {
+                        Item.ItemClass.Loot,
+                        new Dictionary<object, Texture2D>()
+                        {
+
+                        }
+                    },
+                    {
+                        Item.ItemClass.Weapon,
+                        new Dictionary<object, Texture2D>()
+                        {
+
+                        }
+                    }
+                },
+                new Dictionary<object, string>()
+                {
+                    { Projectile.ProjectileType.Arrow, "Arrow" },
+                    { Projectile.ProjectileType.Bullet, "Bullet" },
+                    { Projectile.ProjectileType.Pellet, "Pellet" },
+                },
+                Content.Load<SpriteFont>("UIFont")
+                );
             Gun.Initialize(new Dictionary<Gun.GunType, Texture2D>() {
                 { Gun.GunType.Glock, Content.Load<Texture2D>("Guns/Glock") },
                 { Gun.GunType.Bow, Content.Load<Texture2D>("Guns/Bow") },
@@ -46,9 +87,9 @@ namespace ConcentratedHell
             Bar.Initialize(Content.Load<Texture2D>("Blank"));
             Enemy.Initialize(Content.Load<Texture2D>("Enemy"), Content.Load<Texture2D>("PlayerEyes"), Content.Load<Texture2D>("EnemyEyes"));
             Projectile.Initialize(new Dictionary<Projectile.ProjectileType, Texture2D> {
-                { Projectile.ProjectileType.Bullet , Content.Load<Texture2D>("Bullet") },
-                { Projectile.ProjectileType.Arrow , Content.Load<Texture2D>("Arrow") },
-                { Projectile.ProjectileType.Pellet , Content.Load<Texture2D>("Pellet") }
+                { Projectile.ProjectileType.Bullet, Content.Load<Texture2D>("Bullet") },
+                { Projectile.ProjectileType.Arrow, Content.Load<Texture2D>("Arrow") },
+                { Projectile.ProjectileType.Pellet, Content.Load<Texture2D>("Pellet") }
             });
 
             base.Initialize();
@@ -56,7 +97,7 @@ namespace ConcentratedHell
 
         protected override void LoadContent()
         {
-            Rendering.Initialize(new SpriteBatch(GraphicsDevice), new SpriteBatch(GraphicsDevice), new SpriteBatch(GraphicsDevice));
+            Rendering.Initialize(new SpriteBatch(GraphicsDevice), new SpriteBatch(GraphicsDevice), new SpriteBatch(GraphicsDevice), new SpriteBatch(GraphicsDevice));
         }
 
         protected override void Update(GameTime gameTime)
