@@ -14,7 +14,6 @@ namespace ConcentratedHell
         {
             Main.UpdateEvent += Update;
             Rendering.DrawEntities += Draw;
-            OnCollide += Destroy;
 
             Type = ProjectileType.Arrow;
             Sprite = Sprites[Type];
@@ -24,6 +23,51 @@ namespace ConcentratedHell
             Projectiles.Add(this);
         }
 
+        public void Update()
+        {
+            Move();
+            if ((Position.X < 0) ||
+                (Position.X > Main.screenSize.X) ||
+                (Position.Y < 0) ||
+                (Position.Y > Main.screenSize.Y))
+            {
+
+                Dispose(ProjectileEventType.Despawn);
+            }
+        }
+
+        public void Move()
+        {
+            Position += IncrementedVector * Speed;
+            CollisionCheck();
+        }
+
+        #region Normal Collision, Destroying and Disposing
+        public void CollisionCheck()
+        {
+            float nearest = 2205f;
+            Enemy candidate = null;
+            foreach (Enemy x in Enemy.Enemies)
+            {
+                float current = Vector2.Distance(Position, x.Position);
+                if (current < nearest)
+                {
+                    nearest = current;
+                    candidate = x;
+                }
+            }
+
+            if (candidate != null)
+            {
+                if (nearest <= CollideDistance)
+                {
+                    candidate.Health.AffectValue(-Damage);
+                    candidate.ToggleAnger();
+                    Dispose(ProjectileEventType.Hit);
+                }
+            }
+        }
+
         public void Destroy(ProjectileEventType _type)
         {
             if (_type == ProjectileEventType.Hit && !Duplicated)
@@ -31,13 +75,21 @@ namespace ConcentratedHell
                 for (int i = 0; i < 5; i++)
                 {
                     var x = new Arrow((360 / 5) * i, new Vector2(
-                        (float)Math.Cos(i)*50,
-                        (float)Math.Sin(i)*50
-                        )+Position, 5f);
+                        (float)Math.Cos(i) * 50,
+                        (float)Math.Sin(i) * 50
+                        ) + Position, 5f);
                     x.Duplicated = true;
                 }
             }
             Projectiles.Remove(this);
         }
+
+        public void Dispose(ProjectileEventType _type)
+        {
+            Destroy(_type);
+            Main.UpdateEvent -= Update;
+            Rendering.DrawEntities -= Draw;
+        }
+        #endregion
     }
 }
