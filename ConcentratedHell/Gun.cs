@@ -52,6 +52,18 @@ namespace ConcentratedHell
                 case GunType.Shotgun:
                     final = new Shotgun();
                     break;
+                case GunType.PlasmaPrism:
+                    final = new PlasmaPrism();
+                    break;
+                case GunType.MissileLauncher:
+                    final = new MissileLauncher();
+                    break;
+                case GunType.GrenadeLauncher:
+                    final = new GrenadeLauncher();
+                    break;
+                case GunType.Trapper:
+                    final = new Trapper();
+                    break;
             }
             _gunObject = (Gun)final;
             return final;
@@ -61,7 +73,11 @@ namespace ConcentratedHell
         {
             Glock,
             Bow,
-            Shotgun
+            Shotgun,
+            PlasmaPrism,
+            MissileLauncher,
+            GrenadeLauncher,
+            Trapper
         }
 
 
