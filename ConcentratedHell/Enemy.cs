@@ -18,6 +18,7 @@ namespace ConcentratedHell
 
         #region Game attributes
         public GameValue Health;
+        public bool Alive;
         #endregion
 
         public double AngleToPlayer;
@@ -63,6 +64,7 @@ namespace ConcentratedHell
                 AngleToPlayer = Universe.ANGLETO(Position, Player.Instance.Position, false);
                 Move();
             }
+            Alive = Health.I != 0;
         }
 
         void Move()
@@ -106,7 +108,7 @@ namespace ConcentratedHell
 
         public void Destroy()
         {
-            var x = new Item(Position, Item.ItemClass.Ammo, Projectile.ProjectileType.Arrow, Universe.RANDOM.Next(1, 4));
+            var x = new Item(Position, Item.ItemClass.Ammo, (Projectile.ProjectileType)Universe.RANDOM.Next(0,6), Universe.RANDOM.Next(1, 4));
 
             Main.UpdateEvent -= Update;
             Rendering.DrawEntities -= Draw;
