@@ -30,15 +30,13 @@ namespace ConcentratedHell
 
             #region Game attributes
             GunEquipped = Gun.InstantiateGun(Gun.GunType.Shotgun, out GunEquppedObject);
-            Health = new GameValue("Health", 0, 100, 0.1);
+            Health = new GameValue("Health", 0, 100, 5);
             Stamina = new GameValue("Stamina", 0, 500, 2);
             foreach(Projectile.ProjectileType x in Enum.GetValues(typeof(Projectile.ProjectileType)))
             {
                 AmmoInventory[x] = 5;
             }
             #endregion
-
-            var _x = new Item(Position, Item.ItemClass.Ammo, Projectile.ProjectileType.Arrow);
         }
         #endregion
 
@@ -93,17 +91,33 @@ namespace ConcentratedHell
             float _speed = _sprinting && (Stamina.I > 0) ? SprintMultiplier * Speed : Speed;
 
             #region Weapon changing
-            if(_kInput.IsKeyDown(Keys.E))
+            if(_kInput.IsKeyDown(Keys.D1))
             {
                 GunEquipped = Gun.InstantiateGun(Gun.GunType.Glock, out GunEquppedObject);
             }
-            if (_kInput.IsKeyDown(Keys.R))
+            if (_kInput.IsKeyDown(Keys.D2))
             {
                 GunEquipped = Gun.InstantiateGun(Gun.GunType.Bow, out GunEquppedObject);
             }
-            if (_kInput.IsKeyDown(Keys.F))
+            if (_kInput.IsKeyDown(Keys.D3))
             {
                 GunEquipped = Gun.InstantiateGun(Gun.GunType.Shotgun, out GunEquppedObject);
+            }
+            if (_kInput.IsKeyDown(Keys.D4))
+            {
+                GunEquipped = Gun.InstantiateGun(Gun.GunType.PlasmaPrism, out GunEquppedObject);
+            }
+            if (_kInput.IsKeyDown(Keys.D5))
+            {
+                GunEquipped = Gun.InstantiateGun(Gun.GunType.MissileLauncher, out GunEquppedObject);
+            }
+            if (_kInput.IsKeyDown(Keys.D6))
+            {
+                GunEquipped = Gun.InstantiateGun(Gun.GunType.GrenadeLauncher, out GunEquppedObject);
+            }
+            if (_kInput.IsKeyDown(Keys.D7))
+            {
+                GunEquipped = Gun.InstantiateGun(Gun.GunType.Trapper, out GunEquppedObject);
             }
             #endregion
 
