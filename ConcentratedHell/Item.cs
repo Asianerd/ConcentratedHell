@@ -30,7 +30,9 @@ namespace ConcentratedHell
 
         public string Name;
         public bool ShowName = false;
-        public float ShowRange = 100f;
+        public float ShowRange = 50f;
+
+        float rotation; // Random rotation (for aesthetics)
 
         /*public delegate void ItemEvent();
         public event ItemEvent PickupEvent;*/
@@ -38,8 +40,8 @@ namespace ConcentratedHell
         // OR might just have a switch statement that decides what to append to players inventory   <-- Implementing this one right now
 
         ItemClass Class; // Ammo, Loot, Equipment, Weapon
-        object Type; // Gun, Bow, Shotgun  or  Bullet, Arrow, Pellet
-        int Amount = 1; // Amount of items (like how 64 is a stack in minecraft)
+        public object Type; // Gun, Bow, Shotgun  or  Bullet, Arrow, Pellet
+        public int Amount = 1; // Amount of items (like how 64 is a stack in minecraft)
         #endregion
         #endregion
 
@@ -52,7 +54,7 @@ namespace ConcentratedHell
 
         public Item(Vector2 _position, ItemClass _class, object _type, int _amount = 1)
         {
-            Main.UpdateEvent += Update;
+            Main.PlayerUpdateEvent += Update;
             Rendering.DrawItems += Draw;
             Class = _class;
             Type = _type;
@@ -61,6 +63,7 @@ namespace ConcentratedHell
 
             Position = _position;
             Amount = _amount;
+            rotation = MathHelper.ToRadians(Universe.RANDOM.Next(0, 360));
         }
 
         void Update()
@@ -90,6 +93,8 @@ namespace ConcentratedHell
             }
 
             ShowName = Vector2.Distance(Position, Player.Instance.MousePosition) <= ShowRange;
+
+            rotation += 0.01f;
         }
 
         void Pickup()
@@ -108,6 +113,15 @@ namespace ConcentratedHell
                         case Projectile.ProjectileType.Pellet:
                             Player.Instance.AmmoInventory[Projectile.ProjectileType.Pellet] += Amount;
                             break;
+                        case Projectile.ProjectileType.SeekingMissile:
+                            Player.Instance.AmmoInventory[Projectile.ProjectileType.SeekingMissile] += Amount;
+                            break;
+                        case Projectile.ProjectileType.Grenade:
+                            Player.Instance.AmmoInventory[Projectile.ProjectileType.Grenade] += Amount;
+                            break;
+                        case Projectile.ProjectileType.GravTrap:
+                            Player.Instance.AmmoInventory[Projectile.ProjectileType.GravTrap] += Amount;
+                            break;
                         default:
                             break;
                     }
@@ -121,6 +135,7 @@ namespace ConcentratedHell
                 default:
                     break;
             }
+            UI.Instance.AppendPickedItems(this);
             Destroy();
         }
 
@@ -131,7 +146,7 @@ namespace ConcentratedHell
                 Position,
                 null,
                 Color.White,
-                0f,
+                rotation,
                 Size / 2,
                 1f,
                 SpriteEffects.None,
@@ -140,12 +155,18 @@ namespace ConcentratedHell
 
             if (ShowName)
             {
-                string _shownName = $"{ItemNames[Type]}{(Amount > 1 ? $" x{Amount}" : "")}";
+                
+                string _shownName = $"{ItemNames[Type]}{(Amount > 1 ? $"[{Amount}]" : "")}";
                 _spriteBatch.DrawString(
                     Font,
                     _shownName,
                     Position,
-                    Color.White
+                    Color.White,
+                    0f,
+                    new Vector2(((_shownName.Length - 1) * 25) / 2, -30),
+                    1f,
+                    SpriteEffects.None,
+                    0f
                     );
             }
         }
@@ -160,7 +181,7 @@ namespace ConcentratedHell
 
         public void Destroy()
         {
-            Main.UpdateEvent -= Update;
+            Main.PlayerUpdateEvent -= Update;
             Rendering.DrawItems -= Draw;
 
             Items.Remove(this);
