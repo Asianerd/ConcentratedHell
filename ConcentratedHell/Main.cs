@@ -37,7 +37,11 @@ namespace ConcentratedHell
                         new Dictionary<object, Texture2D>() {
                             { Projectile.ProjectileType.Arrow, Content.Load<Texture2D>("Arrow") },
                             { Projectile.ProjectileType.Bullet, Content.Load<Texture2D>("Bullet") },
-                            { Projectile.ProjectileType.Pellet, Content.Load<Texture2D>("Pellet") }
+                            { Projectile.ProjectileType.Pellet, Content.Load<Texture2D>("Pellet") },
+                            { Projectile.ProjectileType.LightShard, Content.Load<Texture2D>("LightShard") },
+                            { Projectile.ProjectileType.SeekingMissile, Content.Load<Texture2D>("SeekingMissile") },
+                            { Projectile.ProjectileType.Grenade, Content.Load<Texture2D>("Grenade") },
+                            { Projectile.ProjectileType.GravTrap, Content.Load<Texture2D>("GravTrap") }
                         }
                     },
                     {
@@ -67,13 +71,21 @@ namespace ConcentratedHell
                     { Projectile.ProjectileType.Arrow, "Arrow" },
                     { Projectile.ProjectileType.Bullet, "Bullet" },
                     { Projectile.ProjectileType.Pellet, "Pellet" },
+                    { Projectile.ProjectileType.LightShard, "Light Shard" },
+                    { Projectile.ProjectileType.SeekingMissile, "Seeking Missile" },
+                    { Projectile.ProjectileType.Grenade, "Grenade" },
+                    { Projectile.ProjectileType.GravTrap, "Grav Trap" }
                 },
-                Content.Load<SpriteFont>("UIFont")
+                Content.Load<SpriteFont>("ItemFont")
                 );
             Gun.Initialize(new Dictionary<Gun.GunType, Texture2D>() {
                 { Gun.GunType.Glock, Content.Load<Texture2D>("Guns/Glock") },
                 { Gun.GunType.Bow, Content.Load<Texture2D>("Guns/Bow") },
-                { Gun.GunType.Shotgun, Content.Load<Texture2D>("Guns/Shotgun")}
+                { Gun.GunType.Shotgun, Content.Load<Texture2D>("Guns/Shotgun")},
+                { Gun.GunType.PlasmaPrism, Content.Load<Texture2D>("Guns/PlasmaPrism") },
+                { Gun.GunType.MissileLauncher, Content.Load<Texture2D>("Guns/MissileLauncher") },
+                { Gun.GunType.GrenadeLauncher, Content.Load<Texture2D>("Guns/GrenadeLauncher") },
+                { Gun.GunType.Trapper, Content.Load<Texture2D>("Guns/Trapper") }
             });
             Player.Initialize(Content.Load<Texture2D>("Player"), new List<Texture2D>() {
                 Content.Load<Texture2D>("PlayerEyes"),
@@ -89,7 +101,11 @@ namespace ConcentratedHell
             Projectile.Initialize(new Dictionary<Projectile.ProjectileType, Texture2D> {
                 { Projectile.ProjectileType.Bullet, Content.Load<Texture2D>("Bullet") },
                 { Projectile.ProjectileType.Arrow, Content.Load<Texture2D>("Arrow") },
-                { Projectile.ProjectileType.Pellet, Content.Load<Texture2D>("Pellet") }
+                { Projectile.ProjectileType.Pellet, Content.Load<Texture2D>("Pellet") },
+                { Projectile.ProjectileType.LightShard, Content.Load<Texture2D>("LightShard") },
+                { Projectile.ProjectileType.SeekingMissile, Content.Load<Texture2D>("SeekingMissile") },
+                { Projectile.ProjectileType.Grenade, Content.Load<Texture2D>("Grenade") },
+                { Projectile.ProjectileType.GravTrap, Content.Load<Texture2D>("GravTrap") }
             });
 
             base.Initialize();
