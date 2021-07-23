@@ -1,0 +1,39 @@
+.skill {
+    text-align: center;
+    line-height:200%;
+}
+
+.skill #title {
+    text-align: center;
+}
+
+.skill #image {
+    width:25vw;
+    height:25vw;
+    padding:5vh 5vw;
+    color:blueviolet;
+    filter:drop-shadow(0 0 8px);
+    transition-duration: 0.5s;
+}
+
+.skill #image:hover {
+    transform: scale(1.1);
+}
+
+h3 {
+    float:left;
+    padding:0px 5px;
+}
+
+p {
+    padding:8px 0px;
+    font-size: 25px;
+}
+
+a {
+    text-decoration:none;
+}
+
+#description {
+    overflow:auto;
+}

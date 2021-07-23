@@ -1,0 +1,86 @@
+@font-face {
+    font-family:ConsoleFont;
+    src:url("Font/PressStart2P.ttf");
+}
+
+h1, h2, h3, h4, h5, p {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color:white;
+}
+
+h1, h2, h3 {
+    font-family:ConsoleFont;
+}
+
+
+body {
+    background-color:#181a1b;
+    margin-left:15%;
+    margin-right:15%;
+}
+
+@media (max-width:800px) {
+    body {
+        margin-left:0%;
+        margin-right:0%;
+    }
+}
+
+
+.showcase-title {
+    font-weight: 900;
+    font-size:30px;
+    padding:0px 20px;
+}
+
+.showcase-item {
+    background-color:#44535e;
+    float:left;
+    width:194px;
+    height:250px;
+    border-style: solid;
+    border-radius: 20px;
+    border-color:#00000000;
+    text-align: center;
+    margin:5px 5px;
+    transition-duration:0.3s;
+}
+
+#skills .showcase-item p {
+    color:black;
+}
+
+#skills .showcase-item {
+    margin-left:100px;
+    width: 400px;
+    background-color:#ffdf00;
+    color:black;
+}
+
+#skills .showcase-item:hover{
+    transform:scale(1.1);
+    box-shadow:0px 0px 10px black;
+}
+
+.showcase-item:hover {
+    transform: translateY(-15px);
+    box-shadow:0px 0px 10px black;
+}
+
+.showcase img {
+    height:64px;
+    width:64px;
+}
+
+.showcase-item #description {
+    padding:10px 10px;
+}
+
+.showcase a {
+    color:black;
+}
+
+.showcase-item #title {
+    font-size: 20px;
+    font-weight:900;
+}
