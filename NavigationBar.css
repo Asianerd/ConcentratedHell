@@ -1,0 +1,31 @@
+.navigation-bar {
+    background-color:black;
+    padding:20px 10px;
+    margin:-8px;
+}
+
+#navigation-button, #github, #github-creator{
+    text-decoration: none;
+    color:white;
+    margin:-5px 5px;
+    padding:5px 15px;
+    border-style: solid;
+    border-radius:5px;
+    border-color:#00000000;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    transition-duration:0.5s;
+}
+
+#navigation-button:hover, #github:hover {
+    background-color:white;
+    color:black;
+    border-color:#00000000;
+}
+
+#github, #github-creator {
+    float:right;
+}
+
+#github-creator:hover {
+    filter:drop-shadow(0 0 10px #ffffff);
+}

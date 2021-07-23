@@ -1,0 +1,42 @@
+.gun #title {
+    text-align: center;
+}
+
+.gun #image {
+    width:25vw;
+    height:25vw;
+    float:left;
+    padding:5vh 5vw;
+    color:blueviolet;
+    filter:drop-shadow(0 0 8px);
+    transition-duration: 0.5s;
+}
+
+.gun #image:hover {
+    transform: scale(1.1);
+}
+
+#projectile-item img {
+    width:55px;
+    height:55px;
+    float:left;
+    padding-right: 10px;
+}
+
+h3 {
+    float:left;
+    padding:0px 5px;
+}
+
+p {
+    padding:8px 0px;
+    font-size: 25px;
+}
+
+a {
+    text-decoration:none;
+}
+
+#description {
+    overflow:auto;
+}

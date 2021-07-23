@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href=/style.css>
+    <link rel="stylesheet" href="/Gun pages/GunStyle.css">
+    <title>Glock</title>
+    <head>
+        <link rel="shortcut icon" type="image/x-icon" href="/MainIcon.ico">
+
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous">
+        </script>
+        <script> 
+            $(function(){
+            $("#--header").load("/NavigationBar.html");
+            $("#--footer").load("footer.html");
+            });
+        </script> 
+    </head>
+    <body>
+        <div id="--header"></div>
+        <div id="--main">
+            <div class="gun">
+                <h1 id="title">
+                    Glock
+                </h1>
+
+                <img src="/Gun assets/Glock.png" id="image">
+
+                <div id="text-info">
+                    <div id="name">
+                        <h3>
+                            Name : 
+                        </h3>
+                        <p>
+                            Glock
+                        </p>
+                    </div>
+                    <!-- Fast, moderate, slow -->
+                    <div id="fire-rate"> 
+                        <h3>
+                            Fire rate : 
+                        </h3>
+                        <p>
+                            Moderate
+                        </p>
+                    </div>
+                    <div id="projectile">
+                        <h3>
+                            Projectile : 
+                        </h3>
+                        <div id="projectile-item">
+                            <a href="/Projectile pages/Bullet.html">
+                                <img src="/Projectile assets/Bullet.png">
+                                <p>
+                                    Bullet
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="description">
+                        <h3>
+                            "Standard-military-issue handgun"
+                        </h3>
+                    </div>
+                </div>
+
+                <div id="showcase">
+                    
+                </div>
+            </div>
+        </div>
+        <div id="--footer"></div>
+    </body>
+</html>
