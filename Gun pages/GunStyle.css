@@ -40,3 +40,8 @@ a {
 #description {
     overflow:auto;
 }
+
+#showcase {
+    clear:both;
+    text-align: center;
+}
