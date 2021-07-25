@@ -28,10 +28,10 @@ img {
     top:-75px;
 }
 
-img:hover + .hide{
+#title-image:hover + .hide{
     color:#ffffffff;
 }
 
-img:hover {
+#title-image:hover {
     filter:brightness(0.5);
 }
