@@ -9,6 +9,8 @@ namespace ConcentratedHell
     {
         private GraphicsDeviceManager _graphics;
         public static Vector2 screenSize = new Vector2(1920, 1080);
+        public static Vector2 BoundingBox;
+        public static Color BackgroundColor;
         public delegate void MainEvents();
         public static event MainEvents UpdateEvent;
         public static event MainEvents PlayerUpdateEvent;
@@ -21,6 +23,9 @@ namespace ConcentratedHell
             _graphics.PreferredBackBufferWidth = (int)screenSize.X;
             _graphics.PreferredBackBufferHeight = (int)screenSize.Y;
             _graphics.IsFullScreen = true;
+
+            BoundingBox = new Vector2(1908, 1040);
+            BackgroundColor = new Color(51, 51, 51);
 
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
@@ -76,7 +81,7 @@ namespace ConcentratedHell
                     { Projectile.ProjectileType.Grenade, "Grenade" },
                     { Projectile.ProjectileType.GravTrap, "Grav Trap" }
                 },
-                Content.Load<SpriteFont>("ItemFont")
+                Content.Load<SpriteFont>("Fonts/MainFont")
                 );
             Gun.Initialize(new Dictionary<Gun.GunType, Texture2D>() {
                 { Gun.GunType.Glock, Content.Load<Texture2D>("Guns/Glock") },
@@ -87,6 +92,7 @@ namespace ConcentratedHell
                 { Gun.GunType.GrenadeLauncher, Content.Load<Texture2D>("Guns/GrenadeLauncher") },
                 { Gun.GunType.Trapper, Content.Load<Texture2D>("Guns/Trapper") }
             });
+            Enemy.Initialize(Content.Load<Texture2D>("Enemy"), Content.Load<Texture2D>("PlayerEyes"), Content.Load<Texture2D>("EnemyEyes"));
             Player.Initialize(Content.Load<Texture2D>("Player"), new List<Texture2D>() {
                 Content.Load<Texture2D>("PlayerEyes"),
                 Content.Load<Texture2D>("EyeBlink/EyeBlink1"),
@@ -95,9 +101,8 @@ namespace ConcentratedHell
                 Content.Load<Texture2D>("EyeBlink/EyeBlink2"),
                 Content.Load<Texture2D>("EyeBlink/EyeBlink1")
             });
-            UI.Initialize(new SpriteBatch(GraphicsDevice), Content.Load<Texture2D>("Blank"), Content.Load<SpriteFont>("UIFont"));
+            UI.Initialize(Content.Load<Texture2D>("Blank"), Content.Load<SpriteFont>("Fonts/MainFont"), Content.Load<Texture2D>("RadialWheel"), Content.Load<Texture2D>("RadialWheelSelection"));
             Bar.Initialize(Content.Load<Texture2D>("Blank"));
-            Enemy.Initialize(Content.Load<Texture2D>("Enemy"), Content.Load<Texture2D>("PlayerEyes"), Content.Load<Texture2D>("EnemyEyes"));
             Projectile.Initialize(new Dictionary<Projectile.ProjectileType, Texture2D> {
                 { Projectile.ProjectileType.Bullet, Content.Load<Texture2D>("Bullet") },
                 { Projectile.ProjectileType.Arrow, Content.Load<Texture2D>("Arrow") },
@@ -107,13 +112,15 @@ namespace ConcentratedHell
                 { Projectile.ProjectileType.Grenade, Content.Load<Texture2D>("Grenade") },
                 { Projectile.ProjectileType.GravTrap, Content.Load<Texture2D>("GravTrap") }
             });
-
+            Rendering.Initialize(new SpriteBatch(GraphicsDevice), Content.Load<Texture2D>("Background"), Content.Load<Texture2D>("Wall"));
+            DamageBubble.Initialize(Content.Load<SpriteFont>("Fonts/MainFont"));
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            Rendering.Initialize(new SpriteBatch(GraphicsDevice), new SpriteBatch(GraphicsDevice), new SpriteBatch(GraphicsDevice), new SpriteBatch(GraphicsDevice));
+
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -121,9 +128,7 @@ namespace ConcentratedHell
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            FPS = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if(PlayerUpdateEvent!=null)
+            if (PlayerUpdateEvent != null)
             {
                 PlayerUpdateEvent();
             }
@@ -132,16 +137,16 @@ namespace ConcentratedHell
                 UpdateEvent();
             }
 
+            Enemy.StaticUpdate();
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(BackgroundColor);
+            FPS = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             Rendering.RenderObjects();
-            UI.Instance.Draw();
-            Rendering.RenderCursor();
 
             base.Draw(gameTime);
         }
