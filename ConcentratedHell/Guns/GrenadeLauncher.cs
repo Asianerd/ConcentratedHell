@@ -19,7 +19,7 @@ namespace ConcentratedHell
             Rendering.DrawPlayer += Draw;
             DestroyEvent += Destroy;
 
-            Cooldown = new GameValue("Cooldown", 0, 100, 5, 0);
+            Cooldown = new GameValue("Cooldown", 0, 5, 5, 0);
 
             FiringEvent += Fire;
         }
