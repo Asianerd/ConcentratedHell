@@ -15,7 +15,7 @@ namespace ConcentratedHell
         public static event Weapon FiringEvent;
         public static event Weapon DestroyEvent;
 
-        public Vector2 Position;
+        public Vector2 Position = Vector2.One * 2048;
         public Vector2 Size = Vector2.One * 64;
         public float Distance = 50f;
 
@@ -88,9 +88,10 @@ namespace ConcentratedHell
             var _mInput = Mouse.GetState();
             Position = new Vector2((float)Math.Cos(Player.Instance.RadiansToMouse) * Distance, (float)Math.Sin(Player.Instance.RadiansToMouse) * Distance) + Player.Instance.Position;
 
-            if (_mInput.LeftButton == ButtonState.Pressed && 
-                Cooldown.Percent() == 1 && 
-                Player.Instance.AmmoInventory[AmmoType] >= AmmoUsage)
+            if ((_mInput.LeftButton == ButtonState.Pressed) && 
+                (Cooldown.Percent() == 1) && 
+                (Player.Instance.AmmoInventory[AmmoType] >= AmmoUsage) &&
+                (Player.Instance.CanFire))
             {
                 Player.Instance.AmmoInventory[AmmoType] -= AmmoUsage;
                 Cooldown.AffectValue(0f);
