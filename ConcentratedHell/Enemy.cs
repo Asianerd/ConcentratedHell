@@ -9,6 +9,7 @@ namespace ConcentratedHell
     class Enemy
     {
         public static List<Enemy> Enemies = new List<Enemy>();
+        public static GameValue SpawnCooldown;
 
         public static Texture2D Sprite;
         public Vector2 Position;
@@ -30,6 +31,17 @@ namespace ConcentratedHell
         {
             Sprite = _sprite;
             EnemyEyes.Initialize(_passiveEyeSprite, _angryEyeSprite);
+            SpawnCooldown = new GameValue("Spawn Cooldown", 0, 100, 1);
+        }
+
+        public static void StaticUpdate()
+        {
+            SpawnCooldown.Regenerate();
+            if (SpawnCooldown.Percent() == 1)
+            {
+                //var x = new Enemy(new Vector2(Universe.RANDOM.Next((int)-Main.screenSize.X, (int)Main.screenSize.X), Universe.RANDOM.Next((int)-Main.screenSize.Y, (int)Main.screenSize.Y)));
+                SpawnCooldown.AffectValue(Universe.RANDOM.Next(0, 1000) / 1000);
+            }
         }
 
         public Enemy(Vector2 _position)
@@ -95,9 +107,16 @@ namespace ConcentratedHell
             }
         }
 
-        public void AffectHealth(int _value)
+        public void AffectHealth(float _percent)
         {
-            Health.AffectValue(_value);
+            Health.AffectValue(_percent);
+            new DamageBubble(new Vector2(Position.X, Position.Y - 50), Health.PercentToValue(_percent));
+        }
+
+        public void AffectHealth(double _amount)
+        {
+            Health.AffectValue(_amount);
+            new DamageBubble(new Vector2(Position.X, Position.Y - 50), _amount);
         }
 
         public void ToggleAnger()
@@ -108,7 +127,8 @@ namespace ConcentratedHell
 
         public void Destroy()
         {
-            var x = new Item(Position, Item.ItemClass.Ammo, (Projectile.ProjectileType)Universe.RANDOM.Next(0,6), Universe.RANDOM.Next(1, 4));
+            var x = new Item(Position, Item.ItemClass.Ammo, (Projectile.ProjectileType)Universe.RANDOM.Next(0, 7), Universe.RANDOM.Next(1, 5));
+            Player.Instance.Combo.AffectValue(25d);
 
             Main.UpdateEvent -= Update;
             Rendering.DrawEntities -= Draw;
