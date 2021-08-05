@@ -12,6 +12,7 @@ namespace ConcentratedHell
         public static List<IProjectiles> Projectiles = new List<IProjectiles>();    // Projectiles in the world
         //public static List<IProjectiles> PrefabProjectiles;                         // Prefabs of projectiles - Unused at the moment
         public static Dictionary<ProjectileType, Texture2D> Sprites;
+        public static float DespawnDistance = 2040f;
 
         public Vector2 Position;
         public Vector2 Size = Vector2.One * 64;
