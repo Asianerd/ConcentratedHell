@@ -51,12 +51,8 @@ namespace ConcentratedHell
         public void Update()
         {
             Move();
-            if ((Position.X < 0) ||
-                (Position.X > Main.screenSize.X) ||
-                (Position.Y < 0) ||
-                (Position.Y > Main.screenSize.Y))
+            if (Vector2.Distance(Player.Instance.Position, Position) >= DespawnDistance)
             {
-
                 Dispose(ProjectileEventType.Despawn);
             }
         }
@@ -90,7 +86,7 @@ namespace ConcentratedHell
         {
             foreach (Enemy x in Enemy.Enemies.Where(n => Vector2.Distance(Position, n.Position) <= 500f))
             {
-                x.Health.AffectValue(-(double)(30 * ((500 - Vector2.Distance(Position, x.Position)) / 500)));
+                x.AffectHealth(-(double)(30 * ((500 - Vector2.Distance(Position, x.Position)) / 500)));
                 x.ToggleAnger();
             }
 

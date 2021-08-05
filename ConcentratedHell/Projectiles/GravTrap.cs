@@ -33,12 +33,8 @@ namespace ConcentratedHell
             Move();
             Age.Regenerate();
             Direction += (1 - Age.Percent())*30;
-            if ((Position.X < 0) ||
-                (Position.X > Main.screenSize.X) ||
-                (Position.Y < 0) ||
-                (Position.Y > Main.screenSize.Y))
+            if (Vector2.Distance(Player.Instance.Position, Position) >= DespawnDistance)
             {
-
                 Dispose(ProjectileEventType.Despawn);
             }
 
