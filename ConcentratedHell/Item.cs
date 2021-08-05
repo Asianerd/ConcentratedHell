@@ -163,7 +163,7 @@ namespace ConcentratedHell
                     Position,
                     Color.White,
                     0f,
-                    new Vector2(((_shownName.Length - 1) * 25) / 2, -30),
+                    new Vector2(((_shownName.Length - 1) * Rendering.FontWidth) / 2, -30),
                     1f,
                     SpriteEffects.None,
                     0f
