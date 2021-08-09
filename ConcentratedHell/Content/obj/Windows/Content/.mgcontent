@@ -30,10 +30,12 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/PlayerEyes.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/RadialWheel.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/RadialWheelSelection.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/RadialWheelSeperator.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/SeekingMissile.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Wall.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -112,3 +112,4 @@ D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Fonts\MainFont.xnb
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\RadialWheel.xnb
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\RadialWheelSelection.xnb
+D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\RadialWheelSeperator.xnb
