@@ -32,7 +32,7 @@ namespace ConcentratedHell
         void Update()
         {
             Age.Regenerate();
-            if(Age.Percent() == 1)
+            if(Age.Percent() == 1f)
             {
                 Dispose();
             }

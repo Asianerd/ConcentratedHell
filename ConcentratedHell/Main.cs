@@ -101,7 +101,7 @@ namespace ConcentratedHell
                 Content.Load<Texture2D>("EyeBlink/EyeBlink2"),
                 Content.Load<Texture2D>("EyeBlink/EyeBlink1")
             });
-            UI.Initialize(Content.Load<Texture2D>("Blank"), Content.Load<SpriteFont>("Fonts/MainFont"), Content.Load<Texture2D>("RadialWheel"), Content.Load<Texture2D>("RadialWheelSelection"));
+            UI.Initialize(Content.Load<Texture2D>("Blank"), Content.Load<SpriteFont>("Fonts/MainFont"), Content.Load<Texture2D>("RadialWheel"), Content.Load<Texture2D>("RadialWheelSelection"), Content.Load<Texture2D>("RadialWheelSeperator"));
             Bar.Initialize(Content.Load<Texture2D>("Blank"));
             Projectile.Initialize(new Dictionary<Projectile.ProjectileType, Texture2D> {
                 { Projectile.ProjectileType.Bullet, Content.Load<Texture2D>("Bullet") },

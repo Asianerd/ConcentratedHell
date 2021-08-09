@@ -20,7 +20,7 @@ namespace ConcentratedHell
         Bar ComboBar;
         #endregion
 
-        public static void Initialize(Texture2D _blankState, SpriteFont _uiFont, Texture2D _radialWheelSprite, Texture2D _selectionSprite)
+        public static void Initialize(Texture2D _blankState, SpriteFont _uiFont, Texture2D _radialWheelSprite, Texture2D _selectionSprite, Texture2D _seperatorSprite)
         {
             if (Instance == null)
             {
@@ -30,7 +30,7 @@ namespace ConcentratedHell
 
                 Instance.__privateInit__();
             }
-            RadialWeaponWheel.Initialize(_radialWheelSprite, _selectionSprite);
+            RadialWeaponWheel.Initialize(_radialWheelSprite, _selectionSprite, _seperatorSprite);
         }
 
         void __privateInit__()
@@ -169,21 +169,22 @@ namespace ConcentratedHell
         {
             public static RadialWeaponWheel Instance;
 
-            public static void Initialize(Texture2D _wheelSprite, Texture2D _selectionSprite)
+            public static void Initialize(Texture2D _wheelSprite, Texture2D _selectionSprite, Texture2D _seperatorSprite)
             {
                 if(Instance == null)
                 {
-                    Instance = new RadialWeaponWheel(_wheelSprite, _selectionSprite);
+                    Instance = new RadialWeaponWheel(_wheelSprite, _selectionSprite, _seperatorSprite);
                     WeaponWheelWeapon.Initialize();
                 }
             }
 
-            public RadialWeaponWheel(Texture2D _wheelSprite, Texture2D _selectionSprite)
+            public RadialWeaponWheel(Texture2D _wheelSprite, Texture2D _selectionSprite, Texture2D _seperatorSprite)
             {
                 Main.PlayerUpdateEvent += Update;
 
                 WheelSprite = _wheelSprite;
                 SelectionSprite = _selectionSprite;
+                SeperatorSprite = _seperatorSprite;
                 SpriteSize = new Vector2(800, 800);
 
                 Position = Main.screenSize / 2;
@@ -192,6 +193,7 @@ namespace ConcentratedHell
 
             public Texture2D WheelSprite;
             public Texture2D SelectionSprite;
+            public Texture2D SeperatorSprite;
             public Vector2 SpriteSize;
 
             public Vector2 Position;
@@ -201,6 +203,7 @@ namespace ConcentratedHell
             public void Update()
             {
                 var _kInput = Keyboard.GetState();
+
                 
                 if(_kInput.IsKeyDown(Keys.Tab))
                 {
@@ -210,6 +213,9 @@ namespace ConcentratedHell
                 {
                     Value.AffectValue(-5d);
                 }
+
+                WeaponWheelWeapon.WasPressed = WeaponWheelWeapon.IsPressed;
+                WeaponWheelWeapon.IsPressed = (Mouse.GetState().LeftButton == ButtonState.Pressed);
             }
 
             public void Draw(SpriteBatch _spriteBatch)
@@ -227,7 +233,13 @@ namespace ConcentratedHell
             class WeaponWheelWeapon
             {
                 public static List<Gun.GunType> AvailableGuns = new List<Gun.GunType>();
-                public static Gun.GunType WantedGun;
+                public static bool WasPressed = false;
+                public static bool IsPressed = false;
+
+                public static Vector2 AmmoTextRenderOffset = new Vector2(0, 48);
+                public static Vector2 GunNameRenderOffset = new Vector2(0, -48);
+                public static Color SeperatorColor = new Color(150, 150, 150, 150);
+
                 public static void Initialize()
                 {
                     /*foreach(Gun.GunType x in Enum.GetValues(typeof(Gun.GunType)))
@@ -258,9 +270,22 @@ namespace ConcentratedHell
                             _gunSelected = item.value;
                         }
                         Vector2 _renderedPosition = new Vector2(MathF.Cos(_radians) * (326 * _scale), MathF.Sin(_radians) * (326 * _scale)) + (Main.screenSize / 2);
-                        _spriteBatch.Draw(Gun.GunSprites[item.value], _renderedPosition, null, _color, 0f, Vector2.One * 32, _scale * (selected ? 1.5f : 1), SpriteEffects.None, 0f);
+                        float __scale = _scale * (Player.Instance.GunEquppedObject.Type == item.value ? 1.5f : (selected ? 1.2f : 1));
+                        string _ammoString = $"{Player.Instance.AmmoInventory[Gun.GunProjectilePairs[item.value]]}";
+                        string _gunName = $"{Gun.GunNames[item.value]}";
+
+                        // Weapon Sprite
+                        _spriteBatch.Draw(Gun.GunSprites[item.value], _renderedPosition, null, _color, 0f, Vector2.One * 32, __scale, SpriteEffects.None, 0f);
+                        // Seperator
+                        _spriteBatch.Draw(Instance.SeperatorSprite, Main.screenSize / 2, null, SeperatorColor, _radians + (_radianIncrement / 2), Vector2.One * 400, _scale, SpriteEffects.None, 0f);
+                        // Ammo
+                        if (selected)
+                        {
+                            _spriteBatch.DrawString(UIFont, _gunName, _renderedPosition + GunNameRenderOffset, _color, 0f, UIFont.MeasureString(_gunName) / 2, _scale, SpriteEffects.None, 0f);
+                        }
+                        _spriteBatch.DrawString(UIFont, _ammoString, _renderedPosition + AmmoTextRenderOffset, _color, 0f, UIFont.MeasureString(_ammoString) / 2, _scale, SpriteEffects.None, 0f);
                     }
-                    if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    if ((WasPressed == false) && (IsPressed == true))
                     {
                         if (_gunSelected != Player.Instance.GunEquppedObject.Type)
                         {

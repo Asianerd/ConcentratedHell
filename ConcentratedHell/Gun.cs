@@ -11,6 +11,8 @@ namespace ConcentratedHell
     {
         //public static Dictionary<GunType, Gun> PrefabGuns;
         public static Dictionary<GunType, Texture2D> GunSprites;
+        public static Dictionary<GunType, Projectile.ProjectileType> GunProjectilePairs;
+        public static Dictionary<GunType, string> GunNames;
         public delegate void Weapon();
         public static event Weapon FiringEvent;
         public static event Weapon DestroyEvent;
@@ -29,6 +31,25 @@ namespace ConcentratedHell
         public static void Initialize(Dictionary<GunType, Texture2D> _gunSprites)
         {
             GunSprites = _gunSprites;
+            GunProjectilePairs = new Dictionary<GunType, Projectile.ProjectileType> {
+                {GunType.Glock, Projectile.ProjectileType.Bullet},
+                {GunType.Bow, Projectile.ProjectileType.Arrow},
+                {GunType.Shotgun, Projectile.ProjectileType.Pellet},
+                {GunType.PlasmaPrism, Projectile.ProjectileType.LightShard},
+                {GunType.MissileLauncher, Projectile.ProjectileType.SeekingMissile},
+                {GunType.GrenadeLauncher, Projectile.ProjectileType.Grenade},
+                {GunType.Trapper, Projectile.ProjectileType.GravTrap}
+            };
+
+            GunNames = new Dictionary<GunType, string> {
+                {GunType.Glock, "Glock"},
+                {GunType.Bow, "Bow"},
+                {GunType.Shotgun, "Shotgun"},
+                {GunType.PlasmaPrism, "Plasma Prism"},
+                {GunType.MissileLauncher, "Missile Launcher"},
+                {GunType.GrenadeLauncher, "Grenade Launcher"},
+                {GunType.Trapper, "Trapper"}
+            };
         }
 
         public static object InstantiateGun(GunType _type, out Gun _gunObject)
