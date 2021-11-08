@@ -1,0 +1,22 @@
+﻿{
+  "BackgroundImageAbsolutePath": "C:\\USERS\\IRONR\\APPDATA\\LOCAL\\MICROSOFT\\VISUALSTUDIO\\16.0_63F9C7DB\\EXTENSIONS\\5M2KFNIY.TSU\\Images\\background.png",
+  "BackgroundImagesDirectoryAbsolutePath": "C:\\USERS\\IRONR\\APPDATA\\LOCAL\\MICROSOFT\\VISUALSTUDIO\\16.0_63F9C7DB\\EXTENSIONS\\5M2KFNIY.TSU\\Images",
+  "ExpandToIDE": false,
+  "Extensions": ".png, .jpg, .gif, .bmp",
+  "ImageBackgroundType": 0,
+  "ImageFadeAnimationInterval": "PT0S",
+  "ImageStretch": 0,
+  "IsLimitToMainlyEditorWindow": false,
+  "LoopSlideshow": true,
+  "MaxHeight": 0,
+  "MaxWidth": 0,
+  "Opacity": 0.35,
+  "PositionHorizon": 1,
+  "PositionVertical": 1,
+  "ShuffleSlideshow": false,
+  "SoftEdgeX": 0,
+  "SoftEdgeY": 0,
+  "UpdateImageInterval": "PT1M",
+  "ViewBoxPointX": 0,
+  "ViewBoxPointY": 0
+}

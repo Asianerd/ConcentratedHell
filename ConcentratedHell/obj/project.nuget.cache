@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zgbpujSi5mxcyfOjc1PaDXLta2/M1kNnKOhv/mZsXzz0x9UUXyG7EhxNBTCAvJBkM6rXa1xQsPcJ38BsXma8OQ==",
+  "dgSpecHash": "2yqeHfjoVecfSn6oNFWvAb8ztlR7phYKkKH9ttUwq0TrTKKMs7a5/FNpIq4pQNiDms/fDxoq8L1pnbdYEFxlsQ==",
   "success": true,
   "projectFilePath": "D:\\GithubRepos\\ConcentratedHell\\ConcentratedHell\\ConcentratedHell.csproj",
   "expectedPackageFiles": [
@@ -124,8 +124,7 @@
     "C:\\Users\\ironr\\.nuget\\packages\\system.xml.xdocument\\4.0.11\\system.xml.xdocument.4.0.11.nupkg.sha512",
     "C:\\Users\\ironr\\.nuget\\packages\\system.xml.xmldocument\\4.0.1\\system.xml.xmldocument.4.0.1.nupkg.sha512",
     "C:\\Users\\ironr\\.nuget\\packages\\system.xml.xpath\\4.0.1\\system.xml.xpath.4.0.1.nupkg.sha512",
-    "C:\\Users\\ironr\\.nuget\\packages\\system.xml.xpath.xdocument\\4.0.1\\system.xml.xpath.xdocument.4.0.1.nupkg.sha512",
-    "C:\\Users\\ironr\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.12\\microsoft.netcore.app.host.win-x64.3.1.12.nupkg.sha512"
+    "C:\\Users\\ironr\\.nuget\\packages\\system.xml.xpath.xdocument\\4.0.1\\system.xml.xpath.xdocument.4.0.1.nupkg.sha512"
   ],
   "logs": []
 }
