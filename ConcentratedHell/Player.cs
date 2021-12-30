@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
@@ -41,7 +42,7 @@ namespace ConcentratedHell
         {
             speed = 5 * (Main.keyboardState.IsKeyDown(Keys.LeftShift) ? 2 : 1);
 
-            PlayerMovement();
+            ImprovedPlayerMovement();
         }
 
         public void PlayerMovement()
@@ -65,6 +66,44 @@ namespace ConcentratedHell
             {
                 rect.Location = targetPosition;
             }
+        }
+
+        public void ImprovedPlayerMovement()
+        {
+            Vector2 targetVelocity = Vector2.Zero;
+            foreach (Keys key in Input.playerInputKeys)
+            {
+                if (Main.keyboardState.IsKeyDown(key))
+                {
+                    targetVelocity += Input.directionalVectors[Input.keyDirections[key]];
+                }
+            }
+            if (targetVelocity != Vector2.Zero)
+            {
+                targetVelocity.Normalize();
+            }
+
+
+            Point targetPosition = (rect.Location.ToVector2() + (targetVelocity * speed)).ToPoint();
+
+            if (Map.IsValidPosition(targetPosition))
+            {
+                rect.Location = targetPosition;
+                return;
+            }
+
+            Vector2 xVel = new Vector2(targetVelocity.X, 0);
+            Vector2 yVel = new Vector2(0, targetVelocity.Y);
+
+            if (Map.IsValidPosition((rect.Location.ToVector2() + (xVel * speed)).ToPoint()))
+            {
+                rect.Location += (xVel * speed).ToPoint();
+            }
+            else if (Map.IsValidPosition((rect.Location.ToVector2() + (yVel * speed)).ToPoint()))
+            {
+                rect.Location += (yVel * speed).ToPoint();
+            }
+
         }
 
         public void Draw(SpriteBatch spritebatch)
