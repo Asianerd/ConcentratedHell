@@ -37,6 +37,18 @@ namespace ConcentratedHell
             }
             return true;
         }
+
+        public static bool IsValidPosition(Rectangle rectangle)
+        {
+            foreach(Tile x in map)
+            {
+                if(x.rect.Intersects(rectangle))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     class Tile
@@ -61,8 +73,8 @@ namespace ConcentratedHell
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(sprite, rect, Color.White);
-            spriteBatch.Draw(sprite, rect, null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);
+            spriteBatch.Draw(sprite, rect, Color.White);
+            //spriteBatch.Draw(sprite, rect, null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);
             //spriteBatch.Draw(sprite, rect, null, Color.Red, 0f, Vector2.Zero, SpriteEffects.None, 0f);
         }
     }
