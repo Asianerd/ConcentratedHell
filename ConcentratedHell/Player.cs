@@ -30,41 +30,25 @@ namespace ConcentratedHell
         }
 
         public Rectangle rect;
+        public static Vector2 size;
         //public Vector2 position;
         public float speed = 5;
 
         Player()
         {
             rect = new Rectangle(0, 0, 64, 64);
+            size = new Vector2(64, 64);
         }
 
         public void Update()
         {
-            speed = 5 * (Main.keyboardState.IsKeyDown(Keys.LeftShift) ? 2 : 1);
+            speed = 8f * (Main.keyboardState.IsKeyDown(Keys.LeftControl) ? 0.5f : 1f);
 
             ImprovedPlayerMovement();
-        }
-
-        public void PlayerMovement()
-        {
-            Vector2 target = Vector2.Zero;
-            foreach (Keys key in Input.playerInputKeys)
+            if(Input.inputs[Keys.LeftShift].active)
             {
-                if (Main.keyboardState.IsKeyDown(key))
-                {
-                    target += Input.directionalVectors[Input.keyDirections[key]];
-                }
-            }
-            if (target != Vector2.Zero)
-            {
-                target.Normalize();
-            }
-
-            Point targetPosition = (rect.Location.ToVector2() + (target * speed)).ToPoint();
-            
-            if(Map.IsValidPosition(targetPosition))
-            {
-                rect.Location = targetPosition;
+                Debug.WriteLine("Shift is being pressed");
+                Skill.ExecuteSkill(Skill.Type.Dash);
             }
         }
 
@@ -84,33 +68,32 @@ namespace ConcentratedHell
             }
 
 
-            Point targetPosition = (rect.Location.ToVector2() + (targetVelocity * speed)).ToPoint();
+            Rectangle targetRectangle = new Rectangle((rect.Location.ToVector2() + (targetVelocity * speed)).ToPoint(), rect.Size);
 
-            if (Map.IsValidPosition(targetPosition))
+            if(Map.IsValidPosition(targetRectangle))
             {
-                rect.Location = targetPosition;
+                rect.Location = targetRectangle.Location;
                 return;
             }
 
             Vector2 xVel = new Vector2(targetVelocity.X, 0);
+            Rectangle xRect = new Rectangle((rect.Location.ToVector2() + (xVel * speed)).ToPoint(), rect.Size);
+            if (Map.IsValidPosition(xRect))
+            {
+                rect.Location = xRect.Location;
+            }
+
             Vector2 yVel = new Vector2(0, targetVelocity.Y);
-
-            if (Map.IsValidPosition((rect.Location.ToVector2() + (xVel * speed)).ToPoint()))
+            Rectangle yRect = new Rectangle((rect.Location.ToVector2() + (yVel * speed)).ToPoint(), rect.Size);
+            if (Map.IsValidPosition(yRect))
             {
-                rect.Location += (xVel * speed).ToPoint();
+                rect.Location = yRect.Location;
             }
-            else if (Map.IsValidPosition((rect.Location.ToVector2() + (yVel * speed)).ToPoint()))
-            {
-                rect.Location += (yVel * speed).ToPoint();
-            }
-
         }
 
         public void Draw(SpriteBatch spritebatch)
         {
-            //spritebatch.Draw(sprite, position, null, Color.White, 0f, sprite.Bounds.Center.ToVector2(), 1f, SpriteEffects.None, 0f);
-            spritebatch.Draw(sprite, rect, null, Color.White, 0f, sprite.Bounds.Center.ToVector2(), SpriteEffects.None, 0f);
-            //spritebatch.Draw(sprite, position, null, Color.Red, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0f);
+            spritebatch.Draw(sprite, rect, Color.White);
         }
     }
 }
