@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace ConcentratedHell
 {
@@ -16,6 +17,9 @@ namespace ConcentratedHell
             if(Instance == null)
             {
                 Instance = new Player();
+
+                Main.UpdateEvent += Instance.Update;
+                Main.DrawEvent += Instance.Draw;
             }
         }
 
@@ -24,16 +28,50 @@ namespace ConcentratedHell
             sprite = _sprite;
         }
 
-        public Vector2 position;
+        public Rectangle rect;
+        //public Vector2 position;
+        public float speed = 5;
+
+        Player()
+        {
+            rect = new Rectangle(0, 0, 64, 64);
+        }
 
         public void Update()
         {
+            speed = 5 * (Main.keyboardState.IsKeyDown(Keys.LeftShift) ? 2 : 1);
 
+            PlayerMovement();
+        }
+
+        public void PlayerMovement()
+        {
+            Vector2 target = Vector2.Zero;
+            foreach (Keys key in Input.playerInputKeys)
+            {
+                if (Main.keyboardState.IsKeyDown(key))
+                {
+                    target += Input.directionalVectors[Input.keyDirections[key]];
+                }
+            }
+            if (target != Vector2.Zero)
+            {
+                target.Normalize();
+            }
+
+            Point targetPosition = (rect.Location.ToVector2() + (target * speed)).ToPoint();
+            
+            if(Map.IsValidPosition(targetPosition))
+            {
+                rect.Location = targetPosition;
+            }
         }
 
         public void Draw(SpriteBatch spritebatch)
         {
-            spritebatch.Draw(sprite, position, null, Color.White, 0f, sprite.Bounds.Center.ToVector2(), 1f, SpriteEffects.None, 0f);
+            //spritebatch.Draw(sprite, position, null, Color.White, 0f, sprite.Bounds.Center.ToVector2(), 1f, SpriteEffects.None, 0f);
+            spritebatch.Draw(sprite, rect, null, Color.White, 0f, sprite.Bounds.Center.ToVector2(), SpriteEffects.None, 0f);
+            //spritebatch.Draw(sprite, position, null, Color.Red, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0f);
         }
     }
 }
