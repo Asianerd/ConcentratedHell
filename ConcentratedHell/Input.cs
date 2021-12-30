@@ -8,13 +8,13 @@ namespace ConcentratedHell
 {
     class Input
     {
-        static List<Input> inputs;
+        public static Dictionary<Keys, Input> inputs;
         public static List<Keys> playerInputKeys;
         public static Dictionary<Keys, Direction> keyDirections;
         public static Dictionary<Direction, Direction> oppositeDirections;
         public static Dictionary<Direction, Vector2> directionalVectors;
 
-        public static void Initialize(List<Input> _inputs)
+        public static void Initialize(Dictionary<Keys, Input> _inputs)
         {
             inputs = _inputs;
 
@@ -55,7 +55,7 @@ namespace ConcentratedHell
 
         public static void StaticUpdate()
         {
-            foreach(Input x in inputs)
+            foreach(Input x in inputs.Values)
             {
                 x.Update();
             }
@@ -86,6 +86,7 @@ namespace ConcentratedHell
         {
             wasPressed = isPressed;
             isPressed = Main.keyboardState.IsKeyDown(key);
+            Debug.WriteLine($"{key} : {wasPressed} : {isPressed} = {active}");
 
             active = isPressed && !wasPressed;
 
