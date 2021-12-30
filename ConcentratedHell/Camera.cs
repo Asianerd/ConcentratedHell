@@ -22,7 +22,7 @@ namespace ConcentratedHell
 
         public Camera()
         {
-            position = Vector2.Zero;
+            position = Player.Instance.rect.Location.ToVector2() + (Player.size / 2f);
             target = Vector2.Zero;
 
             Main.UpdateEvent += Update;
@@ -30,9 +30,8 @@ namespace ConcentratedHell
 
         public void Update()
         {
-            target = Player.Instance.rect.Location.ToVector2();
+            target = Player.Instance.rect.Location.ToVector2() + (Player.size / 2f);
             position = Vector2.Lerp(position, target, 0.2f);
-            
         }
     }
 }
