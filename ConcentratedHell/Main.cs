@@ -8,8 +8,9 @@ namespace ConcentratedHell
 {
     public class Main : Game
     {
-        public static Rectangle screenSize = new Rectangle(0, 0, 1920, 1080);
+        public static Rectangle screenSize = new Rectangle(0, 0, 500, 500);
         //public static Rectangle screenSize = new Rectangle(0, 0, 800, 800);
+        public static SpriteFont mainFont;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -53,15 +54,20 @@ namespace ConcentratedHell
                 new Tile(new Rectangle(384, 0, 128, 256)),
                 new Tile(new Rectangle(384, 384, 128, 256)),
             });
-            Input.Initialize(new List<Input>()
+            Input.Initialize(new Dictionary<Keys, Input>()
             {
-                new Input(Keys.F11, () => {
-                    _graphics.IsFullScreen = !_graphics.IsFullScreen;
-                    _graphics.ApplyChanges();
-                })
+                { Keys.F11,
+                    new Input(Keys.F11, () => {
+                        _graphics.IsFullScreen = !_graphics.IsFullScreen;
+                        _graphics.ApplyChanges();
+                    })
+                },
+                { Keys.LeftShift, new Input(Keys.LeftShift) },
             });
             Player.Initialize();
             Camera.Initialize();
+
+            Skill.Initialize();
 
             base.Initialize();
         }
@@ -70,6 +76,7 @@ namespace ConcentratedHell
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            mainFont = Content.Load<SpriteFont>("Fonts/MainFont");
             Player.LoadContent(Content.Load<Texture2D>("player"));
         }
 
@@ -101,7 +108,13 @@ namespace ConcentratedHell
             {
                 DrawEvent(_spriteBatch);
             }
+
+            _spriteBatch.DrawString(mainFont, $"{Camera.Instance.position}\n{Player.Instance.rect.Location}", Vector2.Zero, Color.White);
             _spriteBatch.End();
+
+            /*_spriteBatch.Begin();
+            _spriteBatch.Draw(Map.placeholderSprite, screenSize.Size.ToVector2() / 2f, Color.White);
+            _spriteBatch.End();*/
 
             base.Draw(gameTime);
         }
