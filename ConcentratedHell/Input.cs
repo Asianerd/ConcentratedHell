@@ -49,8 +49,6 @@ namespace ConcentratedHell
                 { Direction.Left, new Vector2(-1, 0) },
                 { Direction.Right, new Vector2(1, 0) }
             };
-
-            Main.UpdateEvent += StaticUpdate;
         }
 
         public static void StaticUpdate()
@@ -86,7 +84,6 @@ namespace ConcentratedHell
         {
             wasPressed = isPressed;
             isPressed = Main.keyboardState.IsKeyDown(key);
-            Debug.WriteLine($"{key} : {wasPressed} : {isPressed} = {active}");
 
             active = isPressed && !wasPressed;
 

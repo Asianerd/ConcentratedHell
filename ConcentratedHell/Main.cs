@@ -8,8 +8,7 @@ namespace ConcentratedHell
 {
     public class Main : Game
     {
-        public static Rectangle screenSize = new Rectangle(0, 0, 500, 500);
-        //public static Rectangle screenSize = new Rectangle(0, 0, 800, 800);
+        public static Rectangle screenSize = new Rectangle(0, 0, 1000, 1000);
         public static SpriteFont mainFont;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -108,13 +107,7 @@ namespace ConcentratedHell
             {
                 DrawEvent(_spriteBatch);
             }
-
-            _spriteBatch.DrawString(mainFont, $"{Camera.Instance.position}\n{Player.Instance.rect.Location}", Vector2.Zero, Color.White);
             _spriteBatch.End();
-
-            /*_spriteBatch.Begin();
-            _spriteBatch.Draw(Map.placeholderSprite, screenSize.Size.ToVector2() / 2f, Color.White);
-            _spriteBatch.End();*/
 
             base.Draw(gameTime);
         }
