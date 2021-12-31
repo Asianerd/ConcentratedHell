@@ -109,9 +109,9 @@ namespace ConcentratedHell
             direction = MathF.Atan2(end.Y - start.Y, end.X - start.X);
         }
 
-        public void Draw(SpriteBatch spritebatch)
+        public void Draw()
         {
-            spritebatch.Draw(sprite, rect, Color.White);
+            Main.spriteBatch.Draw(sprite, rect, Color.White);
         }
     }
 }

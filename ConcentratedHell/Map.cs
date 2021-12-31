@@ -18,11 +18,11 @@ namespace ConcentratedHell
             Main.DrawEvent += Draw;
         }
 
-        public static void Draw(SpriteBatch spriteBatch)
+        public static void Draw()
         {
             foreach(Tile x in map)
             {
-                x.Draw(spriteBatch);
+                x.Draw();
             }
         }
 
@@ -71,9 +71,9 @@ namespace ConcentratedHell
             spriteOrigin = sprite.Bounds.Center.ToVector2();
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw()
         {
-            spriteBatch.Draw(sprite, rect, Color.White);
+            Main.spriteBatch.Draw(sprite, rect, Color.White);
             //spriteBatch.Draw(sprite, rect, null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);
             //spriteBatch.Draw(sprite, rect, null, Color.Red, 0f, Vector2.Zero, SpriteEffects.None, 0f);
         }

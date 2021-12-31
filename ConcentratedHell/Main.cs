@@ -10,10 +10,10 @@ namespace ConcentratedHell
     {
         public static Rectangle screenSize = new Rectangle(0, 0, 1000, 1000);
         public static SpriteFont mainFont;
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        public static GraphicsDeviceManager graphics;
+        public static SpriteBatch spriteBatch;
 
-        public delegate void RenderEvent(SpriteBatch spriteBatch);
+        public delegate void RenderEvent();
         public static RenderEvent DrawEvent;
 
         public delegate void GameEvent();
@@ -24,13 +24,13 @@ namespace ConcentratedHell
 
         public Main()
         {
-            _graphics = new GraphicsDeviceManager(this);
-            _graphics.PreferredBackBufferWidth = screenSize.Width;
-            _graphics.PreferredBackBufferHeight = screenSize.Height;
+            graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = screenSize.Width;
+            graphics.PreferredBackBufferHeight = screenSize.Height;
             if(screenSize == new Rectangle(0, 0, 1920, 1080))
             {
-                _graphics.IsFullScreen = true;
-                _graphics.ApplyChanges();
+                graphics.IsFullScreen = true;
+                graphics.ApplyChanges();
             }
 
             Content.RootDirectory = "Content";
@@ -57,26 +57,36 @@ namespace ConcentratedHell
             {
                 { Keys.F11,
                     new Input(Keys.F11, () => {
-                        _graphics.IsFullScreen = !_graphics.IsFullScreen;
-                        _graphics.ApplyChanges();
+                        graphics.IsFullScreen = !graphics.IsFullScreen;
+                        graphics.ApplyChanges();
                     })
                 },
                 { Keys.LeftShift, new Input(Keys.LeftShift) },
+                { Keys.B, new Input(Keys.B, () => {
+                        var x = new Cyborg(Player.Instance.rect);
+                    })
+                },
             });
             Player.Initialize();
             Camera.Initialize();
 
             Skill.Initialize();
+            Enemy.Initialize();
 
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             mainFont = Content.Load<SpriteFont>("Fonts/MainFont");
             Player.LoadContent(Content.Load<Texture2D>("player"));
+            string _enemySpritePath = "Enemy";
+            Enemy.LoadContent(new Dictionary<Enemy.Type, Texture2D>()
+            {
+                { Enemy.Type.Cyborg, Content.Load<Texture2D>($"{_enemySpritePath}/Cyborg") },
+            });
         }
 
         protected override void Update(GameTime gameTime)
@@ -102,12 +112,12 @@ namespace ConcentratedHell
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             Matrix renderPosition = Matrix.CreateTranslation(new Vector3((screenSize.Size.ToVector2() / 2f) - Camera.Instance.position, 0));
-            _spriteBatch.Begin(samplerState:SamplerState.PointClamp, transformMatrix:renderPosition);
+            spriteBatch.Begin(samplerState:SamplerState.PointClamp, transformMatrix:renderPosition);
             if (DrawEvent != null)
             {
-                DrawEvent(_spriteBatch);
+                DrawEvent();
             }
-            _spriteBatch.End();
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
