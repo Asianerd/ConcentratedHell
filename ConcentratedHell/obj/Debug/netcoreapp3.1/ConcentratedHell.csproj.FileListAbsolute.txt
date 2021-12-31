@@ -84,7 +84,6 @@ D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\runtime
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\runtimes\win7-arm\native\libuv.dll
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\runtimes\win7-x64\native\libuv.dll
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\runtimes\win7-x86\native\libuv.dll
-D:\GithubRepos\ConcentratedHell\ConcentratedHell\obj\Debug\netcoreapp3.1\ConcentratedHell.csprojAssemblyReference.cache
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\obj\Debug\netcoreapp3.1\ConcentratedHell.AssemblyInfoInputs.cache
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\obj\Debug\netcoreapp3.1\ConcentratedHell.AssemblyInfo.cs
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\obj\Debug\netcoreapp3.1\ConcentratedHell.csproj.CoreCompileInputs.cache
@@ -113,3 +112,6 @@ D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\RadialWheel.xnb
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\RadialWheelSelection.xnb
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\RadialWheelSeperator.xnb
+D:\GithubRepos\ConcentratedHell\ConcentratedHell\obj\Debug\netcoreapp3.1\ConcentratedHell.csproj.AssemblyReference.cache
+D:\GithubRepos\ConcentratedHell\ConcentratedHell\obj\Debug\netcoreapp3.1\ConcentratedHell.GeneratedMSBuildEditorConfig.editorconfig
+D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Enemy\Cyborg.xnb

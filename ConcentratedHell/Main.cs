@@ -1,126 +1,92 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using System;
 
 namespace ConcentratedHell
 {
     public class Main : Game
     {
-        private GraphicsDeviceManager _graphics;
-        public static Vector2 screenSize = new Vector2(1920, 1080);
-        public static Vector2 BoundingBox;
-        public static Color BackgroundColor;
-        public delegate void MainEvents();
-        public static event MainEvents UpdateEvent;
-        public static event MainEvents PlayerUpdateEvent;
+        public static Rectangle screenSize = new Rectangle(0, 0, 1000, 1000);
+        public static SpriteFont mainFont;
+        public static GraphicsDeviceManager graphics;
+        public static SpriteBatch spriteBatch;
 
-        public static float FPS = 0;
+        public delegate void RenderEvent();
+        public static RenderEvent DrawEvent;
+
+        public delegate void GameEvent();
+        public static GameEvent UpdateEvent;
+
+        public static KeyboardState keyboardState;
+        public static MouseState mouseState;
 
         public Main()
         {
-            _graphics = new GraphicsDeviceManager(this);
-            _graphics.PreferredBackBufferWidth = (int)screenSize.X;
-            _graphics.PreferredBackBufferHeight = (int)screenSize.Y;
-            _graphics.IsFullScreen = true;
-
-            BoundingBox = new Vector2(1908, 1040);
-            BackgroundColor = new Color(51, 51, 51);
+            graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = screenSize.Width;
+            graphics.PreferredBackBufferHeight = screenSize.Height;
+            if(screenSize == new Rectangle(0, 0, 1920, 1080))
+            {
+                graphics.IsFullScreen = true;
+                graphics.ApplyChanges();
+            }
 
             Content.RootDirectory = "Content";
-            IsMouseVisible = false;
+            IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
-            Cursor.Initialize(Content.Load<Texture2D>("Cursor"));
-            Item.Initialize(
-                new Dictionary<Item.ItemClass, Dictionary<object, Texture2D>>()
-                {
-                    {
-                        Item.ItemClass.Ammo,
-                        new Dictionary<object, Texture2D>() {
-                            { Projectile.ProjectileType.Arrow, Content.Load<Texture2D>("Arrow") },
-                            { Projectile.ProjectileType.Bullet, Content.Load<Texture2D>("Bullet") },
-                            { Projectile.ProjectileType.Pellet, Content.Load<Texture2D>("Pellet") },
-                            { Projectile.ProjectileType.LightShard, Content.Load<Texture2D>("LightShard") },
-                            { Projectile.ProjectileType.SeekingMissile, Content.Load<Texture2D>("SeekingMissile") },
-                            { Projectile.ProjectileType.Grenade, Content.Load<Texture2D>("Grenade") },
-                            { Projectile.ProjectileType.GravTrap, Content.Load<Texture2D>("GravTrap") }
-                        }
-                    },
-                    {
-                        Item.ItemClass.Equipment,
-                        new Dictionary<object, Texture2D>()
-                        {
+            Map.placeholderSprite = Content.Load<Texture2D>("blank");
+            Map.Initialize(new List<Tile>(){
+                new Tile(new Rectangle(-128, -128, 1152, 128)),
+                new Tile(new Rectangle(-128, -128, 128, 896)),
+                new Tile(new Rectangle(896, -128, 128, 896)),
+                new Tile(new Rectangle(-128, 640, 1152, 128)),
 
-                        }
-                    },
-                    {
-                        Item.ItemClass.Loot,
-                        new Dictionary<object, Texture2D>()
-                        {
+                new Tile(new Rectangle(128, 128, 128, 128)),
+                new Tile(new Rectangle(128, 384, 128, 128)),
+                new Tile(new Rectangle(640, 256, 128, 128)),
 
-                        }
-                    },
-                    {
-                        Item.ItemClass.Weapon,
-                        new Dictionary<object, Texture2D>()
-                        {
-
-                        }
-                    }
+                new Tile(new Rectangle(384, 0, 128, 256)),
+                new Tile(new Rectangle(384, 384, 128, 256)),
+            });
+            Input.Initialize(new Dictionary<Keys, Input>()
+            {
+                { Keys.F11,
+                    new Input(Keys.F11, () => {
+                        graphics.IsFullScreen = !graphics.IsFullScreen;
+                        graphics.ApplyChanges();
+                    })
                 },
-                new Dictionary<object, string>()
-                {
-                    { Projectile.ProjectileType.Arrow, "Arrow" },
-                    { Projectile.ProjectileType.Bullet, "Bullet" },
-                    { Projectile.ProjectileType.Pellet, "Pellet" },
-                    { Projectile.ProjectileType.LightShard, "Light Shard" },
-                    { Projectile.ProjectileType.SeekingMissile, "Seeking Missile" },
-                    { Projectile.ProjectileType.Grenade, "Grenade" },
-                    { Projectile.ProjectileType.GravTrap, "Grav Trap" }
+                { Keys.LeftShift, new Input(Keys.LeftShift) },
+                { Keys.B, new Input(Keys.B, () => {
+                        var x = new Cyborg(Player.Instance.rect);
+                    })
                 },
-                Content.Load<SpriteFont>("Fonts/MainFont")
-                );
-            Gun.Initialize(new Dictionary<Gun.GunType, Texture2D>() {
-                { Gun.GunType.Glock, Content.Load<Texture2D>("Guns/Glock") },
-                { Gun.GunType.Bow, Content.Load<Texture2D>("Guns/Bow") },
-                { Gun.GunType.Shotgun, Content.Load<Texture2D>("Guns/Shotgun")},
-                { Gun.GunType.PlasmaPrism, Content.Load<Texture2D>("Guns/PlasmaPrism") },
-                { Gun.GunType.MissileLauncher, Content.Load<Texture2D>("Guns/MissileLauncher") },
-                { Gun.GunType.GrenadeLauncher, Content.Load<Texture2D>("Guns/GrenadeLauncher") },
-                { Gun.GunType.Trapper, Content.Load<Texture2D>("Guns/Trapper") }
             });
-            Enemy.Initialize(Content.Load<Texture2D>("Enemy"), Content.Load<Texture2D>("PlayerEyes"), Content.Load<Texture2D>("EnemyEyes"));
-            Player.Initialize(Content.Load<Texture2D>("Player"), new List<Texture2D>() {
-                Content.Load<Texture2D>("PlayerEyes"),
-                Content.Load<Texture2D>("EyeBlink/EyeBlink1"),
-                Content.Load<Texture2D>("EyeBlink/EyeBlink2"),
-                Content.Load<Texture2D>("EyeBlink/EyeBlink3"),
-                Content.Load<Texture2D>("EyeBlink/EyeBlink2"),
-                Content.Load<Texture2D>("EyeBlink/EyeBlink1")
-            });
-            UI.Initialize(Content.Load<Texture2D>("Blank"), Content.Load<SpriteFont>("Fonts/MainFont"), Content.Load<Texture2D>("RadialWheel"), Content.Load<Texture2D>("RadialWheelSelection"), Content.Load<Texture2D>("RadialWheelSeperator"));
-            Bar.Initialize(Content.Load<Texture2D>("Blank"));
-            Projectile.Initialize(new Dictionary<Projectile.ProjectileType, Texture2D> {
-                { Projectile.ProjectileType.Bullet, Content.Load<Texture2D>("Bullet") },
-                { Projectile.ProjectileType.Arrow, Content.Load<Texture2D>("Arrow") },
-                { Projectile.ProjectileType.Pellet, Content.Load<Texture2D>("Pellet") },
-                { Projectile.ProjectileType.LightShard, Content.Load<Texture2D>("LightShard") },
-                { Projectile.ProjectileType.SeekingMissile, Content.Load<Texture2D>("SeekingMissile") },
-                { Projectile.ProjectileType.Grenade, Content.Load<Texture2D>("Grenade") },
-                { Projectile.ProjectileType.GravTrap, Content.Load<Texture2D>("GravTrap") }
-            });
-            Rendering.Initialize(new SpriteBatch(GraphicsDevice), Content.Load<Texture2D>("Background"), Content.Load<Texture2D>("Wall"));
-            DamageBubble.Initialize(Content.Load<SpriteFont>("Fonts/MainFont"));
+            Player.Initialize();
+            Camera.Initialize();
+
+            Skill.Initialize();
+            Enemy.Initialize();
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
-
+            mainFont = Content.Load<SpriteFont>("Fonts/MainFont");
+            Player.LoadContent(Content.Load<Texture2D>("player"));
+            string _enemySpritePath = "Enemy";
+            Enemy.LoadContent(new Dictionary<Enemy.Type, Texture2D>()
+            {
+                { Enemy.Type.Cyborg, Content.Load<Texture2D>($"{_enemySpritePath}/Cyborg") },
+            });
         }
 
         protected override void Update(GameTime gameTime)
@@ -128,25 +94,30 @@ namespace ConcentratedHell
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (PlayerUpdateEvent != null)
-            {
-                PlayerUpdateEvent();
-            }
-            if (UpdateEvent != null && !Player.Instance.TimeStopped)
+            mouseState = Mouse.GetState();
+            keyboardState = Keyboard.GetState();
+
+            Input.StaticUpdate();
+
+            if (UpdateEvent != null)
             {
                 UpdateEvent();
             }
 
-            Enemy.StaticUpdate();
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(BackgroundColor);
-            FPS = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            Rendering.RenderObjects();
+            Matrix renderPosition = Matrix.CreateTranslation(new Vector3((screenSize.Size.ToVector2() / 2f) - Camera.Instance.position, 0));
+            spriteBatch.Begin(samplerState:SamplerState.PointClamp, transformMatrix:renderPosition);
+            if (DrawEvent != null)
+            {
+                DrawEvent();
+            }
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

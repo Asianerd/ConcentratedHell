@@ -6,7 +6,6 @@ namespace ConcentratedHell
 {
     class GameValue
     {
-        public string Name;
         public double I;
         public double Min;
         public double Max;
@@ -15,9 +14,8 @@ namespace ConcentratedHell
         // Min                  Max  Min                  Max  Min                  Max
 
 
-        public GameValue(string _name, double _min, double _max, double _regeneration, double _iPercent = 100.0)
+        public GameValue(double _min, double _max, double _regeneration, double _iPercent = 100.0)
         {
-            Name = _name;
             Min = _min;
             Max = _max;
             Regeneration = _regeneration;
