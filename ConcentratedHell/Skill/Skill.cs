@@ -16,6 +16,8 @@ namespace ConcentratedHell
             {
                 { Type.Dash, new Dash() }
             };
+
+            Main.UpdateEvent += UpdateSkills;
         }
 
         public static void ExecuteSkill(Type type)
@@ -34,7 +36,7 @@ namespace ConcentratedHell
         #region Enheritance
         public Skill()
         {
-            cooldown = new GameValue(0, 60, 1, 100);
+            cooldown = new GameValue(0, 120, 1, 100);
         }
 
         public virtual void Execute()
