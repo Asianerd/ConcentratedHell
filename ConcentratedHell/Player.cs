@@ -31,8 +31,10 @@ namespace ConcentratedHell
 
         public Rectangle rect;
         public static Vector2 size;
-        //public Vector2 position;
+        public float direction = 0f; // Radians
         public float speed = 5;
+        public bool stuck = false;
+        public bool hasMovementInput = false;
 
         Player()
         {
@@ -47,9 +49,9 @@ namespace ConcentratedHell
             ImprovedPlayerMovement();
             if(Input.inputs[Keys.LeftShift].active)
             {
-                Debug.WriteLine("Shift is being pressed");
                 Skill.ExecuteSkill(Skill.Type.Dash);
             }
+            StuckCheck();
         }
 
         public void ImprovedPlayerMovement()
@@ -62,9 +64,15 @@ namespace ConcentratedHell
                     targetVelocity += Input.directionalVectors[Input.keyDirections[key]];
                 }
             }
-            if (targetVelocity != Vector2.Zero)
+            hasMovementInput = targetVelocity != Vector2.Zero;
+            if (hasMovementInput)
             {
+                CalculateDirection(Vector2.Zero, targetVelocity);
                 targetVelocity.Normalize();
+            }
+            else
+            {
+                return;
             }
 
 
@@ -89,6 +97,16 @@ namespace ConcentratedHell
             {
                 rect.Location = yRect.Location;
             }
+        }
+
+        public void StuckCheck()
+        {
+
+        }
+
+        void CalculateDirection(Vector2 start, Vector2 end)
+        {
+            direction = MathF.Atan2(end.Y - start.Y, end.X - start.X);
         }
 
         public void Draw(SpriteBatch spritebatch)
