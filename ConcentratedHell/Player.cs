@@ -36,6 +36,8 @@ namespace ConcentratedHell
         public bool stuck = false;
         public bool hasMovementInput = false;
 
+        public Dictionary<Ammo.Type, int> ammoInventory;
+
         Player()
         {
             rect = new Rectangle(0, 0, 64, 64);
