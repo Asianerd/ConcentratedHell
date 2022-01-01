@@ -7,11 +7,15 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Blank.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Cursor.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/Cyborg.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/Hotbar.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Fonts/MainFont.spritefont</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Player.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/PlayerEyes.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Projectiles/Generic.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

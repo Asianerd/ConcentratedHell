@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Player.png</SourceFile>
-  <SourceTime>2022-01-01T03:48:12.5987078+08:00</SourceTime>
-  <DestFile>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/bin/Windows/Player.xnb</DestFile>
-  <DestTime>2022-01-02T04:52:56.4966091+08:00</DestTime>
+  <SourceFile>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Projectiles/Generic.png</SourceFile>
+  <SourceTime>2022-01-02T05:50:55.4740337+08:00</SourceTime>
+  <DestFile>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/bin/Windows/Weapons/Projectiles/Generic.xnb</DestFile>
+  <DestTime>2022-01-02T06:13:58.9562921+08:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+08:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -115,3 +115,5 @@ D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\obj\Debug\netcoreapp3.1\ConcentratedHell.csproj.AssemblyReference.cache
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\obj\Debug\netcoreapp3.1\ConcentratedHell.GeneratedMSBuildEditorConfig.editorconfig
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Enemy\Cyborg.xnb
+D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Weapons\Projectiles\Generic.xnb
+D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Enemy\Hotbar.xnb
