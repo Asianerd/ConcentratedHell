@@ -9,6 +9,7 @@ namespace ConcentratedHell
     class Enemy
     {
         Rectangle rect;
+        GameValue health;
         float direction;
         Type type;
         Texture2D sprite;
@@ -71,6 +72,16 @@ namespace ConcentratedHell
             {
                 rect.Location = yRect.Location;
             }
+        }
+
+        public virtual void AffectHealth(double damage)
+        {
+            health.AffectValue(damage);
+        }
+
+        public virtual void Die()
+        {
+            collection.Remove(this);
         }
 
         public virtual void Draw()
