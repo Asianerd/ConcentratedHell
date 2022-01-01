@@ -49,6 +49,8 @@ namespace ConcentratedHell
                 { Direction.Left, new Vector2(-1, 0) },
                 { Direction.Right, new Vector2(1, 0) }
             };
+
+            MouseInput.Initialize();
         }
 
         public static void StaticUpdate()
@@ -99,6 +101,38 @@ namespace ConcentratedHell
             Down,
             Right,
             Left
+        }
+    }
+
+    class MouseInput
+    {
+        public static MouseInput RMouse;
+        public static MouseInput LMouse;
+
+        public static void Initialize()
+        {
+            RMouse = new MouseInput();
+            LMouse = new MouseInput();
+
+            Main.UpdateEvent += StaticUpdate;
+        }
+
+        public static void StaticUpdate()
+        {
+            RMouse.Update(Main.mouseState.RightButton == ButtonState.Pressed);
+            LMouse.Update(Main.mouseState.LeftButton == ButtonState.Pressed);
+        }
+
+        bool wasPressed;
+        bool isPressed;
+        public bool active;
+
+        public void Update(bool current)
+        {
+            wasPressed = isPressed;
+            isPressed = current;
+
+            active = isPressed && !wasPressed;
         }
     }
 }
