@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
@@ -8,28 +9,35 @@ namespace ConcentratedHell
 {
     class Enemy
     {
-        Rectangle rect;
-        GameValue health;
-        float direction;
-        Type type;
-        Texture2D sprite;
+        public Rectangle rect;
+        public GameValue health;
+        public float direction;
+        public Type type;
+        public Texture2D sprite;
+        public Vector2 healthBarSize;
+        public bool alive = true;
 
-        public Enemy(Rectangle _rect, Type _type)
+        public Enemy(Rectangle _rect, Type _type, GameValue _health)
         {
             rect = _rect;
             type = _type;
             sprite = spriteTable[type];
             collection.Add(this);
+
+            health = _health;
+            healthBarSize = new Vector2(rect.Width, 8);
         }
 
         public virtual void Update()
         {
             PathFind(Player.Instance.rect.Location, 5f);
+            alive = health.Percent() > 0f;
         }
 
         public virtual void PathFind(Point target, float _speed)
         {
-            float distance = MathF.Sqrt(MathF.Pow(MathF.Abs(target.X - rect.X), 2) + MathF.Pow(MathF.Abs(target.Y - rect.Y), 2));
+            //float distance = MathF.Sqrt(MathF.Pow(MathF.Abs(target.X - rect.X), 2) + MathF.Pow(MathF.Abs(target.Y - rect.Y), 2));
+            float distance = Vector2.Distance(target.ToVector2(), rect.Location.ToVector2());
             // (x + y)^0.5
 
             float speed = distance < _speed ? distance : _speed;
@@ -76,7 +84,7 @@ namespace ConcentratedHell
 
         public virtual void AffectHealth(double damage)
         {
-            health.AffectValue(damage);
+            health.AffectValue(-damage);
         }
 
         public virtual void Die()
@@ -87,11 +95,13 @@ namespace ConcentratedHell
         public virtual void Draw()
         {
             Main.spriteBatch.Draw(sprite, rect, Color.White);
+            Main.spriteBatch.Draw(healthBar, new Rectangle(rect.Location.X, rect.Bottom + 10, (int)(healthBarSize.X * health.Percent()), (int)healthBarSize.Y), Color.White);
         }
 
         #region Statics
         public static Dictionary<Type, Texture2D> spriteTable;
         public static List<Enemy> collection;
+        public static Texture2D healthBar;
 
         public static void Initialize()
         {
@@ -100,9 +110,16 @@ namespace ConcentratedHell
             Main.DrawEvent += StaticDraw;
         }
 
-        public static void LoadContent(Dictionary<Type, Texture2D> _spriteTable)
+        public static void LoadContent(Texture2D _healthBar)
         {
-            spriteTable = _spriteTable;
+            string enemyPath = "Enemy";
+            spriteTable = new Dictionary<Type, Texture2D>();
+            foreach(Type x in Enum.GetValues(typeof(Type)).Cast<Type>())
+            {
+                spriteTable.Add(x, Main.Instance.Content.Load<Texture2D>($"{enemyPath}/{x.ToString().ToLower()}"));
+            }
+
+            healthBar = _healthBar;
         }
 
         public static void StaticUpdate()
@@ -111,6 +128,7 @@ namespace ConcentratedHell
             {
                 x.Update();
             }
+            collection.RemoveAll(n => !n.alive);
         }
 
         public static void StaticDraw()
