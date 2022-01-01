@@ -1,7 +1,7 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 "D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Blank.png","D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/bin/Windows/Content/Blank.xnb","TextureProcessor","Texture2DContent",220,16469,0.0053949
 "D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Cursor.png","D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/bin/Windows/Content/Cursor.xnb","TextureProcessor","Texture2DContent",279,16469,0.0025094
-"D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/Cyborg.png","D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/bin/Windows/Content/Enemy/Cyborg.xnb","TextureProcessor","Texture2DContent",168,1109,0.1198697
+"D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/Cyborg.png","D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/bin/Windows/Content/Enemy/Cyborg.xnb","TextureProcessor","Texture2DContent",168,1109,0.4598792
 "D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Fonts/MainFont.spritefont","D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/bin/Windows/Content/Fonts/MainFont.xnb","FontDescriptionProcessor","SpriteFontContent",2069,156706,0.1440505
-"D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Player.png","D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/bin/Windows/Content/Player.xnb","TextureProcessor","Texture2DContent",142,1109,0.2542841
-"D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/PlayerEyes.png","D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/bin/Windows/Content/PlayerEyes.xnb","TextureProcessor","Texture2DContent",101,1109,0.158459
+"D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Player.png","D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/bin/Windows/Content/Player.xnb","TextureProcessor","Texture2DContent",142,1109,0.0219887
+"D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/PlayerEyes.png","D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/bin/Windows/Content/PlayerEyes.xnb","TextureProcessor","Texture2DContent",101,1109,0.00265

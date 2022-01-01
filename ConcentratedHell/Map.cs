@@ -15,12 +15,21 @@ namespace ConcentratedHell
         {
             map = _map;
 
+            Main.UpdateEvent += Update;
             Main.DrawEvent += Draw;
+        }
+
+        public static void Update()
+        {
+            foreach(Tile x in map)
+            {
+                x.Update();
+            }
         }
 
         public static void Draw()
         {
-            foreach(Tile x in map)
+            foreach (Tile x in map)
             {
                 x.Draw();
             }
@@ -28,9 +37,9 @@ namespace ConcentratedHell
 
         public static bool IsValidPosition(Point position)
         {
-            foreach(Tile x in map)
+            foreach (Tile x in map)
             {
-                if(x.rect.Contains(position))
+                if (x.rect.Contains(position))
                 {
                     return false;
                 }
@@ -40,9 +49,9 @@ namespace ConcentratedHell
 
         public static bool IsValidPosition(Rectangle rectangle)
         {
-            foreach(Tile x in map)
+            foreach (Tile x in map)
             {
-                if(x.rect.Intersects(rectangle))
+                if (x.rect.Intersects(rectangle))
                 {
                     return false;
                 }
@@ -71,11 +80,62 @@ namespace ConcentratedHell
             spriteOrigin = sprite.Bounds.Center.ToVector2();
         }
 
-        public void Draw()
+        public virtual void Update()
+        {
+
+        }
+
+        public virtual void Draw()
         {
             Main.spriteBatch.Draw(sprite, rect, Color.White);
-            //spriteBatch.Draw(sprite, rect, null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);
-            //spriteBatch.Draw(sprite, rect, null, Color.Red, 0f, Vector2.Zero, SpriteEffects.None, 0f);
+        }
+    }
+
+    class Door:Tile
+    {
+        bool activated = false;
+        GameValue progress;
+        Vector2 start;
+        Vector2 destination;
+
+        static float activationDistance = 300f;
+
+        public Door(Rectangle _rect, Vector2 _start, Vector2 _destination, GameValue _progress = null, Texture2D _sprite = null) : base(_rect, _sprite)
+        {
+            destination = _destination;
+            start = _start;
+            if (progress == null)
+            {
+                progress = new GameValue(0, 15, 1);
+            }
+            else
+            {
+                progress = _progress;
+            }
+            // Progress will regenerate when its open
+            // Open = 100%
+            // Closed = 0%
+        }
+
+        public override void Update()
+        {
+            float distance = Vector2.Distance(start, Player.Instance.rect.Center.ToVector2()); // bruh why cant point class have these things
+
+            activated = distance <= activationDistance;
+            Debug.WriteLine($"{distance} : {activationDistance}");
+
+            if(activated)
+            {
+                progress.Regenerate();
+            }
+            else
+            {
+                progress.Regenerate(-1);
+            }
+
+            /*Vector2 candidate = Vector2.Lerp(start, destination, (float)progress.Percent());
+            rect.Location = candidate.ToPoint();*/
+            rect.Location = Vector2.Lerp(start, destination, (float)progress.Percent()).ToPoint();
         }
     }
 }

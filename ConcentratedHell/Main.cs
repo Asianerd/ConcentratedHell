@@ -41,6 +41,9 @@ namespace ConcentratedHell
         {
             Map.placeholderSprite = Content.Load<Texture2D>("blank");
             Map.Initialize(new List<Tile>(){
+                // Doors first to avoid weird graphic inconsistencies
+                new Door(new Rectangle(0, 0, 64, 128), new Vector2(416, 256), new Vector2(416, 128)),
+
                 new Tile(new Rectangle(-128, -128, 1152, 128)),
                 new Tile(new Rectangle(-128, -128, 128, 896)),
                 new Tile(new Rectangle(896, -128, 128, 896)),
