@@ -35,7 +35,22 @@ namespace ConcentratedHell
             }
         }
 
+        #region Position validation
+        // Split into many overloads to increase performance
+
         public static bool IsValidPosition(Point position)
+        {
+            foreach (Tile x in map)
+            {
+                if (x.rect.Contains(position))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool IsValidPosition(Vector2 position)
         {
             foreach (Tile x in map)
             {
@@ -58,6 +73,7 @@ namespace ConcentratedHell
             }
             return true;
         }
+        #endregion
     }
 
     class Tile
@@ -122,7 +138,6 @@ namespace ConcentratedHell
             float distance = Vector2.Distance(start, Player.Instance.rect.Center.ToVector2()); // bruh why cant point class have these things
 
             activated = distance <= activationDistance;
-            Debug.WriteLine($"{distance} : {activationDistance}");
 
             if(activated)
             {
