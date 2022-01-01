@@ -17,7 +17,13 @@ namespace ConcentratedHell
             }
         }
 
+        public static Vector2 ScreenToWorld(Vector2 position)
+        {
+            return position - Instance.offset;
+        }
+
         public Vector2 position;
+        public Vector2 offset;
         public Vector2 target;
 
         public Camera()
@@ -32,6 +38,7 @@ namespace ConcentratedHell
         {
             target = Player.Instance.rect.Location.ToVector2() + (Player.size / 2f);
             position = Vector2.Lerp(position, target, 0.2f);
+            offset = (Main.screenSize.Size.ToVector2() / 2f) - position;
         }
     }
 }
