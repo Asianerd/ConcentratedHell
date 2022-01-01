@@ -48,8 +48,17 @@ namespace ConcentratedHell
         {
             speed = 8f * (Main.keyboardState.IsKeyDown(Keys.LeftControl) ? 0.5f : 1f);
 
+            if (MouseInput.LMouse.active)
+            {
+                var x = new Combat.Projectiles.Generic(rect.Center.ToVector2(), Cursor.Instance.playerToCursor);
+            }
+            if (MouseInput.RMouse.active)
+            {
+                var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), rect.Size));
+            }
+
             ImprovedPlayerMovement();
-            if(Input.inputs[Keys.LeftShift].active)
+            if (Input.inputs[Keys.LeftShift].active)
             {
                 Skill.ExecuteSkill(Skill.Type.Dash);
             }
