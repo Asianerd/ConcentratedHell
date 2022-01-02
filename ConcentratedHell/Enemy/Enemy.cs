@@ -98,6 +98,10 @@ namespace ConcentratedHell
         public virtual void Draw()
         {
             Main.spriteBatch.Draw(sprite, rect, Color.White);
+        }
+
+        public virtual void DrawHealthBar()
+        {
             if (health.Percent() != 1)
             {
                 Main.spriteBatch.Draw(healthBar, new Rectangle(rect.Location.X, rect.Bottom + 10, (int)(healthBarSize.X * health.Percent()), (int)healthBarSize.Y), Color.White);
@@ -142,6 +146,10 @@ namespace ConcentratedHell
             foreach(Enemy x in collection)
             {
                 x.Draw();
+            }
+            foreach(Enemy x in collection)
+            {
+                x.DrawHealthBar();
             }
         }
 
