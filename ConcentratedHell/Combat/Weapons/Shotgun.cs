@@ -8,7 +8,7 @@ namespace ConcentratedHell.Combat.Weapons
 {
     class Shotgun:Weapon
     {
-        public Shotgun() : base(Type.Shotgun, Projectile.Type.Pellet)
+        public Shotgun() : base(Type.Shotgun, Projectile.Type.Pellet, Ammo.Type.Shell, new GameValue(0, 60, 1, 0))
         {
 
         }

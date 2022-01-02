@@ -27,20 +27,27 @@ namespace ConcentratedHell.Combat
         public Texture2D sprite;
         public Type type;
         public Projectile.Type projectileType;
+        public Ammo.Type ammoType;
+        public GameValue cooldown;
 
-        public Weapon(Type _type, Projectile.Type _projectileType)
+        public Weapon(Type _type, Projectile.Type _projectileType, Ammo.Type _ammoType, GameValue _cooldown)
         {
             type = _type;
             projectileType = _projectileType;
+            ammoType = _ammoType;
+            cooldown = _cooldown;
 
             sprite = spriteTable[type];
         }
 
         public virtual void Update()
         {
-            if (MouseInput.LMouse.active)
+            cooldown.Regenerate();
+
+            if (MouseInput.LMouse.isPressed && (cooldown.Percent() == 1f))
             {
                 Fire(Player.Instance.rect.Center.ToVector2());
+                cooldown.AffectValue(0f);
             }
         }
 

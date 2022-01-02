@@ -7,7 +7,7 @@ namespace ConcentratedHell.Combat.Weapons
 {
     class Plasma_rifle:Weapon
     {
-        public Plasma_rifle() : base(Type.Plasma_Rifle, Projectiles.Projectile.Type.Plasma_orb)
+        public Plasma_rifle() : base(Type.Plasma_Rifle, Projectiles.Projectile.Type.Plasma_orb, Ammo.Type.Plasma, new GameValue(0, 5, 1, 100))
         {
 
         }
