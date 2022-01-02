@@ -108,7 +108,7 @@ namespace ConcentratedHell
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Cursor.LoadContent(Content.Load<Texture2D>("cursor"));
+            Cursor.LoadContent();
             UI.UI.LoadContent(Content.Load<SpriteFont>("Fonts/mainFont"));
 
             mainFont = Content.Load<SpriteFont>("Fonts/MainFont");

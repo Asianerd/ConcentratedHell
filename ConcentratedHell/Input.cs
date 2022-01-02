@@ -123,8 +123,8 @@ namespace ConcentratedHell
             LMouse.Update(Main.mouseState.LeftButton == ButtonState.Pressed);
         }
 
-        bool wasPressed;
-        bool isPressed;
+        public bool wasPressed;
+        public bool isPressed;
         public bool active;
 
         public void Update(bool current)

@@ -7,7 +7,7 @@ namespace ConcentratedHell.Combat.Projectiles
 {
     class Plasma_orb:Projectile
     {
-        public Plasma_orb(Vector2 position, float direction) : base(Type.Plasma_orb, 2f, 20f, position, direction)
+        public Plasma_orb(Vector2 position, float direction) : base(Type.Plasma_orb, 20f, 5f, position, direction)
         {
 
         }

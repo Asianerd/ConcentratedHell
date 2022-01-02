@@ -12,7 +12,8 @@ namespace ConcentratedHell
             Medium,
             Large,
             Shell,
-            Rocket
+            Rocket,
+            Plasma
         }
     }
 }
