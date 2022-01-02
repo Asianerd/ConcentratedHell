@@ -11,9 +11,21 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Fonts/MainFont.spritefont</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Player.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/PlayerEyes.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/overlay.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/radialWheelSelection.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Plasma_rifle.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Projectiles/Generic.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Projectiles/Pellet.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Projectiles/Plasma_orb.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Shotgun.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
