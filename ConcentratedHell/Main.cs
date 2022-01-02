@@ -11,23 +11,24 @@ namespace ConcentratedHell
     {
         public static Main Instance;
 
-        public static Rectangle screenSize = new Rectangle(0, 0, 1000, 1000);
+        //public static Rectangle screenSize = new Rectangle(0, 0, 800, 800);
+        public static Rectangle screenSize = new Rectangle(0, 0, 1920, 1080);
         public static SpriteFont mainFont;
         public static GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
 
-        public delegate void RenderEvent();
-        public static RenderEvent DrawEvent;
-
         public delegate void GameEvent();
         public static GameEvent UpdateEvent;
+        public static GameEvent DrawEvent;
 
+        public static Random random;
         public static KeyboardState keyboardState;
         public static MouseState mouseState;
 
         public Main()
         {
             Instance = this;
+            random = new Random();
 
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = screenSize.Width;
@@ -44,7 +45,7 @@ namespace ConcentratedHell
 
         protected override void Initialize()
         {
-            UI.Initialize();
+            UI.UI.Initialize();
 
             Input.Initialize(new Dictionary<Keys, Input>()
             {
@@ -55,8 +56,19 @@ namespace ConcentratedHell
                     })
                 },
                 { Keys.LeftShift, new Input(Keys.LeftShift) },
-                { Keys.B, new Input(Keys.B, () => {
+                { Keys.B,
+                    new Input(Keys.B, () => {
                         var x = new Cyborg(Player.Instance.rect);
+                    })
+                },
+                { Keys.E,
+                    new Input(Keys.E, () => {
+                        Player.Instance.AddWeapon(new Combat.Weapons.Shotgun());
+                    }) 
+                },
+                { Keys.R,
+                    new Input(Keys.R, () => {
+                        Player.Instance.AddWeapon(new Combat.Weapons.Plasma_rifle());
                     })
                 }
             });
@@ -84,6 +96,8 @@ namespace ConcentratedHell
             Skill.Initialize();
             Enemy.Initialize();
 
+            Weapon.Initialize();
+
             Combat.Projectiles.Projectile.LoadContent();
             Combat.Projectiles.Projectile.Initialize();
 
@@ -95,7 +109,7 @@ namespace ConcentratedHell
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             Cursor.LoadContent(Content.Load<Texture2D>("cursor"));
-            UI.LoadContent(Content.Load<SpriteFont>("Fonts/mainFont"));
+            UI.UI.LoadContent(Content.Load<SpriteFont>("Fonts/mainFont"));
 
             mainFont = Content.Load<SpriteFont>("Fonts/MainFont");
             Player.LoadContent(Content.Load<Texture2D>("player"));
@@ -132,8 +146,8 @@ namespace ConcentratedHell
             }
             spriteBatch.End();
 
-            spriteBatch.Begin();
-            UI.Draw();
+            spriteBatch.Begin(samplerState:SamplerState.PointClamp);
+            UI.UI.Draw();
             spriteBatch.End();
 
             base.Draw(gameTime);
