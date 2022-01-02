@@ -64,13 +64,10 @@ namespace ConcentratedHell
                 { Keys.E,
                     new Input(Keys.E, () => {
                         Player.Instance.AddWeapon(new Combat.Weapons.Shotgun());
+                        Player.Instance.AddWeapon(new Combat.Weapons.Plasma_rifle());
+                        Player.Instance.AddWeapon(new Combat.Weapons.AutoShotgun());
                     }) 
                 },
-                { Keys.R,
-                    new Input(Keys.R, () => {
-                        Player.Instance.AddWeapon(new Combat.Weapons.Plasma_rifle());
-                    })
-                }
             });
 
             Map.placeholderSprite = Content.Load<Texture2D>("blank");
@@ -80,7 +77,8 @@ namespace ConcentratedHell
 
                 new Tile(new Rectangle(-128, -128, 1152, 128)),
                 new Tile(new Rectangle(-128, -128, 128, 896)),
-                new Tile(new Rectangle(896, -128, 128, 896)),
+                new Tile(new Rectangle(896, -128, 128, 384)),
+                new Tile(new Rectangle(896, 384, 128, 384)),
                 new Tile(new Rectangle(-128, 640, 1152, 128)),
 
                 new Tile(new Rectangle(128, 128, 128, 128)),
