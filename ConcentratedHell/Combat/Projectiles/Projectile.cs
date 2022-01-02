@@ -11,7 +11,6 @@ namespace ConcentratedHell.Combat.Projectiles
     {
         public static List<Projectile> collection;
         public static Dictionary<Type, Texture2D> spriteTable;
-        public static Dictionary<Type, Projectile> prefabrication;
 
         public static void Initialize()
         {
@@ -49,15 +48,18 @@ namespace ConcentratedHell.Combat.Projectiles
         }
 
         #region Base class
-        Type type;
-        Vector2 position;
-        Vector2 increment;
-        Texture2D sprite;
-        Vector2 spriteOrigin;
-        float direction;
-        float speed;
+        public Type type;
+        public Vector2 position;
+        public Vector2 increment;
+        public Texture2D sprite;
+        public Vector2 spriteOrigin;
+        public float renderedScale = 3f;
 
-        float damage;
+        public float direction;
+        public float rotation = 0f;
+        public float speed;
+
+        public float damage;
 
         public Projectile(Type _type, float _speed, float _damage, Vector2 _position, float _direction)
         {
@@ -105,7 +107,7 @@ namespace ConcentratedHell.Combat.Projectiles
 
         public void Move()
         {
-            position += increment;
+            position += increment * Universe.speedMultiplier;
         }
 
         public virtual void Destroy()
@@ -115,13 +117,15 @@ namespace ConcentratedHell.Combat.Projectiles
 
         public virtual void Draw()
         {
-            Main.spriteBatch.Draw(sprite, position, null, Color.White, direction, spriteOrigin, 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(sprite, position, null, Color.White, direction + rotation, spriteOrigin, renderedScale, SpriteEffects.None, 0f);
         }
         #endregion
 
         public enum Type
         {
-            Generic
+            Generic,
+            Plasma_orb,
+            Pellet
         }
     }
 }
