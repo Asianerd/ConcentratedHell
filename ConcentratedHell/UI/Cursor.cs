@@ -37,6 +37,7 @@ namespace ConcentratedHell
         public Vector2 screenPosition;
         public Vector2 worldPosition;
         public float playerToCursor;
+        public bool systemCursor;
 
         public void Update()
         {
@@ -50,17 +51,18 @@ namespace ConcentratedHell
             if(Player.Instance.equippedWeapon != null)
             {
                 sprite = cursorSights[Player.Instance.equippedWeapon.ammoType];
+                systemCursor = false;
             }
             else
             {
                 sprite = cursorSprites[Type.Default];
+                systemCursor = true;
             }
         }
 
         public void Draw()
         {
-            //Main.spriteBatch.Draw(sprite, screenPosition, Color.White);
-            Main.spriteBatch.Draw(sprite, screenPosition, null, Color.White, 0f, Vector2.Zero, 5f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(sprite, screenPosition, null, Color.White, 0f, systemCursor ? Vector2.Zero : sprite.Bounds.Center.ToVector2(), 5f, SpriteEffects.None, 0f);
         }
 
         public enum Type

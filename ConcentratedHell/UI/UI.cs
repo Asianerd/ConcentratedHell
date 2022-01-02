@@ -36,6 +36,11 @@ namespace ConcentratedHell.UI
 
         public static void Draw()
         {
+            if (Player.Instance.equippedWeapon != null)
+            {
+                Main.spriteBatch.DrawString(font, Player.Instance.ammoInventory[Player.Instance.equippedWeapon.ammoType].ToString(), Cursor.Instance.screenPosition, Color.Black);
+            }
+
             SelectionWheel.SelectionWheel.Instance.Draw();
 
             Cursor.Instance.Draw();
