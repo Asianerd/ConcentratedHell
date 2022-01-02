@@ -130,3 +130,4 @@ D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\UI\CursorSights\Shell.xnb
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\UI\CursorSights\Small.xnb
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\UI\CursorSprites\Default.xnb
+D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Weapons\Auto_shotgun.xnb
