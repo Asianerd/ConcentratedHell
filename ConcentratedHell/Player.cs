@@ -130,15 +130,57 @@ namespace ConcentratedHell
             direction = MathF.Atan2(end.Y - start.Y, end.X - start.X);
         }
 
+        public void Knockback(float _direction, float _distance)
+        {
+            Vector2 targetVelocity = new Vector2(
+                MathF.Cos(_direction) * _distance,
+                MathF.Sin(_direction) * _distance
+                );
+            Debug.WriteLine(_distance.ToString());
+
+            Rectangle targetRectangle = new Rectangle((rect.Location.ToVector2() + (targetVelocity * speed)).ToPoint(), rect.Size);
+
+            if (Map.IsValidPosition(targetRectangle))
+            {
+                rect.Location = targetRectangle.Location;
+                return;
+            }
+
+            Vector2 xVel = new Vector2(targetVelocity.X, 0);
+            Rectangle xRect = new Rectangle((rect.Location.ToVector2() + (xVel * speed)).ToPoint(), rect.Size);
+            if (Map.IsValidPosition(xRect))
+            {
+                rect.Location = xRect.Location;
+            }
+
+            Vector2 yVel = new Vector2(0, targetVelocity.Y);
+            Rectangle yRect = new Rectangle((rect.Location.ToVector2() + (yVel * speed)).ToPoint(), rect.Size);
+            if (Map.IsValidPosition(yRect))
+            {
+                rect.Location = yRect.Location;
+            }
+        }
+
         public void Draw()
         {
             Main.spriteBatch.Draw(sprite, rect, Color.White);
             if(equippedWeapon != null)
             {
+                float distance = 45f + (5f * (float)equippedWeapon.cooldown.Percent());
                 Vector2 renderedPosition = new Vector2(
-
+                    (MathF.Cos(Cursor.Instance.playerToCursor) * distance) + rect.Center.X,
+                    (MathF.Sin(Cursor.Instance.playerToCursor) * distance) + rect.Center.Y
                     );
-                Main.spriteBatch.Draw(equippedWeapon.sprite, rect.Location.ToVector2(), Color.White);
+                Main.spriteBatch.Draw(
+                    equippedWeapon.sprite,
+                    renderedPosition,
+                    null,
+                    Color.White,
+                    Cursor.Instance.playerToCursor,
+                    equippedWeapon.sprite.Bounds.Center.ToVector2(),
+                    5f,
+                    Math.Abs(Cursor.Instance.playerToCursor) >= (Math.PI / 2f) ? SpriteEffects.FlipVertically : SpriteEffects.None,
+                    0f);
             }
         }
 

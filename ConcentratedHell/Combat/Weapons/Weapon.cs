@@ -28,13 +28,20 @@ namespace ConcentratedHell.Combat
         public Type type;
         public Projectile.Type projectileType;
         public Ammo.Type ammoType;
+        public int ammoUsage;
         public GameValue cooldown;
+        public float projectileSpawnDistance;
+        public float knockback;
 
-        public Weapon(Type _type, Projectile.Type _projectileType, Ammo.Type _ammoType, GameValue _cooldown)
+        public Weapon(Type _type, Projectile.Type _projectileType, float _projectileSpawnDistance, float _knockback, Ammo.Type _ammoType, GameValue _cooldown, int _ammoUsage = 1)
         {
             type = _type;
             projectileType = _projectileType;
+            projectileSpawnDistance = _projectileSpawnDistance;
+            knockback = _knockback;
+
             ammoType = _ammoType;
+            ammoUsage = _ammoUsage;
             cooldown = _cooldown;
 
             sprite = spriteTable[type];
@@ -46,25 +53,34 @@ namespace ConcentratedHell.Combat
 
             if (MouseInput.LMouse.isPressed && (cooldown.Percent() == 1f))
             {
-                Fire(Player.Instance.rect.Center.ToVector2());
-                cooldown.AffectValue(0f);
+                if (Player.Instance.ammoInventory[ammoType] >= ammoUsage)
+                {
+                    Player.Instance.ammoInventory[ammoType] -= ammoUsage;
+                    Fire(new Vector2(
+                        (MathF.Cos(Cursor.Instance.playerToCursor) * projectileSpawnDistance) + Player.Instance.rect.Center.X,
+                        (MathF.Sin(Cursor.Instance.playerToCursor) * projectileSpawnDistance) + Player.Instance.rect.Center.Y
+                        ));
+                    cooldown.AffectValue(0f);
+                }
             }
         }
 
         public virtual void Fire(Vector2 origin) // Firing origin; The user's position
         {
-
-        }
-
-        public virtual void Reload()
-        {
-
+            Player.Instance.Knockback(
+                MathF.Atan2(
+                    Player.Instance.rect.Center.Y - origin.Y,
+                    Player.Instance.rect.Center.X - origin.X
+                    ),
+                knockback * (Main.random.Next(97, 103) / 100f)
+                );
         }
 
         public enum Type
         {
             Shotgun,
-            Plasma_Rifle
+            Plasma_Rifle,
+            Auto_Shotgun
         }
     }
 }
