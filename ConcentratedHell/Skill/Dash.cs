@@ -37,7 +37,7 @@ namespace ConcentratedHell
             {
                 ApplyDash();
 
-                dashPower.Regenerate();
+                dashPower.Regenerate(Universe.speedMultiplier);
                 if (dashPower.Percent() <= 0)
                 {
                     dashing = false;
@@ -55,8 +55,8 @@ namespace ConcentratedHell
         public void ApplyDash()
         {
             Point increment = new Point(
-                (int)(MathF.Cos(Player.Instance.direction) * dashSpeed),
-                (int)(MathF.Sin(Player.Instance.direction) * dashSpeed)
+                (int)(MathF.Cos(Player.Instance.direction) * dashSpeed * Universe.speedMultiplier),
+                (int)(MathF.Sin(Player.Instance.direction) * dashSpeed * Universe.speedMultiplier)
                 );
 
             Rectangle target = new Rectangle(

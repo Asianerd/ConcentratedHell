@@ -12,12 +12,13 @@ namespace ConcentratedHell
         public Rectangle rect;
         public GameValue health;
         public float direction;
+        public float speed;
         public Type type;
         public Texture2D sprite;
         public Vector2 healthBarSize;
         public bool alive = true;
 
-        public Enemy(Rectangle _rect, Type _type, GameValue _health)
+        public Enemy(Rectangle _rect, Type _type, GameValue _health, float _speed)
         {
             rect = _rect;
             type = _type;
@@ -26,29 +27,31 @@ namespace ConcentratedHell
 
             health = _health;
             healthBarSize = new Vector2(rect.Width, 8);
+
+            speed = _speed;
         }
 
         public virtual void Update()
         {
-            PathFind(Player.Instance.rect.Location, 5f);
+            PathFind(Player.Instance.rect.Location);
             alive = health.Percent() > 0f;
         }
 
-        public virtual void PathFind(Point target, float _speed)
+        public virtual void PathFind(Point target)
         {
             //float distance = MathF.Sqrt(MathF.Pow(MathF.Abs(target.X - rect.X), 2) + MathF.Pow(MathF.Abs(target.Y - rect.Y), 2));
             float distance = Vector2.Distance(target.ToVector2(), rect.Location.ToVector2());
             // (x + y)^0.5
 
-            float speed = distance < _speed ? distance : _speed;
+            float processedSpeed = (distance < speed ? distance : speed) * Universe.speedMultiplier;
 
             direction = MathF.Atan2(
                 target.Y - rect.Y,
                 target.X - rect.X
                 );
             Vector2 increment = new Vector2(
-                (int)(MathF.Cos(direction) * speed),
-                (int)(MathF.Sin(direction) * speed)
+                MathF.Cos(direction) * processedSpeed,
+                MathF.Sin(direction) * processedSpeed
                 );
 
             Rectangle candidate = new Rectangle(
@@ -61,20 +64,20 @@ namespace ConcentratedHell
                 increment.Normalize();
             }
 
-            if(Map.IsValidPosition(candidate))
+            if (Map.IsValidPosition(candidate))
             {
                 rect.Location = candidate.Location;
                 return;
             }
 
-            Point xVel = new Point((int)(increment.X * speed), 0);
+            Point xVel = new Point((int)Math.Ceiling(increment.X), 0);
             Rectangle xRect = new Rectangle(rect.Location + xVel, rect.Size);
             if(Map.IsValidPosition(xRect))
             {
                 rect.Location = xRect.Location;
             }
 
-            Point yVel = new Point(0, (int)(increment.Y * speed));
+            Point yVel = new Point(0, (int)Math.Ceiling(increment.Y));
             Rectangle yRect = new Rectangle(rect.Location + yVel, rect.Size);
             if(Map.IsValidPosition(yRect))
             {
@@ -95,7 +98,10 @@ namespace ConcentratedHell
         public virtual void Draw()
         {
             Main.spriteBatch.Draw(sprite, rect, Color.White);
-            Main.spriteBatch.Draw(healthBar, new Rectangle(rect.Location.X, rect.Bottom + 10, (int)(healthBarSize.X * health.Percent()), (int)healthBarSize.Y), Color.White);
+            if (health.Percent() != 1)
+            {
+                Main.spriteBatch.Draw(healthBar, new Rectangle(rect.Location.X, rect.Bottom + 10, (int)(healthBarSize.X * health.Percent()), (int)healthBarSize.Y), Color.White);
+            }
         }
 
         #region Statics

@@ -46,7 +46,7 @@ namespace ConcentratedHell
 
         public virtual void Update()
         {
-            cooldown.Regenerate();
+            cooldown.Regenerate(Universe.speedMultiplier);
         }
         #endregion
 

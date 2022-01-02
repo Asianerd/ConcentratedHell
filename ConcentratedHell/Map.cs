@@ -141,11 +141,11 @@ namespace ConcentratedHell
 
             if(activated)
             {
-                progress.Regenerate();
+                progress.Regenerate(Universe.speedMultiplier);
             }
             else
             {
-                progress.Regenerate(-1);
+                progress.Regenerate(-1 * Universe.speedMultiplier);
             }
 
             /*Vector2 candidate = Vector2.Lerp(start, destination, (float)progress.Percent());
