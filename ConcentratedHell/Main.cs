@@ -119,7 +119,7 @@ namespace ConcentratedHell
 
             mainFont = Content.Load<SpriteFont>("Fonts/MainFont");
             Player.LoadContent(Content.Load<Texture2D>("player"));
-            Enemy.LoadContent(Content.Load<Texture2D>("Enemy/hotbar"));
+            Enemy.LoadContent(Content.Load<Texture2D>("Enemy/healthbar"));
         }
 
         protected override void Update(GameTime gameTime)
