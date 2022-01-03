@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/Cyborg.png</SourceFile>
-  <SourceTime>2022-01-01T03:48:12.5987078+08:00</SourceTime>
+  <SourceTime>2022-01-03T14:02:10.8928997+08:00</SourceTime>
   <DestFile>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/bin/Windows/Content/Enemy/Cyborg.xnb</DestFile>
-  <DestTime>2022-01-01T12:20:28.8499255+08:00</DestTime>
+  <DestTime>2022-01-03T14:02:11.7293414+08:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+08:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

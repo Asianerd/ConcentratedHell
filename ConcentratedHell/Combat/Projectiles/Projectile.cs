@@ -100,6 +100,7 @@ namespace ConcentratedHell.Combat.Projectiles
                 if(x.rect.Contains(position.ToPoint()))
                 {
                     x.AffectHealth(damage);
+                    x.Knockback(Cursor.Instance.playerToCursor, speed/20f);
                     Destroy();
                     break;
                 }

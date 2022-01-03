@@ -15,25 +15,47 @@ namespace ConcentratedHell
         public float speed;
         public Type type;
         public Texture2D sprite;
+        public Texture2D eyeSprite;
         public Vector2 healthBarSize;
         public bool alive = true;
 
-        public Enemy(Rectangle _rect, Type _type, GameValue _health, float _speed)
+        public float knockbackResist = 1f;
+
+        public bool angered = false;
+        public float detectDistance;
+
+        public Enemy(Rectangle _rect, Type _type, GameValue _health, float _speed, float _detectDistance)
         {
             rect = _rect;
             type = _type;
-            sprite = spriteTable[type];
             collection.Add(this);
 
             health = _health;
             healthBarSize = new Vector2(rect.Width, 8);
 
             speed = _speed;
+            direction = (Main.random.Next(0, 100) / 100f) * MathF.PI * 2f;
+
+            detectDistance = _detectDistance;
+
+            sprite = enemyAssets[type][0];
+            eyeSprite = enemyAssets[type][angered ? 2 : 1];
         }
 
         public virtual void Update()
         {
-            PathFind(Player.Instance.rect.Location);
+            if (angered)
+            {
+                PathFind(Player.Instance.rect.Location);
+            }
+            else
+            {
+                if(Vector2.Distance(Player.Instance.rect.Center.ToVector2(), rect.Center.ToVector2()) <= detectDistance)
+                {
+                    Anger();
+                }
+            }
+
             alive = health.Percent() > 0f;
             if (!alive)
             {
@@ -89,9 +111,43 @@ namespace ConcentratedHell
             }
         }
 
+        public void Knockback(float _direction, float rawDistance)
+        {
+            float _distance = rawDistance * knockbackResist;
+
+            Vector2 targetVelocity = new Vector2(
+                MathF.Cos(_direction) * _distance,
+                MathF.Sin(_direction) * _distance
+                );
+
+            Rectangle targetRectangle = new Rectangle((rect.Location.ToVector2() + (targetVelocity * speed)).ToPoint(), rect.Size);
+
+            if (Map.IsValidPosition(targetRectangle))
+            {
+                rect.Location = targetRectangle.Location;
+                return;
+            }
+
+            Vector2 xVel = new Vector2(targetVelocity.X, 0);
+            Rectangle xRect = new Rectangle((rect.Location.ToVector2() + (xVel * speed)).ToPoint(), rect.Size);
+            if (Map.IsValidPosition(xRect))
+            {
+                rect.Location = xRect.Location;
+            }
+
+            Vector2 yVel = new Vector2(0, targetVelocity.Y);
+            Rectangle yRect = new Rectangle((rect.Location.ToVector2() + (yVel * speed)).ToPoint(), rect.Size);
+            if (Map.IsValidPosition(yRect))
+            {
+                rect.Location = yRect.Location;
+            }
+        }
+
+
         public virtual void AffectHealth(double damage)
         {
             health.AffectValue(-damage);
+            Anger();
         }
 
         public virtual void OnDeath()
@@ -103,9 +159,32 @@ namespace ConcentratedHell
             Debug.WriteLine("This happens");*/
         }
 
+        public virtual void Anger()
+        {
+            if(angered)
+            {
+                return;
+            }
+
+            angered = true;
+            eyeSprite = enemyAssets[type][2];
+            foreach(Enemy x in collection.Where(n => Vector2.Distance(n.rect.Center.ToVector2(), rect.Center.ToVector2()) <= 200f))
+            {
+                if(Main.random.Next(0, 10) == 1)
+                {
+                    x.Anger();
+                }
+            }
+        }
+
         public virtual void Draw()
         {
             Main.spriteBatch.Draw(sprite, rect, Color.White);
+            Vector2 renderPosition = new Vector2(
+                (MathF.Cos(direction) * 5f) + rect.Center.X,
+                (MathF.Sin(direction) * 5f) + rect.Center.Y - 5f
+                );
+            Main.spriteBatch.Draw(eyeSprite, renderPosition, null, Color.White, 0f, eyeSprite.Bounds.Center.ToVector2(), 4.5f, SpriteEffects.None, 0f);
         }
 
         public virtual void DrawHealthBar()
@@ -117,9 +196,14 @@ namespace ConcentratedHell
         }
 
         #region Statics
-        public static Dictionary<Type, Texture2D> spriteTable;
+        //public static Dictionary<Type, Texture2D> spriteTable;
         public static List<Enemy> collection;
         public static Texture2D healthBar;
+        public static Dictionary<Type, List<Texture2D>> enemyAssets;
+        /* 0 Body
+         * 1 Neutral Eyes
+         * 2 Angered Eyes
+         */
 
         public static void Initialize()
         {
@@ -130,11 +214,16 @@ namespace ConcentratedHell
 
         public static void LoadContent(Texture2D _healthBar)
         {
-            string enemyPath = "Enemy";
-            spriteTable = new Dictionary<Type, Texture2D>();
-            foreach(Type x in Enum.GetValues(typeof(Type)).Cast<Type>())
+            enemyAssets = new Dictionary<Type, List<Texture2D>>();
+            foreach (Type x in Enum.GetValues(typeof(Type)).Cast<Type>())
             {
-                spriteTable.Add(x, Main.Instance.Content.Load<Texture2D>($"{enemyPath}/{x.ToString().ToLower()}"));
+                string _path = x.ToString().ToLower();
+                enemyAssets.Add(x, new List<Texture2D>()
+                {
+                    Main.Instance.Content.Load<Texture2D>($"Enemy/{_path}/body"),
+                    Main.Instance.Content.Load<Texture2D>($"Enemy/{_path}/Eyes/neutral"),
+                    Main.Instance.Content.Load<Texture2D>($"Enemy/{_path}/Eyes/angered")
+                });
             }
 
             healthBar = _healthBar;

@@ -8,7 +8,7 @@ namespace ConcentratedHell
 {
     class Cyborg:Enemy
     {
-        public Cyborg(Rectangle rect) : base(rect, Type.Cyborg, new GameValue(0, 100, 1), 6f)
+        public Cyborg(Rectangle rect) : base(rect, Type.Cyborg, new GameValue(0, 100, 1), 6f, 300f)
         {
 
         }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Pickups/Ammo/Shell.png</SourceFile>
-  <SourceTime>2022-01-03T07:59:10.2848932+08:00</SourceTime>
+  <SourceTime>2022-01-03T08:20:01.1491346+08:00</SourceTime>
   <DestFile>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/bin/Windows/Pickups/Ammo/Shell.xnb</DestFile>
-  <DestTime>2022-01-03T08:05:12.7102125+08:00</DestTime>
+  <DestTime>2022-01-03T12:22:23.9032776+08:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+08:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

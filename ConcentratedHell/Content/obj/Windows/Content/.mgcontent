@@ -5,8 +5,10 @@
   <Config />
   <SourceFiles>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Blank.png</File>
-    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/Cyborg.png</File>
-    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/Hotbar.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/cyborg/body.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/cyborg/Eyes/angered.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/cyborg/Eyes/neutral.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/healthbar.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Fonts/MainFont.spritefont</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Pickups/Ammo/Large.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Pickups/Ammo/Medium.png</File>
@@ -15,6 +17,11 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Pickups/Ammo/Shell.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Pickups/Ammo/Small.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Player.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Player/Blink/Blink1.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Player/Blink/Blink2.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Player/Blink/Blink3.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Player/Blink/Blink4.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Player/Blink/Blink5.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/PlayerEyes.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/CursorSights/Large.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/CursorSights/Medium.png</File>
@@ -35,6 +42,13 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Shotgun.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
