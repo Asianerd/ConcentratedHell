@@ -64,6 +64,12 @@ namespace ConcentratedHell.UI.SelectionWheel
                 ) + SelectionWheel.origin;
 
             Main.spriteBatch.Draw(weapon.sprite, renderedPosition, null, Color.White, 0f, weapon.sprite.Bounds.Center.ToVector2(), scale * 6f, SpriteEffects.None, 0f);
+
+            int ammoAmount = Player.Instance.ammoInventory[weapon.ammoType];
+            string ammoText = ammoAmount.ToString();
+            Vector2 origin = UI.font.MeasureString(ammoText) / 2f;
+            renderedPosition += new Vector2(0, 40);
+            Main.spriteBatch.DrawString(UI.font, ammoText, renderedPosition, ammoAmount > 0 ? Color.White : UI.errorColor, 0f, origin, 1f, SpriteEffects.None, 0f);
         }
     }
 }
