@@ -10,6 +10,30 @@ namespace ConcentratedHell.Combat
 {
     class Weapon
     {
+        /* Handguns possibly?
+         * 
+         * Railgun
+         * Burst rifle
+         * Rocket launcher
+         * Grenade launcher
+         *      - Possible ice launcher?
+         * Amogus shotgun
+         * Dildo launcher
+         * Sniper
+         * Anti-material rifle (BFG-9000 tendrils? / Piercing? / )
+         *      - High damage & knockback
+         *      - High cooldown
+         *      - Special 
+         * Gatling gun
+         *      - Low cooldown
+         *      - Low damage & medium knockback
+         * 
+         * Kunai/ Shuriken
+         *      - Inflict poison?
+         * 
+         * Grappling hook
+         */
+
         #region Static
         public static Dictionary<Type, Texture2D> spriteTable;
 
@@ -76,11 +100,16 @@ namespace ConcentratedHell.Combat
                 );
         }
 
+        public virtual void AltFire(Vector2 origin)
+        {
+
+        }
+
         public enum Type
         {
             Shotgun,
             Plasma_Rifle,
-            Auto_Shotgun
+            Auto_Shotgun,
         }
     }
 }

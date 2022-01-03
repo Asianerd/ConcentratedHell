@@ -13,6 +13,20 @@ namespace ConcentratedHell.Combat.Weapons
 
         }
 
+        public override void Update()
+        {
+            base.Update();
+
+            if (MouseInput.RMouse.active && (Player.Instance.ammoInventory[ammoType] >= 25))
+            {
+                AltFire(new Vector2(
+                        (MathF.Cos(Cursor.Instance.playerToCursor) * projectileSpawnDistance) + Player.Instance.rect.Center.X,
+                        (MathF.Sin(Cursor.Instance.playerToCursor) * projectileSpawnDistance) + Player.Instance.rect.Center.Y
+                        ));
+                Player.Instance.ammoInventory[ammoType] -= 25;
+            }
+        }
+
         public override void Fire(Vector2 origin)
         {
             base.Fire(origin);
@@ -20,6 +34,16 @@ namespace ConcentratedHell.Combat.Weapons
             for (int i = 0; i <= 20; i++)
             {
                 var x = new Pellet(origin, Cursor.Instance.playerToCursor + (Main.random.Next(-300, 300) / 1000f), Main.random.Next(-30,30)/10f);
+            }
+        }
+
+        public override void AltFire(Vector2 origin)
+        {
+            base.AltFire(origin);
+
+            for (int i = 0; i <= 1000; i++)
+            {
+                var x = new Projectiles.Pellet(origin, Cursor.Instance.playerToCursor + Main.random.Next(-360, 360) / 100f, Main.random.Next(-300, 300) / 100f);
             }
         }
     }
