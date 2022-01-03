@@ -14,6 +14,7 @@ namespace ConcentratedHell
         #region Static
         public static Player Instance = null;
         public static Texture2D sprite;
+        public static List<Texture2D> playerEyeSprites;
         
         public static void Initialize()
         {
@@ -29,6 +30,13 @@ namespace ConcentratedHell
         public static void LoadContent(Texture2D _sprite)
         {
             sprite = _sprite;
+
+            string _playerEyeAssetsPath = "Player/Blink";
+            playerEyeSprites = new List<Texture2D>();
+            for (int i = 1; i <= 5; i++)
+            {
+                playerEyeSprites.Add(Main.Instance.Content.Load<Texture2D>($"{_playerEyeAssetsPath}/blink{i}"));
+            }
         }
         #endregion
 
@@ -41,6 +49,8 @@ namespace ConcentratedHell
         public Dictionary<Ammo.Type, int> ammoInventory;
         public Dictionary<Weapon.Type, Weapon> arsenal;
         public Weapon equippedWeapon = null;
+
+        public GameValue eyeBlink;
 
         Player()
         {
@@ -62,6 +72,8 @@ namespace ConcentratedHell
             }*/
 
             arsenal = new Dictionary<Weapon.Type, Weapon>();
+
+            eyeBlink = new GameValue(0, 120, 1);
         }
 
         public void Update()
@@ -85,6 +97,12 @@ namespace ConcentratedHell
             if (Input.inputs[Keys.LeftShift].active)
             {
                 Skill.ExecuteSkill(Skill.Type.Dash);
+            }
+
+            eyeBlink.Regenerate(0.2f);
+            if (eyeBlink.Percent() >= 1f)
+            {
+                eyeBlink.AffectValue(0f);
             }
         }
 
@@ -171,6 +189,24 @@ namespace ConcentratedHell
         public void Draw()
         {
             Main.spriteBatch.Draw(sprite, rect, Color.White);
+            Vector2 eyePosition = new Vector2(
+                (MathF.Cos(Cursor.Instance.playerToCursor) * 5f) + rect.Center.X,
+                (MathF.Sin(Cursor.Instance.playerToCursor) * 5f) + rect.Center.Y - 5f
+                );
+            // sprites = 1, 2, 3, 4, 5(o)
+            // blink = 1, 2, 3, 4, 5, 6, 7, 8, 9..120
+            Texture2D _eyeSprite = playerEyeSprites[(eyeBlink.I >= playerEyeSprites.Count ? (playerEyeSprites.Count - 1) : (int)eyeBlink.I)];
+            Main.spriteBatch.Draw(
+                _eyeSprite,
+                eyePosition,
+                null,
+                Color.White,
+                0f,
+                _eyeSprite.Bounds.Center.ToVector2(),
+                5f,
+                SpriteEffects.None,
+                0f
+                );
             if(equippedWeapon != null)
             {
                 float distance = 45f + (5f * (float)equippedWeapon.cooldown.Percent());
