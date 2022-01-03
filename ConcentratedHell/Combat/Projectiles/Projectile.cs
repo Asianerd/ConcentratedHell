@@ -32,11 +32,11 @@ namespace ConcentratedHell.Combat.Projectiles
 
         public static void StaticUpdate()
         {
-            List<Projectile> customizable = new List<Projectile>(collection);
-            foreach(Projectile x in customizable)
+            foreach(Projectile x in collection)
             {
                 x.Update();
             }
+            collection.RemoveAll(n => !n.alive);
         }
 
         public static void StaticDraw()
@@ -55,6 +55,9 @@ namespace ConcentratedHell.Combat.Projectiles
         public Vector2 spriteOrigin;
         public float renderedScale = 3f;
 
+        public GameValue age;
+        public bool alive = true;
+
         public float direction;
         public float rotation = 0f;
         public float speed;
@@ -69,6 +72,7 @@ namespace ConcentratedHell.Combat.Projectiles
 
             speed = _speed;
             damage = _damage;
+            age = new GameValue(0, 300, 1, 0);
 
             position = _position;
             direction = _direction;
@@ -83,9 +87,14 @@ namespace ConcentratedHell.Combat.Projectiles
 
         public virtual void Update()
         {
+            age.Regenerate();
+            if(age.Percent() >= 1f)
+            {
+                Destroy();
+            }
+
             Move();
             ValidatePosition();
-            Point pointPos = position.ToPoint();
             foreach(Enemy x in Enemy.collection)
             {
                 if(x.rect.Contains(position.ToPoint()))
@@ -112,7 +121,7 @@ namespace ConcentratedHell.Combat.Projectiles
 
         public virtual void Destroy()
         {
-            collection.Remove(this);
+            alive = false;
         }
 
         public virtual void Draw()
@@ -125,7 +134,7 @@ namespace ConcentratedHell.Combat.Projectiles
         {
             Generic,
             Plasma_orb,
-            Pellet
+            Pellet,
         }
     }
 }
