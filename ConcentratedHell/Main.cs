@@ -61,12 +61,10 @@ namespace ConcentratedHell
                         var x = new Cyborg(Player.Instance.rect);
                     })
                 },
-                { Keys.E,
-                    new Input(Keys.E, () => {
-                        Player.Instance.AddWeapon(new Combat.Weapons.Shotgun());
-                        Player.Instance.AddWeapon(new Combat.Weapons.Plasma_rifle());
-                        Player.Instance.AddWeapon(new Combat.Weapons.AutoShotgun());
-                    }) 
+                { Keys.C,
+                    new Input(Keys.C, () => {
+                        Player.Instance.rect.Location = Cursor.Instance.worldPosition.ToPoint();
+                    })
                 },
             });
 
@@ -74,12 +72,15 @@ namespace ConcentratedHell
             Map.Initialize(new List<Tile>(){
                 // Doors first to avoid weird graphic inconsistencies
                 new Door(new Rectangle(0, 0, 64, 128), new Vector2(416, 256), new Vector2(416, 128)),
+                new Door(new Rectangle(0, 0, 64, 128), new Vector2(896, 256), new Vector2(896, 128)),
+                new Door(new Rectangle(0, 0, 64, 128), new Vector2(-128, 256), new Vector2(-128, 128)),
 
-                new Tile(new Rectangle(-128, -128, 1152, 128)),
-                new Tile(new Rectangle(-128, -128, 128, 896)),
-                new Tile(new Rectangle(896, -128, 128, 384)),
-                new Tile(new Rectangle(896, 384, 128, 384)),
-                new Tile(new Rectangle(-128, 640, 1152, 128)),
+                new Tile(new Rectangle(-128, -128, 1152, 128)), // Up
+                new Tile(new Rectangle(-128, -128, 128, 384)),  // Left
+                new Tile(new Rectangle(-128, 384, 128, 384)),  // Left
+                new Tile(new Rectangle(896, -128, 128, 384)),   // Right
+                new Tile(new Rectangle(896, 384, 128, 384)),    // Right
+                new Tile(new Rectangle(-128, 640, 1152, 128)),  // Down
 
                 new Tile(new Rectangle(128, 128, 128, 128)),
                 new Tile(new Rectangle(128, 384, 128, 128)),
@@ -94,12 +95,19 @@ namespace ConcentratedHell
             Skill.Initialize();
             Enemy.Initialize();
 
-            Weapon.Initialize();
+            Pickups.Pickup.Initialize();
 
+            Ammo.LoadContent();
+            Weapon.Initialize();
             Combat.Projectiles.Projectile.LoadContent();
             Combat.Projectiles.Projectile.Initialize();
 
             base.Initialize();
+
+            /* For testing ; Remove later */
+            Player.Instance.AddWeapon(new Combat.Weapons.Shotgun());
+            Player.Instance.AddWeapon(new Combat.Weapons.Plasma_rifle());
+            Player.Instance.AddWeapon(new Combat.Weapons.AutoShotgun());
         }
 
         protected override void LoadContent()
@@ -134,7 +142,7 @@ namespace ConcentratedHell
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Gray);
 
             Matrix renderPosition = Matrix.CreateTranslation(new Vector3(Camera.Instance.offset, 0));
             spriteBatch.Begin(samplerState:SamplerState.PointClamp, transformMatrix:renderPosition);
