@@ -56,16 +56,16 @@ namespace ConcentratedHell
                     })
                 },
                 { Keys.LeftShift, new Input(Keys.LeftShift) },
-                { Keys.B,
-                    new Input(Keys.B, () => {
-                        var x = new Cyborg(Player.Instance.rect);
-                    })
-                },
                 { Keys.C,
                     new Input(Keys.C, () => {
                         Player.Instance.rect.Location = Cursor.Instance.worldPosition.ToPoint();
                     })
                 },
+                { Keys.B,
+                    new Input(Keys.B, () => {
+                        var x = new Particles.SmokeGroup(Player.Instance.rect.Center.ToVector2());
+                    })
+                }
             });
 
             Map.placeholderSprite = Content.Load<Texture2D>("blank");
@@ -101,6 +101,8 @@ namespace ConcentratedHell
             Weapon.Initialize();
             Combat.Projectiles.Projectile.LoadContent();
             Combat.Projectiles.Projectile.Initialize();
+
+            Particles.ParticleGroup.Initialize();
 
             base.Initialize();
 

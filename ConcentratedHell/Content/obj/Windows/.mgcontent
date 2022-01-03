@@ -10,6 +10,7 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/cyborg/Eyes/neutral.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/healthbar.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Fonts/MainFont.spritefont</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Particles/Smoke.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Pickups/Ammo/Large.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Pickups/Ammo/Medium.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Pickups/Ammo/Plasma.png</File>
@@ -42,6 +43,7 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Shotgun.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
