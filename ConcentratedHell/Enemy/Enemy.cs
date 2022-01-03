@@ -35,6 +35,10 @@ namespace ConcentratedHell
         {
             PathFind(Player.Instance.rect.Location);
             alive = health.Percent() > 0f;
+            if (!alive)
+            {
+                OnDeath();
+            }
         }
 
         public virtual void PathFind(Point target)
@@ -90,9 +94,13 @@ namespace ConcentratedHell
             health.AffectValue(-damage);
         }
 
-        public virtual void Die()
+        public virtual void OnDeath()
         {
-            collection.Remove(this);
+            var x = new Pickups.AmmoPickup(
+                Enum.GetValues(typeof(Ammo.Type)).Cast<Ammo.Type>().ToArray()[Main.random.Next(0, Enum.GetValues(typeof(Ammo.Type)).Length)],
+                Main.random.Next(0, 50), rect.Center.ToVector2());
+            /*Debug.WriteLine(Pickups.Pickup.pickups.Count().ToString());
+            Debug.WriteLine("This happens");*/
         }
 
         public virtual void Draw()
