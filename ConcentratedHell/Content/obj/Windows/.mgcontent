@@ -10,6 +10,7 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/cyborg/Eyes/neutral.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/healthbar.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Fonts/MainFont.spritefont</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Particles/Gore.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Particles/Smoke.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Pickups/Ammo/Large.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Pickups/Ammo/Medium.png</File>
@@ -35,14 +36,21 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/radialWheelSelection.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Amongus_Shotgun.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Auto_shotgun.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Barrett.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Hell.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Plasma_rifle.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Projectiles/Amongus.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Projectiles/Generic.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Projectiles/Pellet.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Projectiles/Plasma_orb.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Projectiles/Sniper_round.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Shotgun.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

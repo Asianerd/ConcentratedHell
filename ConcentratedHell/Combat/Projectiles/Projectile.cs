@@ -51,9 +51,11 @@ namespace ConcentratedHell.Combat.Projectiles
         public Type type;
         public Vector2 position;
         public Vector2 increment;
+
         public Texture2D sprite;
         public Vector2 spriteOrigin;
         public float renderedScale = 3f;
+        public Color color = Color.White;
 
         public GameValue age;
         public bool alive = true;
@@ -61,16 +63,18 @@ namespace ConcentratedHell.Combat.Projectiles
         public float direction;
         public float rotation = 0f;
         public float speed;
+        public float weight;
 
         public float damage;
 
-        public Projectile(Type _type, float _speed, float _damage, Vector2 _position, float _direction)
+        public Projectile(Type _type, float _speed, float _damage, Vector2 _position, float _direction, float _weight = -100f)
         {
             type = _type;
             sprite = spriteTable[type];
             spriteOrigin = sprite.Bounds.Center.ToVector2();
 
             speed = _speed;
+            weight = _weight == -100f? speed : _weight;
             damage = _damage;
             age = new GameValue(0, 300, 1, 0);
 
@@ -99,8 +103,8 @@ namespace ConcentratedHell.Combat.Projectiles
             {
                 if(x.rect.Contains(position.ToPoint()))
                 {
-                    x.AffectHealth(damage);
-                    x.Knockback(Cursor.Instance.playerToCursor, speed/20f);
+                    x.AffectHealth(damage, direction, weight);
+                    x.Knockback(Cursor.Instance.playerToCursor, weight/20f);
                     Destroy();
                     break;
                 }
@@ -111,7 +115,7 @@ namespace ConcentratedHell.Combat.Projectiles
         {
             if(!Map.IsValidPosition(position.ToPoint()))
             {
-                Destroy();
+                Destroy(mapCollide:true);
             }
         }
 
@@ -120,14 +124,14 @@ namespace ConcentratedHell.Combat.Projectiles
             position += increment * Universe.speedMultiplier;
         }
 
-        public virtual void Destroy()
+        public virtual void Destroy(bool mapCollide = false)
         {
             alive = false;
         }
 
         public virtual void Draw()
         {
-            Main.spriteBatch.Draw(sprite, position, null, Color.White, direction + rotation, spriteOrigin, renderedScale, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(sprite, position, null, color, direction + rotation, spriteOrigin, renderedScale, SpriteEffects.None, 0f);
         }
         #endregion
 
@@ -136,6 +140,7 @@ namespace ConcentratedHell.Combat.Projectiles
             Generic,
             Plasma_orb,
             Pellet,
+            Sniper_round,
         }
     }
 }

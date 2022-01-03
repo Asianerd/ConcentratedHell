@@ -17,7 +17,7 @@ namespace ConcentratedHell.Particles
                 MathF.Cos(_direction) * _distance + origin.X,
                 MathF.Sin(_direction) * _distance + origin.Y
                 ),
-            new GameValue(0, 30, 1, 0)
+            new GameValue(0, 60, 1, 0)
             )
         {
             increment = new Vector2(
@@ -25,7 +25,7 @@ namespace ConcentratedHell.Particles
                 MathF.Sin(_direction) * _distance
                 );
 
-            speed = (Main.random.Next(50, 100) / 100f);
+            speed = (Main.random.Next(10, 100) / 100f);
         }
 
         public override void Update()
@@ -33,8 +33,8 @@ namespace ConcentratedHell.Particles
             base.Update();
 
             float inverseProgress = 1f - (float)age.Percent();
-            position += increment * inverseProgress;
-            renderedScale = inverseProgress;
+            position += increment * inverseProgress * speed;
+            renderedScale = inverseProgress * 2f;
             rotation += speed;
         }
     }

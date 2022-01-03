@@ -110,6 +110,8 @@ namespace ConcentratedHell.Combat
             Shotgun,
             Plasma_Rifle,
             Auto_Shotgun,
+            Barrett,
+            Hell
         }
     }
 }

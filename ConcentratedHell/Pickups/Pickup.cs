@@ -44,7 +44,7 @@ namespace ConcentratedHell.Pickups
 
         float detectRange = 100f;
         float pickupRange = 20f;
-        bool detected = false;
+        public bool detected = false;
         GameValue progress;
 
         public Texture2D sprite;

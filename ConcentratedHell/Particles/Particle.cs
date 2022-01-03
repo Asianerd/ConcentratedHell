@@ -8,6 +8,35 @@ namespace ConcentratedHell.Particles
 {
     class Particle
     {
+        #region Statics
+        public static List<Particle> particles;
+
+        public static void Initialize()
+        {
+            particles = new List<Particle>();
+
+            Main.UpdateEvent += StaticUpdate;
+            Main.DrawEvent += StaticDraw;
+        }
+
+        public static void StaticUpdate()
+        {
+            foreach(Particle x in particles)
+            {
+                x.Update();
+            }
+            particles.RemoveAll(n => !n.active);
+        }
+
+        public static void StaticDraw()
+        {
+            foreach(Particle x in particles)
+            {
+                x.Draw();
+            }
+        }
+        #endregion
+
         public bool active = true;
         public Vector2 position;
         public GameValue age;
@@ -16,6 +45,7 @@ namespace ConcentratedHell.Particles
         public Vector2 spriteOrigin;
         public float renderedScale = 1f;
         public float rotation = 0f;
+        public Color color;
 
         public Particle(Texture2D _sprite, Vector2 _position, GameValue _age)
         {
@@ -24,6 +54,8 @@ namespace ConcentratedHell.Particles
 
             position = _position;
             age = _age;
+
+            particles.Add(this);
         }
 
         public virtual void Update()
@@ -37,7 +69,7 @@ namespace ConcentratedHell.Particles
 
         public virtual void Draw()
         {
-            Main.spriteBatch.Draw(sprite, position, null, Color.White, rotation, spriteOrigin, renderedScale, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(sprite, position, null, color, rotation, spriteOrigin, renderedScale, SpriteEffects.None, 0f);
         }
     }
 }

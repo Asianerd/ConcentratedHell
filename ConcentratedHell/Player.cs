@@ -88,6 +88,7 @@ namespace ConcentratedHell
                 }
             }
 
+            /*if (MouseInput.RMouse.active)*/
             if (MouseInput.RMouse.active)
             {
                 var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), rect.Size));

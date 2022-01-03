@@ -61,9 +61,13 @@ namespace ConcentratedHell
                         Player.Instance.rect.Location = Cursor.Instance.worldPosition.ToPoint();
                     })
                 },
-                { Keys.B,
-                    new Input(Keys.B, () => {
-                        var x = new Particles.SmokeGroup(Player.Instance.rect.Center.ToVector2());
+                { Keys.F,
+                    new Input(Keys.F, () =>
+                    {
+                        foreach(Pickups.Pickup x in Pickups.Pickup.pickups)
+                        {
+                            x.detected = true;
+                        }
                     })
                 }
             });
@@ -102,7 +106,7 @@ namespace ConcentratedHell
             Combat.Projectiles.Projectile.LoadContent();
             Combat.Projectiles.Projectile.Initialize();
 
-            Particles.ParticleGroup.Initialize();
+            Particles.Particle.Initialize();
 
             base.Initialize();
 
@@ -110,6 +114,8 @@ namespace ConcentratedHell
             Player.Instance.AddWeapon(new Combat.Weapons.Shotgun());
             Player.Instance.AddWeapon(new Combat.Weapons.Plasma_rifle());
             Player.Instance.AddWeapon(new Combat.Weapons.AutoShotgun());
+            Player.Instance.AddWeapon(new Combat.Weapons.Barrett());
+            Player.Instance.AddWeapon(new Combat.Weapons.Hell());
         }
 
         protected override void LoadContent()

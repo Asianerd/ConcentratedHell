@@ -24,6 +24,9 @@ namespace ConcentratedHell
         public bool angered = false;
         public float detectDistance;
 
+        public float lastHitDirection;
+        public float lastHitPower;
+
         public Enemy(Rectangle _rect, Type _type, GameValue _health, float _speed, float _detectDistance)
         {
             rect = _rect;
@@ -59,7 +62,7 @@ namespace ConcentratedHell
             alive = health.Percent() > 0f;
             if (!alive)
             {
-                OnDeath();
+                OnDeath(_direction:lastHitDirection, power:lastHitPower);
             }
         }
 
@@ -143,18 +146,27 @@ namespace ConcentratedHell
             }
         }
 
-
-        public virtual void AffectHealth(double damage)
+        public virtual void AffectHealth(double damage, float direction, float speed)
         {
             health.AffectValue(-damage);
             Anger();
+
+            lastHitDirection = direction;
+            lastHitPower = speed/2f;
         }
 
-        public virtual void OnDeath()
+        public virtual void OnDeath(float _direction = -10f, float power = 3f, float spread = 0.1f)
         {
             var x = new Pickups.AmmoPickup(
                 Enum.GetValues(typeof(Ammo.Type)).Cast<Ammo.Type>().ToArray()[Main.random.Next(0, Enum.GetValues(typeof(Ammo.Type)).Length)],
                 Main.random.Next(0, 50), rect.Center.ToVector2());
+
+            Vector2 pos = rect.Center.ToVector2();
+            for (int i = 0; i <= 10; i++)
+            {
+                float direction = (float)(_direction == -10f ? ((Main.random.Next(0, 100) / 100f) * Math.PI * 2f) : (_direction + ((Main.random.Next(-100, 100) / 100f) * spread * Math.PI * 2f)));
+                var p = new Particles.GoreParticle(pos, direction, power * (Main.random.Next(97, 103) / 100f));
+            }
         }
 
         public virtual void Anger()

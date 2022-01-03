@@ -12,12 +12,5 @@ namespace ConcentratedHell
         {
 
         }
-
-        public override void OnDeath()
-        {
-            base.OnDeath();
-
-            var x = new Particles.SmokeGroup(rect.Center.ToVector2());
-        }
     }
 }

@@ -80,6 +80,18 @@
 /processorParam:TextureFormat=NoChange
 /build:Fonts/MainFont.spritefont
 
+#begin Particles/Gore.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Particles/Gore.png
+
 #begin Particles/Smoke.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -380,6 +392,30 @@
 /processorParam:TextureFormat=Color
 /build:Weapons/Auto_shotgun.png
 
+#begin Weapons/Barrett.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Weapons/Barrett.png
+
+#begin Weapons/Hell.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Weapons/Hell.png
+
 #begin Weapons/Plasma_rifle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -439,6 +475,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Weapons/Projectiles/Plasma_orb.png
+
+#begin Weapons/Projectiles/Sniper_round.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Weapons/Projectiles/Sniper_round.png
 
 #begin Weapons/Shotgun.png
 /importer:TextureImporter
