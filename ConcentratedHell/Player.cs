@@ -44,14 +44,22 @@ namespace ConcentratedHell
 
         Player()
         {
-            rect = new Rectangle(0, 0, 64, 64);
+            rect = new Rectangle(-96, 288, 64, 64);
             size = new Vector2(64, 64);
 
-            ammoInventory = new Dictionary<Ammo.Type, int>();
-            foreach (Ammo.Type x in Enum.GetValues(typeof(Ammo.Type)).Cast<Ammo.Type>())
+            ammoInventory = new Dictionary<Ammo.Type, int>()
             {
-                ammoInventory.Add(x, 100);
-            }
+                { Ammo.Type.Small, 50 },
+                { Ammo.Type.Medium, 40 },
+                { Ammo.Type.Large, 14 },
+                { Ammo.Type.Shell, 30 },
+                { Ammo.Type.Rocket, 6 },
+                { Ammo.Type.Plasma, 8 },
+            };
+            /*foreach (Ammo.Type x in Enum.GetValues(typeof(Ammo.Type)).Cast<Ammo.Type>())
+            {
+                ammoInventory.Add(x, 50);
+            }*/
 
             arsenal = new Dictionary<Weapon.Type, Weapon>();
         }
@@ -136,7 +144,6 @@ namespace ConcentratedHell
                 MathF.Cos(_direction) * _distance,
                 MathF.Sin(_direction) * _distance
                 );
-            Debug.WriteLine(_distance.ToString());
 
             Rectangle targetRectangle = new Rectangle((rect.Location.ToVector2() + (targetVelocity * speed)).ToPoint(), rect.Size);
 
