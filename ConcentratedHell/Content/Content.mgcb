@@ -92,6 +92,18 @@
 /processorParam:TextureFormat=Color
 /build:Particles/Gore.png
 
+#begin Particles/Muzzle_flash.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Particles/Muzzle_flash.png
+
 #begin Particles/Smoke.png
 /importer:TextureImporter
 /processor:TextureProcessor
