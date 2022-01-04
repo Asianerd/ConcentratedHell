@@ -101,7 +101,7 @@ namespace ConcentratedHell.Combat.Projectiles
             ValidatePosition();
             foreach(Enemy x in Enemy.collection)
             {
-                if(x.rect.Contains(position.ToPoint()))
+                if(x.rect.Contains(position))
                 {
                     x.AffectHealth(damage, direction, weight);
                     x.Knockback(Cursor.Instance.playerToCursor, weight/20f);

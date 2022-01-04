@@ -103,7 +103,7 @@ namespace ConcentratedHell
 
         public virtual void Draw()
         {
-            Main.spriteBatch.Draw(sprite, rect, Color.White);
+            Main.spriteBatch.Draw(sprite, rect, Color.DarkGray);
         }
     }
 

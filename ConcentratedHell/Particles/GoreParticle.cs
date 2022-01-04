@@ -34,9 +34,9 @@ namespace ConcentratedHell.Particles
             base.Update();
 
             float inverseAge = 1f - (float)age.Percent();
-            position += increment * inverseAge;
+            position += increment * inverseAge * Universe.speedMultiplier;
 
-            rotation += 0.1f * inverseAge;
+            rotation += 0.1f * inverseAge * Universe.speedMultiplier;
 
             color = Color.White * (inverseAge + 0.2f);
         }

@@ -69,6 +69,11 @@ namespace ConcentratedHell
                             x.detected = true;
                         }
                     })
+                },
+                { Keys.G,
+                    new Input(Keys.G, () => {
+                        var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), Player.Instance.rect.Size));
+                    })
                 }
             });
 
@@ -113,9 +118,9 @@ namespace ConcentratedHell
             /* For testing ; Remove later */
             Player.Instance.AddWeapon(new Combat.Weapons.Shotgun());
             Player.Instance.AddWeapon(new Combat.Weapons.Plasma_rifle());
-            Player.Instance.AddWeapon(new Combat.Weapons.AutoShotgun());
-            Player.Instance.AddWeapon(new Combat.Weapons.Barrett());
             Player.Instance.AddWeapon(new Combat.Weapons.Hell());
+            Player.Instance.AddWeapon(new Combat.Weapons.Barrett());
+            Player.Instance.AddWeapon(new Combat.Weapons.AutoShotgun());
         }
 
         protected override void LoadContent()

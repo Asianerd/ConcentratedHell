@@ -159,13 +159,14 @@ namespace ConcentratedHell
         {
             var x = new Pickups.AmmoPickup(
                 Enum.GetValues(typeof(Ammo.Type)).Cast<Ammo.Type>().ToArray()[Main.random.Next(0, Enum.GetValues(typeof(Ammo.Type)).Length)],
-                Main.random.Next(0, 50), rect.Center.ToVector2());
+                Main.random.Next(1, 50), rect.Center.ToVector2());
 
             Vector2 pos = rect.Center.ToVector2();
             for (int i = 0; i <= 10; i++)
             {
                 float direction = (float)(_direction == -10f ? ((Main.random.Next(0, 100) / 100f) * Math.PI * 2f) : (_direction + ((Main.random.Next(-100, 100) / 100f) * spread * Math.PI * 2f)));
                 var p = new Particles.GoreParticle(pos, direction, power * (Main.random.Next(97, 103) / 100f));
+                //var p = new Particles.SmokeParticle(pos, direction, power * (Main.random.Next(97, 103) / 100f));
             }
         }
 
