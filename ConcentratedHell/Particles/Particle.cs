@@ -45,7 +45,7 @@ namespace ConcentratedHell.Particles
         public Vector2 spriteOrigin;
         public float renderedScale = 1f;
         public float rotation = 0f;
-        public Color color;
+        public Color color = Color.White;
 
         public Particle(Texture2D _sprite, Vector2 _position, GameValue _age)
         {
@@ -60,7 +60,7 @@ namespace ConcentratedHell.Particles
 
         public virtual void Update()
         {
-            age.Regenerate();
+            age.Regenerate(Universe.speedMultiplier);
             if (age.Percent() >= 1f)
             {
                 active = false;
