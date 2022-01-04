@@ -33,9 +33,9 @@ namespace ConcentratedHell.Particles
             base.Update();
 
             float inverseProgress = 1f - (float)age.Percent();
-            position += increment * inverseProgress * speed;
+            position += increment * inverseProgress * Universe.speedMultiplier;
             renderedScale = inverseProgress * 2f;
-            rotation += speed;
+            rotation += speed * Universe.speedMultiplier;
         }
     }
 }
