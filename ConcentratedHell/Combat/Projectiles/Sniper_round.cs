@@ -14,6 +14,19 @@ namespace ConcentratedHell.Combat.Projectiles
 
         }
 
+        public override void Update()
+        {
+            base.Update();
+
+            if (alive)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    var x = new Particles.SmokeParticle(Vector2.Lerp(position, position + increment, i / 3f), direction, 5f);
+                }
+            }
+        }
+
         public override void Destroy(bool mapCollide = false)
         {
             if(mapCollide)
