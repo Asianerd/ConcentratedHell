@@ -12,6 +12,18 @@ namespace ConcentratedHell.Combat.Weapons
 
         }
 
+        public override void Update()
+        {
+            base.Update();
+
+            if (MouseInput.RMouse.isPressed)
+            {
+                Camera.Instance.SetTarget(
+                    Vector2.Lerp(Player.Instance.rect.Center.ToVector2(), Cursor.Instance.worldPosition, 0.5f)
+                    );
+            }
+        }
+
         public override void Fire(Vector2 origin)
         {
             base.Fire(origin);
