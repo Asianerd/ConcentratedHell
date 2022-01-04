@@ -22,6 +22,8 @@ namespace ConcentratedHell.UI
 
             errorColor = new Color(184, 30, 17);
 
+            PickupText.Initialize();
+
             Main.UpdateEvent += Update;
         }
 
@@ -32,6 +34,7 @@ namespace ConcentratedHell.UI
 
         public static void Update()
         {
+            PickupText.StaticUpdate();
             Cursor.Instance.Update();
             SelectionWheel.SelectionWheel.Instance.Update();
             selectionActive = SelectionWheel.SelectionWheel.Instance.progress.Percent() > 0;
@@ -44,13 +47,14 @@ namespace ConcentratedHell.UI
                 int ammoAmount = Player.Instance.ammoInventory[Player.Instance.equippedWeapon.ammoType];
                 string ammoText = ammoAmount > 0 ? ammoAmount.ToString() : "Out of ammo!";
                 Vector2 origin = font.MeasureString(ammoText) / 2f;
-                Vector2 renderedPosition = Cursor.Instance.screenPosition + new Vector2(0, 40);
+                Vector2 renderedPosition = Cursor.Instance.screenPosition + new Vector2(2, 50);
                 Main.spriteBatch.DrawString(font, ammoText, renderedPosition, ammoAmount >= Player.Instance.equippedWeapon.ammoUsage ? Color.White : errorColor, 0f, origin, 1f, SpriteEffects.None, 0f);
             }
 
             SelectionWheel.SelectionWheel.Instance.Draw();
 
             Cursor.Instance.Draw();
+            PickupText.StaticDraw();
         }
     }
 }

@@ -64,7 +64,7 @@ namespace ConcentratedHell
                 { Ammo.Type.Large, 14 },
                 { Ammo.Type.Shell, 30 },
                 { Ammo.Type.Rocket, 6 },
-                { Ammo.Type.Plasma, 8 },
+                { Ammo.Type.Plasma, 80 },
             };
             /*foreach (Ammo.Type x in Enum.GetValues(typeof(Ammo.Type)).Cast<Ammo.Type>())
             {
@@ -89,7 +89,12 @@ namespace ConcentratedHell
             }
 
             /*if (MouseInput.RMouse.active)*/
-            if (MouseInput.RMouse.active)
+            /*if (MouseInput.RMouse.active)
+            {
+                var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), rect.Size));
+            }*/
+
+            if (Main.keyboardState.IsKeyDown(Keys.T))
             {
                 var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), rect.Size));
             }
@@ -243,6 +248,14 @@ namespace ConcentratedHell
         public void EquipWeapon(Weapon.Type type)
         {
             equippedWeapon = arsenal[type];
+        }
+        #endregion
+
+        #region Ammo
+        public void AffectAmmo(Ammo.Type type, int amount)
+        {
+            ammoInventory[type] += amount;
+            UI.PickupText.AppendItem(type, amount);
         }
         #endregion
     }

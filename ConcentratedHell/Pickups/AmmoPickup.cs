@@ -28,7 +28,8 @@ namespace ConcentratedHell.Pickups
         {
             base.AddToPlayer();
 
-            Player.Instance.ammoInventory[type] += amount;
+            //Player.Instance.ammoInventory[type] += amount;
+            Player.Instance.AffectAmmo(type, amount);
         }
     }
 }
