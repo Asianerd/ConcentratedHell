@@ -9,27 +9,15 @@ using ConcentratedHell.Combat;
 
 namespace ConcentratedHell
 {
-    class Player
+    class Player:Entity
     {
         #region Static
         public static Player Instance = null;
-        public static Texture2D sprite;
         public static List<Texture2D> playerEyeSprites;
-        
-        public static void Initialize()
-        {
-            if(Instance == null)
-            {
-                Instance = new Player();
-
-                Main.UpdateEvent += Instance.Update;
-                Main.DrawEvent += Instance.Draw;
-            }
-        }
 
         public static void LoadContent(Texture2D _sprite)
         {
-            sprite = _sprite;
+            Instance.sprite = _sprite;
 
             string _playerEyeAssetsPath = "Player/Blink";
             playerEyeSprites = new List<Texture2D>();
@@ -40,10 +28,7 @@ namespace ConcentratedHell
         }
         #endregion
 
-        public Rectangle rect;
         public static Vector2 size;
-        public float direction = 0f; // Radians
-        public float speed = 5;
         public bool hasMovementInput = false;
 
         public Dictionary<Ammo.Type, int> ammoInventory;
@@ -52,10 +37,18 @@ namespace ConcentratedHell
 
         public GameValue eyeBlink;
 
-        Player()
+        public Player():base(new Rectangle(-96, 288, 64, 64), Type.Player, new GameValue(0, 100, 1), 8f)
         {
-            rect = new Rectangle(-96, 288, 64, 64);
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+
             size = new Vector2(64, 64);
+            Debug.WriteLine($"{size} : {rect}");
+
+            direction = 0f;
+            speed = 5f;
 
             ammoInventory = new Dictionary<Ammo.Type, int>()
             {
@@ -66,17 +59,13 @@ namespace ConcentratedHell
                 { Ammo.Type.Rocket, 6 },
                 { Ammo.Type.Plasma, 80 },
             };
-            /*foreach (Ammo.Type x in Enum.GetValues(typeof(Ammo.Type)).Cast<Ammo.Type>())
-            {
-                ammoInventory.Add(x, 50);
-            }*/
 
             arsenal = new Dictionary<Weapon.Type, Weapon>();
 
             eyeBlink = new GameValue(0, 120, 1);
         }
 
-        public void Update()
+        public override void Update()
         {
             speed = 8f * (Main.keyboardState.IsKeyDown(Keys.LeftControl) ? 0.5f : 1f) * Universe.speedMultiplier;
 
@@ -86,17 +75,6 @@ namespace ConcentratedHell
                 {
                     equippedWeapon.Update();
                 }
-            }
-
-            /*if (MouseInput.RMouse.active)*/
-            /*if (MouseInput.RMouse.active)
-            {
-                var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), rect.Size));
-            }*/
-
-            if (Main.keyboardState.IsKeyDown(Keys.T))
-            {
-                var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), rect.Size));
             }
 
             Move();
@@ -162,37 +140,7 @@ namespace ConcentratedHell
             direction = MathF.Atan2(end.Y - start.Y, end.X - start.X);
         }
 
-        public void Knockback(float _direction, float _distance)
-        {
-            Vector2 targetVelocity = new Vector2(
-                MathF.Cos(_direction) * _distance,
-                MathF.Sin(_direction) * _distance
-                );
-
-            Rectangle targetRectangle = new Rectangle((rect.Location.ToVector2() + (targetVelocity * speed)).ToPoint(), rect.Size);
-
-            if (Map.IsValidPosition(targetRectangle))
-            {
-                rect.Location = targetRectangle.Location;
-                return;
-            }
-
-            Vector2 xVel = new Vector2(targetVelocity.X, 0);
-            Rectangle xRect = new Rectangle((rect.Location.ToVector2() + (xVel * speed)).ToPoint(), rect.Size);
-            if (Map.IsValidPosition(xRect))
-            {
-                rect.Location = xRect.Location;
-            }
-
-            Vector2 yVel = new Vector2(0, targetVelocity.Y);
-            Rectangle yRect = new Rectangle((rect.Location.ToVector2() + (yVel * speed)).ToPoint(), rect.Size);
-            if (Map.IsValidPosition(yRect))
-            {
-                rect.Location = yRect.Location;
-            }
-        }
-
-        public void Draw()
+        public override void Draw()
         {
             Main.spriteBatch.Draw(sprite, rect, Color.White);
             Vector2 eyePosition = new Vector2(
@@ -256,6 +204,23 @@ namespace ConcentratedHell
         {
             ammoInventory[type] += amount;
             UI.PickupText.AppendItem(type, amount);
+        }
+        #endregion
+
+        #region Stats
+        public override void OnDeath(float _direction = -10, float power = 3, float spread = 0.1F)
+        {
+            
+        }
+
+        public override void Anger()
+        {
+            
+        }
+
+        public override void DrawHealthBar()
+        {
+            
         }
         #endregion
     }

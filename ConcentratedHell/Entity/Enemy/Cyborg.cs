@@ -6,9 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ConcentratedHell
 {
-    class Cyborg:Enemy
+    class Cyborg:Entity
     {
-        public Cyborg(Rectangle rect) : base(rect, Type.Cyborg, new GameValue(0, 100, 1), 6f, 300f)
+        public Cyborg(Rectangle rect) : base(rect, Type.Cyborg, new GameValue(0, 100, 1), 7f)
         {
 
         }

@@ -98,11 +98,13 @@ namespace ConcentratedHell
                 new Tile(new Rectangle(384, 0, 128, 256)),
                 new Tile(new Rectangle(384, 384, 128, 256)),
             });
-            Player.Initialize();
+            //Player.Initialize();
+            Enemy.LoadContent(Content.Load<Texture2D>("Enemy/healthbar"));
+
+            Entity.Initialize();
             Camera.Initialize();
 
             Skill.Initialize();
-            Enemy.Initialize();
 
             Pickups.Pickup.Initialize();
 
@@ -132,7 +134,6 @@ namespace ConcentratedHell
 
             mainFont = Content.Load<SpriteFont>("Fonts/MainFont");
             Player.LoadContent(Content.Load<Texture2D>("player"));
-            Enemy.LoadContent(Content.Load<Texture2D>("Enemy/healthbar"));
         }
 
         protected override void Update(GameTime gameTime)
@@ -144,6 +145,11 @@ namespace ConcentratedHell
             keyboardState = Keyboard.GetState();
 
             Input.StaticUpdate();
+
+            if (keyboardState.IsKeyDown(Keys.T))
+            {
+                var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), Player.Instance.rect.Size));
+            }
 
             if (UpdateEvent != null)
             {

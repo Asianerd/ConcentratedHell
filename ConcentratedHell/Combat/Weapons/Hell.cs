@@ -16,7 +16,7 @@ namespace ConcentratedHell.Combat.Weapons
         {
             base.Fire(origin);
 
-            foreach(Enemy x in Enemy.collection)
+            foreach(Entity x in Entity.collection)
             {
                 float direction = MathF.Atan2(
                     x.rect.Center.Y - Player.Instance.rect.Center.Y,

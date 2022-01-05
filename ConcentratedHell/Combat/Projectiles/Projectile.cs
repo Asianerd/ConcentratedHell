@@ -99,12 +99,12 @@ namespace ConcentratedHell.Combat.Projectiles
 
             Move();
             ValidatePosition();
-            foreach(Enemy x in Enemy.collection)
+            foreach(Entity x in Entity.collection)
             {
                 if(x.rect.Contains(position))
                 {
                     x.AffectHealth(damage, direction, weight);
-                    x.Knockback(Cursor.Instance.playerToCursor, weight/20f);
+                    x.Knockback(Cursor.Instance.playerToCursor, weight / 20f);
                     Destroy();
                     break;
                 }
