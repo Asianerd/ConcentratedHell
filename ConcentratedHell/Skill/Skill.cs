@@ -18,6 +18,7 @@ namespace ConcentratedHell
             };
 
             Main.UpdateEvent += UpdateSkills;
+            Main.DrawEvent += DrawSkills;
         }
 
         public static void ExecuteSkill(Type type)
@@ -30,6 +31,14 @@ namespace ConcentratedHell
             foreach(Skill x in skills.Values)
             {
                 x.Update();
+            }
+        }
+
+        public static void DrawSkills()
+        {
+            foreach(Skill x in skills.Values)
+            {
+                x.Draw();
             }
         }
 
@@ -47,6 +56,11 @@ namespace ConcentratedHell
         public virtual void Update()
         {
             cooldown.Regenerate(Universe.speedMultiplier);
+        }
+
+        public virtual void Draw()
+        {
+
         }
         #endregion
 
