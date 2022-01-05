@@ -9,7 +9,7 @@ namespace ConcentratedHell
 {
     class Enemy
     {
-/*        public Type type;
+        /*public Type type;
         public Texture2D sprite;
         public Texture2D eyeSprite;
         public Vector2 healthBarSize;

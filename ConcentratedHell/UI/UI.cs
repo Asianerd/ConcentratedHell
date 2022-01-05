@@ -14,6 +14,10 @@ namespace ConcentratedHell.UI
         public static bool selectionActive;
         public static Color errorColor;
 
+        public static Texture2D healthbarSprite;
+        public static Texture2D healthbarCase;
+        public static Rectangle healthbarRect;
+
         public static void Initialize()
         {
             Instance = new UI();
@@ -21,6 +25,10 @@ namespace ConcentratedHell.UI
             SelectionWheel.SelectionWheel.Initialize();
 
             errorColor = new Color(184, 30, 17);
+
+            healthbarSprite = Main.Instance.Content.Load<Texture2D>("UI/Healthbar/healthbar");
+            healthbarCase = Main.Instance.Content.Load<Texture2D>("UI/Healthbar/healthbar_case");
+            healthbarRect = new Rectangle(0, 0, 780, 50);
 
             PickupText.Initialize();
 
@@ -50,6 +58,14 @@ namespace ConcentratedHell.UI
                 Vector2 renderedPosition = Cursor.Instance.screenPosition + new Vector2(2, 50);
                 Main.spriteBatch.DrawString(font, ammoText, renderedPosition, ammoAmount >= Player.Instance.equippedWeapon.ammoUsage ? Color.White : errorColor, 0f, origin, 1f, SpriteEffects.None, 0f);
             }
+
+            Main.spriteBatch.Draw(healthbarSprite, new Rectangle(
+                20,
+                20,
+                (int)(healthbarRect.Width * Player.Instance.health.Percent()),
+                healthbarRect.Height
+                ), Color.White);
+            Main.spriteBatch.Draw(healthbarCase, new Vector2(20, 20), null, Color.White, 0f, Vector2.Zero, 5f, SpriteEffects.None, 0f);
 
             SelectionWheel.SelectionWheel.Instance.Draw();
 

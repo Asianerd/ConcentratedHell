@@ -33,6 +33,9 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/CursorSights/Shell.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/CursorSights/Small.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/CursorSprites/Default.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/healthbar.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/Healthbar/Healthbar.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/Healthbar/Healthbar_case.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/overlay.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/radialWheelSelection.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Amongus_Shotgun.png</File>
@@ -48,6 +51,9 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Shotgun.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
