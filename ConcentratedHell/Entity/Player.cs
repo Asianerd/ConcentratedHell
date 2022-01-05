@@ -36,8 +36,9 @@ namespace ConcentratedHell
         public Weapon equippedWeapon = null;
 
         public GameValue eyeBlink;
+        public GameValue regenerateCooldown;
 
-        public Player():base(new Rectangle(-96, 288, 64, 64), Type.Player, new GameValue(0, 100, 1), 8f)
+        public Player():base(new Rectangle(-96, 288, 64, 64), Type.Player, new GameValue(0, 1000, 1), 8f)
         {
             if (Instance == null)
             {
@@ -45,7 +46,6 @@ namespace ConcentratedHell
             }
 
             size = new Vector2(64, 64);
-            Debug.WriteLine($"{size} : {rect}");
 
             direction = 0f;
             speed = 5f;
@@ -63,6 +63,7 @@ namespace ConcentratedHell
             arsenal = new Dictionary<Weapon.Type, Weapon>();
 
             eyeBlink = new GameValue(0, 120, 1);
+            regenerateCooldown = new GameValue(0, 60, 1);
         }
 
         public override void Update()
@@ -83,7 +84,13 @@ namespace ConcentratedHell
                 Skill.ExecuteSkill(Skill.Type.Dash);
             }
 
-            eyeBlink.Regenerate(0.2f);
+            regenerateCooldown.Regenerate(Universe.speedMultiplier);
+            if(regenerateCooldown.Percent() >= 1f)
+            {
+                health.Regenerate(Universe.speedMultiplier);
+            }
+
+            eyeBlink.Regenerate(0.2f * Universe.speedMultiplier);
             if (eyeBlink.Percent() >= 1f)
             {
                 eyeBlink.AffectValue(0f);
@@ -221,6 +228,13 @@ namespace ConcentratedHell
         public override void DrawHealthBar()
         {
             
+        }
+
+        public override void AffectHealth(double damage, float _direction, float _speed)
+        {
+            base.AffectHealth(damage, _direction, _speed);
+
+            regenerateCooldown.AffectValue(0f);
         }
         #endregion
     }
