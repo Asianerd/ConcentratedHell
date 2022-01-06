@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
@@ -10,13 +11,13 @@ namespace ConcentratedHell.Particles
     {
         #region Statics
         public static List<Particle> particles;
+        public static int maxCount = 50000;
 
         public static void Initialize()
         {
             particles = new List<Particle>();
 
             Main.UpdateEvent += StaticUpdate;
-            Main.DrawEvent += StaticDraw;
         }
 
         public static void StaticUpdate()
@@ -28,9 +29,17 @@ namespace ConcentratedHell.Particles
             particles.RemoveAll(n => !n.active);
         }
 
-        public static void StaticDraw()
+        public static void StaticBackgroundDraw()
         {
-            foreach(Particle x in particles)
+            foreach (Particle x in particles.Where(n => n.depth == Depth.Background))
+            {
+                x.Draw();
+            }
+        }
+
+        public static void StaticForegroundDraw()
+        {
+            foreach (Particle x in particles.Where(n => n.depth == Depth.Foreground))
             {
                 x.Draw();
             }
@@ -38,6 +47,7 @@ namespace ConcentratedHell.Particles
         #endregion
 
         public bool active = true;
+        public Depth depth;
         public Vector2 position;
         public GameValue age;
 
@@ -47,13 +57,20 @@ namespace ConcentratedHell.Particles
         public float rotation = 0f;
         public Color color = Color.White;
 
-        public Particle(Texture2D _sprite, Vector2 _position, GameValue _age)
+        public Particle(Texture2D _sprite, Vector2 _position, GameValue _age, Depth _depth = Depth.Foreground)
         {
+            if (particles.Count >= maxCount)
+            {
+                return;
+            }
+
             sprite = _sprite;
             spriteOrigin = sprite.Bounds.Center.ToVector2();
 
             position = _position;
             age = _age;
+
+            depth = _depth;
 
             particles.Add(this);
         }
@@ -70,6 +87,12 @@ namespace ConcentratedHell.Particles
         public virtual void Draw()
         {
             Main.spriteBatch.Draw(sprite, position, null, color, rotation, spriteOrigin, renderedScale, SpriteEffects.None, 0f);
+        }
+
+        public enum Depth
+        {
+            Background,
+            Foreground
         }
     }
 }

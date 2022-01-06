@@ -19,7 +19,7 @@ namespace ConcentratedHell
             var x = new Player();
 
             Main.UpdateEvent += StaticUpdate;
-            Main.DrawEvent += StaticDraw;
+            Main.MidgroundDrawEvent += StaticDraw;
         }
 
         public static void StaticUpdate()
@@ -205,6 +205,17 @@ namespace ConcentratedHell
 
             lastHitDirection = _direction;
             lastHitPower = _speed / 2f;
+
+            for (int i = 0; i <= Main.random.Next(2, 3); i++)
+            {
+                float _particleDirection = (Main.random.Next(0, 100) / 100f) * MathF.PI * 2f;
+                float _particleDistance = (Main.random.Next(90, 110) / 100f) * 10f;
+                Vector2 offset = new Vector2(
+                    MathF.Cos(_particleDirection) * _particleDistance,
+                    MathF.Sin(_particleDirection) * _particleDistance
+                    );
+                var x = new Particles.BloodFloorSplatter(rect.Center.ToVector2() + offset, scale: (Main.random.Next(50, 150) / 100f) * 0.3f);
+            }
         }
 
         public virtual void OnDeath(float _direction = -10f, float power = 3f, float spread = 0.1f)
@@ -218,6 +229,16 @@ namespace ConcentratedHell
             {
                 float direction = (float)(_direction == -10f ? ((Main.random.Next(0, 100) / 100f) * Math.PI * 2f) : (_direction + ((Main.random.Next(-100, 100) / 100f) * spread * Math.PI * 2f)));
                 var p = new Particles.GoreParticle(pos, direction, power * (Main.random.Next(97, 103) / 100f));
+            }
+            for (int i = 0; i <= 3; i++)
+            {
+                float _particleDirection = (Main.random.Next(0, 100) / 100f) * MathF.PI * 2f;
+                float _particleDistance = (Main.random.Next(90, 110) / 100f) * 10f;
+                Vector2 offset = new Vector2(
+                    MathF.Cos(_particleDirection) * _particleDistance,
+                    MathF.Sin(_particleDirection) * _particleDistance
+                    );
+                var y = new Particles.BloodFloorSplatter(rect.Center.ToVector2() + offset, scale: (Main.random.Next(40, 100) / 100f));
             }
         }
 
@@ -242,7 +263,8 @@ namespace ConcentratedHell
 
         public virtual void Draw()
         {
-            Main.spriteBatch.Draw(sprite, rect, Color.White);
+            //Main.spriteBatch.Draw(sprite, rect, Color.White);
+            Main.spriteBatch.Draw(sprite, rect, null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1f);
             Vector2 renderPosition = new Vector2(
                 (MathF.Cos(direction) * 5f) + rect.Center.X,
                 (MathF.Sin(direction) * 5f) + rect.Center.Y - 5f

@@ -19,7 +19,9 @@ namespace ConcentratedHell
 
         public delegate void GameEvent();
         public static GameEvent UpdateEvent;
-        public static GameEvent DrawEvent;
+        public static GameEvent ForegroundDrawEvent;
+        public static GameEvent MidgroundDrawEvent;
+        public static GameEvent BackgroundDrawEvent;
 
         public static Random random;
         public static KeyboardState keyboardState;
@@ -73,6 +75,11 @@ namespace ConcentratedHell
                 { Keys.G,
                     new Input(Keys.G, () => {
                         var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), Player.Instance.rect.Size));
+                    })
+                },
+                { Keys.F3,
+                    new Input(Keys.F3, () => {
+                        UI.UI.showDebug = !UI.UI.showDebug;
                     })
                 }
             });
@@ -161,14 +168,26 @@ namespace ConcentratedHell
 
         protected override void Draw(GameTime gameTime)
         {
+            UI.UI.fps = 1f / (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             GraphicsDevice.Clear(Color.Gray);
 
             Matrix renderPosition = Matrix.CreateTranslation(new Vector3(Camera.Instance.offset, 0));
             spriteBatch.Begin(samplerState:SamplerState.PointClamp, transformMatrix:renderPosition);
-            if (DrawEvent != null)
+            if (BackgroundDrawEvent != null)
             {
-                DrawEvent();
+                BackgroundDrawEvent();
             }
+            Particles.Particle.StaticBackgroundDraw();
+            if (MidgroundDrawEvent != null)
+            {
+                MidgroundDrawEvent();
+            }
+            if (ForegroundDrawEvent != null)
+            {
+                ForegroundDrawEvent();
+            }
+            Particles.Particle.StaticForegroundDraw();
             spriteBatch.End();
 
             spriteBatch.Begin(samplerState:SamplerState.PointClamp);

@@ -18,6 +18,9 @@ namespace ConcentratedHell.UI
         public static Texture2D healthbarCase;
         public static Rectangle healthbarRect;
 
+        public static bool showDebug = false;
+        public static float fps;
+
         public static void Initialize()
         {
             Instance = new UI();
@@ -71,6 +74,13 @@ namespace ConcentratedHell.UI
 
             Cursor.Instance.Draw();
             PickupText.StaticDraw();
+
+
+            string debugText = $"{fps}\n\nEntities : {Entity.collection.Count}\nProjectiles : {Combat.Projectiles.Projectile.collection.Count}\nParticles : {Particles.Particle.particles.Count}";
+            if (showDebug)
+            {
+                Main.spriteBatch.DrawString(UI.font, debugText, Vector2.Zero, Color.White);
+            }
         }
     }
 }

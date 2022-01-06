@@ -38,7 +38,7 @@ namespace ConcentratedHell
         public GameValue eyeBlink;
         public GameValue regenerateCooldown;
 
-        public Player():base(new Rectangle(-96, 288, 64, 64), Type.Player, new GameValue(0, 1000, 1), 8f)
+        public Player():base(new Rectangle(-96, 288, 64, 64), Type.Player, new GameValue(0, 1000, 0.5f), 8f)
         {
             if (Instance == null)
             {
@@ -63,7 +63,7 @@ namespace ConcentratedHell
             arsenal = new Dictionary<Weapon.Type, Weapon>();
 
             eyeBlink = new GameValue(0, 120, 1);
-            regenerateCooldown = new GameValue(0, 60, 1);
+            regenerateCooldown = new GameValue(0, 120, 1);
         }
 
         public override void Update()

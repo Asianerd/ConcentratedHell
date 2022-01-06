@@ -18,7 +18,7 @@ namespace ConcentratedHell
             };
 
             Main.UpdateEvent += UpdateSkills;
-            Main.DrawEvent += DrawSkills;
+            Main.MidgroundDrawEvent += DrawSkills;
         }
 
         public static void ExecuteSkill(Type type)

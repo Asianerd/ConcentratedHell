@@ -17,7 +17,7 @@ namespace ConcentratedHell.Combat.Projectiles
             collection = new List<Projectile>();
 
             Main.UpdateEvent += StaticUpdate;
-            Main.DrawEvent += StaticDraw;
+            Main.MidgroundDrawEvent += StaticDraw;
         }
 
         public static void LoadContent()

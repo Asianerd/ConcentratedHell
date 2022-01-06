@@ -21,4 +21,7 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Map\Levels\" />
+  </ItemGroup>
 </Project>

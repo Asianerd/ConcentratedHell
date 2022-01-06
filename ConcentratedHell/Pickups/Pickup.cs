@@ -15,7 +15,7 @@ namespace ConcentratedHell.Pickups
             pickups = new List<Pickup>();
 
             Main.UpdateEvent += StaticUpdate;
-            Main.DrawEvent += StaticDraw;
+            Main.MidgroundDrawEvent += StaticDraw;
         }
 
         public static void StaticUpdate()

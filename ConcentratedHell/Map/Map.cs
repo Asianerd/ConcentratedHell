@@ -16,7 +16,7 @@ namespace ConcentratedHell
             map = _map;
 
             Main.UpdateEvent += Update;
-            Main.DrawEvent += Draw;
+            Main.MidgroundDrawEvent += Draw;
         }
 
         public static void Update()
@@ -109,6 +109,7 @@ namespace ConcentratedHell
 
     class Door:Tile
     {
+        bool locked = false;
         bool activated = false;
         GameValue progress;
         Vector2 start;
@@ -116,8 +117,9 @@ namespace ConcentratedHell
 
         static float activationDistance = 300f;
 
-        public Door(Rectangle _rect, Vector2 _start, Vector2 _destination, GameValue _progress = null, Texture2D _sprite = null) : base(_rect, _sprite)
+        public Door(Rectangle _rect, Vector2 _start, Vector2 _destination, GameValue _progress = null, Texture2D _sprite = null, bool _locked = false) : base(_rect, _sprite)
         {
+            locked = _locked;
             destination = _destination;
             start = _start;
             if (progress == null)
@@ -131,21 +133,28 @@ namespace ConcentratedHell
             // Progress will regenerate when its open
             // Open = 100%
             // Closed = 0%
+            if (locked)
+            {
+                progress.AffectValue(0f);
+            }
         }
 
         public override void Update()
         {
             float distance = Vector2.Distance(start, Player.Instance.rect.Center.ToVector2()); // bruh why cant point class have these things
 
-            activated = distance <= activationDistance;
+            if (!locked)
+            {
+                activated = distance <= activationDistance;
 
-            if(activated)
-            {
-                progress.Regenerate(Universe.speedMultiplier);
-            }
-            else
-            {
-                progress.Regenerate(-1 * Universe.speedMultiplier);
+                if (activated)
+                {
+                    progress.Regenerate(Universe.speedMultiplier);
+                }
+                else
+                {
+                    progress.Regenerate(-1 * Universe.speedMultiplier);
+                }
             }
 
             /*Vector2 candidate = Vector2.Lerp(start, destination, (float)progress.Percent());
