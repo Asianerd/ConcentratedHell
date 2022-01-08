@@ -11,7 +11,7 @@ namespace ConcentratedHell.Particles
     {
         #region Statics
         public static List<Particle> particles;
-        public static int maxCount = 50000;
+        public static int maxCount = 2000000;
 
         public static void Initialize()
         {
@@ -86,7 +86,10 @@ namespace ConcentratedHell.Particles
 
         public virtual void Draw()
         {
-            Main.spriteBatch.Draw(sprite, position, null, color, rotation, spriteOrigin, renderedScale, SpriteEffects.None, 0f);
+            if (UI.UI.viewport.Contains(position))
+            {
+                Main.spriteBatch.Draw(sprite, position, null, color, rotation, spriteOrigin, renderedScale, SpriteEffects.None, 0f);
+            }
         }
 
         public enum Depth

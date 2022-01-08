@@ -7,7 +7,7 @@ namespace ConcentratedHell.Combat.Weapons
 {
     class Hell:Weapon
     {
-        public Hell():base(Type.Hell, Projectiles.Projectile.Type.Sniper_round, 0f, 0f, Ammo.Type.Large, new GameValue(0, 5, 1), 0)
+        public Hell():base(Type.Hell, Projectiles.Projectile.Type.Sniper_round, 0f, 0f, Ammo.Type.Large, new GameValue(0, 50, 1), 0)
         {
 
         }
@@ -16,7 +16,7 @@ namespace ConcentratedHell.Combat.Weapons
         {
             base.Fire(origin);
 
-            foreach(Entity x in Entity.collection)
+            foreach(Entity.Entity x in Entity.Entity.collection)
             {
                 float direction = MathF.Atan2(
                     x.rect.Center.Y - Player.Instance.rect.Center.Y,

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System;
 using ConcentratedHell.Combat;
+using ConcentratedHell.Entity;
 
 namespace ConcentratedHell
 {
@@ -74,7 +75,7 @@ namespace ConcentratedHell
                 },
                 { Keys.G,
                     new Input(Keys.G, () => {
-                        var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), Player.Instance.rect.Size));
+                        var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), new Point(64,64)));
                     })
                 },
                 { Keys.F3,
@@ -108,7 +109,7 @@ namespace ConcentratedHell
             //Player.Initialize();
             Enemy.LoadContent(Content.Load<Texture2D>("Enemy/healthbar"));
 
-            Entity.Initialize();
+            Entity.Entity.Initialize();
             Camera.Initialize();
 
             Skill.Initialize();
@@ -130,6 +131,9 @@ namespace ConcentratedHell
             Player.Instance.AddWeapon(new Combat.Weapons.Hell());
             Player.Instance.AddWeapon(new Combat.Weapons.Barrett());
             Player.Instance.AddWeapon(new Combat.Weapons.AutoShotgun());
+            Player.Instance.AddWeapon(new Combat.Weapons.Gatling_gun());
+
+            Player.Instance.EquipWeapon(Weapon.Type.Auto_Shotgun);
         }
 
         protected override void LoadContent()
@@ -155,7 +159,10 @@ namespace ConcentratedHell
 
             if (keyboardState.IsKeyDown(Keys.T))
             {
-                var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), Player.Instance.rect.Size));
+                for (int i = 0; i <= 10; i++)
+                {
+                    var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), Player.Instance.rect.Size));
+                }
             }
 
             if (UpdateEvent != null)

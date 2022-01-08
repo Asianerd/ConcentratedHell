@@ -25,6 +25,42 @@
 /processorParam:TextureFormat=Color
 /build:Blank.png
 
+#begin Enemy/amongus/body.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Enemy/amongus/body.png
+
+#begin Enemy/amongus/Eyes/angered.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Enemy/amongus/Eyes/angered.png
+
+#begin Enemy/amongus/Eyes/neutral.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Enemy/amongus/Eyes/neutral.png
+
 #begin Enemy/cyborg/body.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -127,6 +163,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Particles/Smoke.png
+
+#begin Particles/Wall_colliding_particle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Particles/Wall_colliding_particle.png
 
 #begin Pickups/Ammo/Large.png
 /importer:TextureImporter
@@ -428,6 +476,18 @@
 /processorParam:TextureFormat=Color
 /build:UI/radialWheelSelection.png
 
+#begin UI/weapon_stat_sprite.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/weapon_stat_sprite.png
+
 #begin Weapons/Amongus_Shotgun.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -463,6 +523,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Weapons/Barrett.png
+
+#begin Weapons/Gatling_gun.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Weapons/Gatling_gun.png
 
 #begin Weapons/Hell.png
 /importer:TextureImporter
@@ -512,6 +584,18 @@
 /processorParam:TextureFormat=Color
 /build:Weapons/Projectiles/Generic.png
 
+#begin Weapons/Projectiles/Medium_round.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Weapons/Projectiles/Medium_round.png
+
 #begin Weapons/Projectiles/Pellet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -535,6 +619,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Weapons/Projectiles/Plasma_orb.png
+
+#begin Weapons/Projectiles/Small_round.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Weapons/Projectiles/Small_round.png
 
 #begin Weapons/Projectiles/Sniper_round.png
 /importer:TextureImporter

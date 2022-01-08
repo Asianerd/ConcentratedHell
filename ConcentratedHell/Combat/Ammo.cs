@@ -10,6 +10,7 @@ namespace ConcentratedHell
     class Ammo
     {
         public static Dictionary<Type, Texture2D> spriteTable;
+        public static Dictionary<Type, string> names;
 
         public static void LoadContent()
         {
@@ -19,6 +20,16 @@ namespace ConcentratedHell
             {
                 spriteTable.Add(x, Main.Instance.Content.Load<Texture2D>($"{ammoAssetPath}/{x.ToString().ToLower()}"));
             }
+
+            names = new Dictionary<Type, string>()
+            {
+                { Type.Small, "Small" },
+                { Type.Medium, "Medium" },
+                { Type.Large, "Large" },
+                { Type.Shell, "Shell" },
+                { Type.Rocket, "Rocket" },
+                { Type.Plasma, "Plasma" },
+            };
         }
 
         public enum Type

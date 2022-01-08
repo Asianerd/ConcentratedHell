@@ -11,7 +11,7 @@ namespace ConcentratedHell.Particles
         public BloodFloorSplatter(Vector2 position, float scale) : base(
             Main.Instance.Content.Load<Texture2D>("Particles/BloodFloorSplatter/1"),
             position,
-            new GameValue(0, 300, 1, 0),
+            new GameValue(0, 1200, 1, 0),
             Depth.Background
             )
         {
@@ -23,7 +23,7 @@ namespace ConcentratedHell.Particles
         {
             base.Update();
 
-            color = Color.White * (1f - (float)age.Percent());
+            color = new Color(0.8f, 0.8f, 0.8f, 0.8f) * (1f - (float)age.Percent());
         }
     }
 }

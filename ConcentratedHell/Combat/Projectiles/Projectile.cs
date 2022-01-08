@@ -76,7 +76,7 @@ namespace ConcentratedHell.Combat.Projectiles
             speed = _speed;
             weight = _weight == -100f? speed : _weight;
             damage = _damage;
-            age = new GameValue(0, 300, 1, 0);
+            age = new GameValue(0, 240, 1, 0);
 
             position = _position;
             direction = _direction;
@@ -91,7 +91,7 @@ namespace ConcentratedHell.Combat.Projectiles
 
         public virtual void Update()
         {
-            age.Regenerate();
+            age.Regenerate(Universe.speedMultiplier);
             if(age.Percent() >= 1f)
             {
                 Destroy();
@@ -99,7 +99,7 @@ namespace ConcentratedHell.Combat.Projectiles
 
             Move();
             ValidatePosition();
-            foreach(Entity x in Entity.collection)
+            foreach(Entity.Entity x in Entity.Entity.collection)
             {
                 if(x.rect.Contains(position))
                 {
@@ -127,6 +127,7 @@ namespace ConcentratedHell.Combat.Projectiles
         public virtual void Destroy(bool mapCollide = false)
         {
             alive = false;
+            var x = new Particles.WallCollidingParticle(position);
         }
 
         public virtual void Draw()
@@ -141,6 +142,8 @@ namespace ConcentratedHell.Combat.Projectiles
             Plasma_orb,
             Pellet,
             Sniper_round,
+            Small_round,
+            Medium_round,
         }
     }
 }

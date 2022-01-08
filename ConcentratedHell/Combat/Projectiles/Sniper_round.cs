@@ -18,11 +18,11 @@ namespace ConcentratedHell.Combat.Projectiles
         {
             base.Update();
 
-            if (alive)
+            if (UI.UI.viewport.Contains(position))
             {
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 2; i++)
                 {
-                    var x = new Particles.SmokeParticle(Vector2.Lerp(position, position + increment, i / 3f), direction, 5f);
+                    var x = new Particles.SmokeParticle(Vector2.Lerp(position, position + increment, i / 2f), direction, 5f);
                 }
             }
         }

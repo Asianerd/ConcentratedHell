@@ -6,14 +6,17 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ConcentratedHell.Combat;
+using ConcentratedHell.Entity;
 
 namespace ConcentratedHell
 {
-    class Player:Entity
+    class Player:Entity.Entity
     {
         #region Static
         public static Player Instance = null;
         public static List<Texture2D> playerEyeSprites;
+        public delegate void PlayerEvents();
+        public static PlayerEvents OnWeaponChange;
 
         public static void LoadContent(Texture2D _sprite)
         {
@@ -52,10 +55,10 @@ namespace ConcentratedHell
 
             ammoInventory = new Dictionary<Ammo.Type, int>()
             {
-                { Ammo.Type.Small, 50 },
+                { Ammo.Type.Small, 5000 },
                 { Ammo.Type.Medium, 40 },
                 { Ammo.Type.Large, 14 },
-                { Ammo.Type.Shell, 30 },
+                { Ammo.Type.Shell, 3000 },
                 { Ammo.Type.Rocket, 6 },
                 { Ammo.Type.Plasma, 80 },
             };
@@ -203,6 +206,10 @@ namespace ConcentratedHell
         public void EquipWeapon(Weapon.Type type)
         {
             equippedWeapon = arsenal[type];
+            if(OnWeaponChange != null)
+            {
+                OnWeaponChange();
+            }
         }
         #endregion
 

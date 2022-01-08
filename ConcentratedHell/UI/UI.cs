@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ConcentratedHell.Entity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,6 +11,7 @@ namespace ConcentratedHell.UI
     class UI
     {
         public static UI Instance;
+        public static Rectangle viewport;
         public static SpriteFont font;
         public static bool selectionActive;
         public static Color errorColor;
@@ -49,6 +51,8 @@ namespace ConcentratedHell.UI
             Cursor.Instance.Update();
             SelectionWheel.SelectionWheel.Instance.Update();
             selectionActive = SelectionWheel.SelectionWheel.Instance.progress.Percent() > 0;
+
+            viewport = new Rectangle(Camera.Instance.position.ToPoint() - (Main.screenSize.Size.ToVector2()/2f).ToPoint(), Main.screenSize.Size);
         }
 
         public static void Draw()
@@ -75,8 +79,7 @@ namespace ConcentratedHell.UI
             Cursor.Instance.Draw();
             PickupText.StaticDraw();
 
-
-            string debugText = $"{fps}\n\nEntities : {Entity.collection.Count}\nProjectiles : {Combat.Projectiles.Projectile.collection.Count}\nParticles : {Particles.Particle.particles.Count}";
+            string debugText = $"{fps}\n\nEntities : {Entity.Entity.collection.Count}\nProjectiles : {Combat.Projectiles.Projectile.collection.Count}\nParticles : {Particles.Particle.particles.Count}";
             if (showDebug)
             {
                 Main.spriteBatch.DrawString(UI.font, debugText, Vector2.Zero, Color.White);

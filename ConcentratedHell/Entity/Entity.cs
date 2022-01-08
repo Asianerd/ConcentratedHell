@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ConcentratedHell
+namespace ConcentratedHell.Entity
 {
     class Entity
     {
@@ -220,9 +220,9 @@ namespace ConcentratedHell
 
         public virtual void OnDeath(float _direction = -10f, float power = 3f, float spread = 0.1f)
         {
-            var x = new Pickups.AmmoPickup(
+            /*var x = new Pickups.AmmoPickup(
                 Enum.GetValues(typeof(Ammo.Type)).Cast<Ammo.Type>().ToArray()[Main.random.Next(0, Enum.GetValues(typeof(Ammo.Type)).Length)],
-                Main.random.Next(1, 50), rect.Center.ToVector2());
+                Main.random.Next(1, 50), rect.Center.ToVector2());*/
 
             Vector2 pos = rect.Center.ToVector2();
             for (int i = 0; i <= 10; i++)
@@ -265,6 +265,11 @@ namespace ConcentratedHell
         {
             //Main.spriteBatch.Draw(sprite, rect, Color.White);
             Main.spriteBatch.Draw(sprite, rect, null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1f);
+            DrawEyes();
+        }
+
+        public virtual void DrawEyes()
+        {
             Vector2 renderPosition = new Vector2(
                 (MathF.Cos(direction) * 5f) + rect.Center.X,
                 (MathF.Sin(direction) * 5f) + rect.Center.Y - 5f
@@ -283,7 +288,9 @@ namespace ConcentratedHell
         public enum Type
         {
             Player,
-            Cyborg
+
+            Cyborg,
+            Amongus,
         }
     }
 }

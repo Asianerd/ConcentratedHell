@@ -54,7 +54,7 @@ namespace ConcentratedHell.UI.SelectionWheel
             }
         }
 
-        public void Draw(float _distance, float scale)
+        public void Draw(float _distance, float scale, Color color)
         {
             float distance = _distance - ((float)progress.Percent() * _distance);
 
@@ -63,13 +63,13 @@ namespace ConcentratedHell.UI.SelectionWheel
                 MathF.Sin(rotation) * distance
                 ) + SelectionWheel.origin;
 
-            Main.spriteBatch.Draw(weapon.sprite, renderedPosition, null, Color.White, 0f, weapon.sprite.Bounds.Center.ToVector2(), scale * 6f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(weapon.sprite, renderedPosition, null, color, 0f, weapon.sprite.Bounds.Center.ToVector2(), scale * 6f, SpriteEffects.None, 0f);
 
             int ammoAmount = Player.Instance.ammoInventory[weapon.ammoType];
             string ammoText = ammoAmount.ToString();
             Vector2 origin = UI.font.MeasureString(ammoText) / 2f;
             renderedPosition += new Vector2(0, 40);
-            Main.spriteBatch.DrawString(UI.font, ammoText, renderedPosition, ammoAmount > 0 ? Color.White : UI.errorColor, 0f, origin, 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.DrawString(UI.font, ammoText, renderedPosition, ammoAmount > 0 ? color : UI.errorColor, 0f, origin, scale, SpriteEffects.None, 0f);
         }
     }
 }
