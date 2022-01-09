@@ -101,22 +101,22 @@ namespace ConcentratedHell.UI.SelectionWheel
         {
             Color textColor = new Color(Color.Black, scale);
 
-            Rectangle weaponStatRect = new Rectangle((int)(0.75f * Main.screenSize.Width), (Main.screenSize.Height / 2) - 500, 400, 1000);
+            Rectangle weaponStatRect = new Rectangle((int)(0.75f * Main.screenSize.Width), (Main.screenSize.Height / 2) - 500, 450, 1000);
             Main.spriteBatch.Draw(weaponStatSprite, weaponStatRect, color);
             Vector2 textRect = UI.font.MeasureString(Player.Instance.equippedWeapon.name);
             Main.spriteBatch.DrawString(UI.font, Player.Instance.equippedWeapon.name, new Vector2(weaponStatRect.Center.X, weaponStatRect.Y + 50) - (textRect / 2f), textColor);
 
-            Main.spriteBatch.Draw(Player.Instance.equippedWeapon.sprite, new Vector2(weaponStatRect.Center.X, weaponStatRect.Center.Y - 150f), null, color, 0f, Player.Instance.equippedWeapon.sprite.Bounds.Center.ToVector2(), scale * 10f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(Player.Instance.equippedWeapon.sprite, new Vector2(weaponStatRect.Center.X, weaponStatRect.Center.Y - 250f), null, color, 0f, Player.Instance.equippedWeapon.sprite.Bounds.Center.ToVector2(), scale * 10f, SpriteEffects.None, 0f);
 
-            Main.spriteBatch.DrawString(UI.font, weaponStats, weaponStatRect.Center.ToVector2() - new Vector2(160, 0), textColor);
+            Main.spriteBatch.DrawString(UI.font, weaponStats, weaponStatRect.Center.ToVector2() - new Vector2(190, 100), textColor);
         }
 
         void UpdateWeaponStats()
         {
             weaponStats = WrapText($"" +
-                $"Ammo type : {Ammo.names[Player.Instance.equippedWeapon.ammoType]}\n" +
-                $"Ammo usage : {Player.Instance.equippedWeapon.ammoUsage}\n" +
+                $"Ammo : {Player.Instance.equippedWeapon.ammoUsage} {Ammo.names[Player.Instance.equippedWeapon.ammoType]}\n" +
                 $"Knockback : {Player.Instance.equippedWeapon.knockback}\n" +
+                $"Fire rate : {Math.Round(1f/Player.Instance.equippedWeapon.cooldown.rate,3)}/s\n" +
                 $"\n" +
                 $"{Combat.Weapon.weaponDescriptions[Player.Instance.equippedWeapon.type]}");
         }
@@ -133,7 +133,7 @@ namespace ConcentratedHell.UI.SelectionWheel
                     amount = 0;
                 }
                 amount++;
-                if ((amount >= 15f) && (x == ' '))
+                if ((amount >= 22f) && (x == ' '))
                 {
                     final += "\n";
                     amount = 0;

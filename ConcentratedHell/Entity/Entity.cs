@@ -55,6 +55,7 @@ namespace ConcentratedHell.Entity
         public Vector2 healthBarSize;
 
         #region Movement
+        public Vector2 position;
         public float speed;
         public float direction;
         #endregion
@@ -74,6 +75,7 @@ namespace ConcentratedHell.Entity
             type = _type;
 
             rect = _rect;
+            position = rect.Location.ToVector2();
             healthBarSize = new Vector2(rect.Width, 8f);
             health = _health;
 
@@ -96,6 +98,11 @@ namespace ConcentratedHell.Entity
 
         public virtual void Update()
         {
+            if (Map.IsValidPosition(new Rectangle(position.ToPoint(), rect.Size)))
+            {
+                rect.Location = position.ToPoint();
+            }
+
             if (angered)
             {
                 PathFind(Player.Instance.rect.Location);
@@ -119,7 +126,7 @@ namespace ConcentratedHell.Entity
         public virtual void PathFind(Point target)
         {
             //float distance = MathF.Sqrt(MathF.Pow(MathF.Abs(target.X - rect.X), 2) + MathF.Pow(MathF.Abs(target.Y - rect.Y), 2));
-            float distance = Vector2.Distance(target.ToVector2(), rect.Location.ToVector2());
+            float distance = Vector2.Distance(target.ToVector2(), position);
             // (x + y)^0.5
 
             float processedSpeed = (distance < speed ? distance : speed) * Universe.speedMultiplier;
@@ -129,13 +136,8 @@ namespace ConcentratedHell.Entity
                 target.X - rect.X
                 );
             Vector2 increment = new Vector2(
-                MathF.Cos(direction) * processedSpeed,
-                MathF.Sin(direction) * processedSpeed
-                );
-
-            Rectangle candidate = new Rectangle(
-                rect.Location + increment.ToPoint(),
-                rect.Size
+                MathF.Cos(direction),
+                MathF.Sin(direction)
                 );
 
             if (increment != Vector2.Zero)
@@ -143,24 +145,30 @@ namespace ConcentratedHell.Entity
                 increment.Normalize();
             }
 
+            Vector2 candidatePosition = position + (increment * processedSpeed);
+            Rectangle candidate = new Rectangle(
+                candidatePosition.ToPoint(),
+                rect.Size
+                );
+
             if (Map.IsValidPosition(candidate))
             {
-                rect.Location = candidate.Location;
+                position = candidatePosition;
                 return;
             }
 
-            Point xVel = new Point((int)Math.Ceiling(increment.X), 0);
-            Rectangle xRect = new Rectangle(rect.Location + xVel, rect.Size);
+            Vector2 xVel = new Vector2(increment.X * processedSpeed, 0);
+            Rectangle xRect = new Rectangle((position + xVel).ToPoint(), rect.Size);
             if (Map.IsValidPosition(xRect))
             {
-                rect.Location = xRect.Location;
+                position.X = candidatePosition.X;
             }
 
-            Point yVel = new Point(0, (int)Math.Ceiling(increment.Y));
-            Rectangle yRect = new Rectangle(rect.Location + yVel, rect.Size);
+            Vector2 yVel = new Vector2(0, increment.Y * processedSpeed);
+            Rectangle yRect = new Rectangle((position + yVel).ToPoint(), rect.Size);
             if (Map.IsValidPosition(yRect))
             {
-                rect.Location = yRect.Location;
+                position.Y = candidatePosition.Y;
             }
         }
 
@@ -178,6 +186,7 @@ namespace ConcentratedHell.Entity
             if (Map.IsValidPosition(targetRectangle))
             {
                 rect.Location = targetRectangle.Location;
+                position = rect.Location.ToVector2();
                 return;
             }
 
@@ -194,6 +203,8 @@ namespace ConcentratedHell.Entity
             {
                 rect.Location = yRect.Location;
             }
+
+            position = rect.Location.ToVector2();
         }
         #endregion
 

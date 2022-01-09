@@ -10,6 +10,7 @@ namespace ConcentratedHell
         public double Min;
         public double Max;
         public double Regeneration;
+        public float rate;
         //  |---------I----------|    |---I----------------|    |----------------I----|
         // Min                  Max  Min                  Max  Min                  Max
 
@@ -20,6 +21,8 @@ namespace ConcentratedHell
             Max = _max;
             Regeneration = _regeneration;
             I = (_max - _min) * (_iPercent / 100);
+
+            rate = (float)(Max / Regeneration) / 60f;
         }
 
         public void Regenerate(double _multiplier = 1)

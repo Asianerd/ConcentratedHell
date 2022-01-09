@@ -67,6 +67,7 @@ namespace ConcentratedHell.Combat
                 { Type.Barrett, "A regular Barrett sniper rifle" },
                 { Type.Hell, "a dev weapon\n\nyoure not supposed to see this lmao" },
                 { Type.Gatling_Gun, "A heavy gatling-gun that exterminates hordes with ease" },
+                //{ Type.Gatling_Gun, "a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a " },
             };
         }
         #endregion
@@ -136,6 +137,24 @@ namespace ConcentratedHell.Combat
         public virtual void AltFire(Vector2 origin)
         {
 
+        }
+
+        public virtual void SpawnEmptyCartridge()
+        {
+            Vector2 cartridgeSpawn = (new Vector2(
+                MathF.Cos(Cursor.Instance.playerToCursor),
+                MathF.Sin(Cursor.Instance.playerToCursor)
+                ) * (projectileSpawnDistance / 2f)) + Player.Instance.rect.Center.ToVector2();
+            var z = new Particles.AmmoCartridgeParticle(ammoType, cartridgeSpawn, 1f);
+        }
+
+        public virtual void SpawnEmptyCartridge(Ammo.Type type)
+        {
+            Vector2 cartridgeSpawn = (new Vector2(
+                MathF.Cos(Cursor.Instance.playerToCursor),
+                MathF.Sin(Cursor.Instance.playerToCursor)
+                ) * (projectileSpawnDistance / 2f)) + Player.Instance.rect.Center.ToVector2();
+            var z = new Particles.AmmoCartridgeParticle(type, cartridgeSpawn, 1f);
         }
 
         public enum Type

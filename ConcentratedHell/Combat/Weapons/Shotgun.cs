@@ -36,6 +36,8 @@ namespace ConcentratedHell.Combat.Weapons
             {
                 var x = new Pellet(origin, Cursor.Instance.playerToCursor + (Main.random.Next(-300, 300) / 1000f), Main.random.Next(-30,30)/10f);
             }
+
+            SpawnEmptyCartridge();
         }
 
         public override void AltFire(Vector2 origin)
@@ -46,6 +48,8 @@ namespace ConcentratedHell.Combat.Weapons
             {
                 var x = new Projectiles.Pellet(origin, Cursor.Instance.playerToCursor + Main.random.Next(-360, 360) / 100f, Main.random.Next(-300, 300) / 100f);
             }
+
+            SpawnEmptyCartridge();
         }
     }
 }

@@ -41,7 +41,7 @@ namespace ConcentratedHell
         public GameValue eyeBlink;
         public GameValue regenerateCooldown;
 
-        public Player():base(new Rectangle(-96, 288, 64, 64), Type.Player, new GameValue(0, 1000, 0.5f), 8f)
+        public Player():base(new Rectangle(0, 0, 64, 64), Type.Player, new GameValue(0, 1000, 0.5f), 8f)
         {
             if (Instance == null)
             {
@@ -71,6 +71,11 @@ namespace ConcentratedHell
 
         public override void Update()
         {
+            if (Map.IsValidPosition(new Rectangle(position.ToPoint(), rect.Size)))
+            {
+                rect.Location = position.ToPoint();
+            }
+
             speed = 8f * (Main.keyboardState.IsKeyDown(Keys.LeftControl) ? 0.5f : 1f) * Universe.speedMultiplier;
 
             if (!UI.UI.selectionActive)
@@ -121,27 +126,27 @@ namespace ConcentratedHell
                 return;
             }
 
-
-            Rectangle targetRectangle = new Rectangle((rect.Location.ToVector2() + (targetVelocity * speed)).ToPoint(), rect.Size);
+            Vector2 targetPosition = position + (targetVelocity * speed);
+            Rectangle targetRectangle = new Rectangle(targetPosition.ToPoint(), rect.Size);
 
             if(Map.IsValidPosition(targetRectangle))
             {
-                rect.Location = targetRectangle.Location;
+                position = targetPosition;
                 return;
             }
 
             Vector2 xVel = new Vector2(targetVelocity.X, 0);
-            Rectangle xRect = new Rectangle((rect.Location.ToVector2() + (xVel * speed)).ToPoint(), rect.Size);
+            Rectangle xRect = new Rectangle((position + (xVel * speed)).ToPoint(), rect.Size);
             if (Map.IsValidPosition(xRect))
             {
-                rect.Location = xRect.Location;
+                position.X = targetPosition.X;
             }
 
             Vector2 yVel = new Vector2(0, targetVelocity.Y);
-            Rectangle yRect = new Rectangle((rect.Location.ToVector2() + (yVel * speed)).ToPoint(), rect.Size);
+            Rectangle yRect = new Rectangle((position + (yVel * speed)).ToPoint(), rect.Size);
             if (Map.IsValidPosition(yRect))
             {
-                rect.Location = yRect.Location;
+                position.Y = targetPosition.Y;
             }
         }
 
@@ -152,7 +157,7 @@ namespace ConcentratedHell
 
         public override void Draw()
         {
-            Main.spriteBatch.Draw(sprite, rect, Color.White);
+            Main.spriteBatch.Draw(sprite, rect, Map.IsValidPosition(rect)?Color.White:Color.Red);
             Vector2 eyePosition = new Vector2(
                 (MathF.Cos(Cursor.Instance.playerToCursor) * 5f) + rect.Center.X,
                 (MathF.Sin(Cursor.Instance.playerToCursor) * 5f) + rect.Center.Y - 5f

@@ -61,7 +61,7 @@ namespace ConcentratedHell
                 { Keys.LeftShift, new Input(Keys.LeftShift) },
                 { Keys.C,
                     new Input(Keys.C, () => {
-                        Player.Instance.rect.Location = Cursor.Instance.worldPosition.ToPoint();
+                        Player.Instance.position = Cursor.Instance.worldPosition;
                     })
                 },
                 { Keys.F,
@@ -86,7 +86,8 @@ namespace ConcentratedHell
             });
 
             Map.placeholderSprite = Content.Load<Texture2D>("blank");
-            Map.Initialize(new List<Tile>(){
+            Map.Initialize();
+            /*new List<Tile>(){
                 // Doors first to avoid weird graphic inconsistencies
                 new Door(new Rectangle(0, 0, 64, 128), new Vector2(416, 256), new Vector2(416, 128)),
                 new Door(new Rectangle(0, 0, 64, 128), new Vector2(896, 256), new Vector2(896, 128)),
@@ -105,7 +106,7 @@ namespace ConcentratedHell
 
                 new Tile(new Rectangle(384, 0, 128, 256)),
                 new Tile(new Rectangle(384, 384, 128, 256)),
-            });
+            });*/
             //Player.Initialize();
             Enemy.LoadContent(Content.Load<Texture2D>("Enemy/healthbar"));
 
@@ -159,10 +160,7 @@ namespace ConcentratedHell
 
             if (keyboardState.IsKeyDown(Keys.T))
             {
-                for (int i = 0; i <= 10; i++)
-                {
-                    var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), Player.Instance.rect.Size));
-                }
+                var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), Player.Instance.rect.Size));
             }
 
             if (UpdateEvent != null)

@@ -24,6 +24,7 @@ namespace ConcentratedHell.Combat.Weapons
             {
                 var y = new Particles.MuzzleFlashParticle(origin, Cursor.Instance.playerToCursor + (Main.random.Next(-800, 800) / 1000f), Main.random.Next(400, 1600) / 100f);
             }
+            SpawnEmptyCartridge();
         }
     }
 }

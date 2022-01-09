@@ -54,19 +54,24 @@ namespace ConcentratedHell
 
         public void ApplyDash()
         {
-            Point increment = new Point(
+            /*Point increment = new Point(
                 (int)(MathF.Cos(Player.Instance.direction) * dashSpeed * Universe.speedMultiplier),
                 (int)(MathF.Sin(Player.Instance.direction) * dashSpeed * Universe.speedMultiplier)
+                );*/
+            Vector2 increment = new Vector2(
+                MathF.Cos(Player.Instance.direction) * dashSpeed * Universe.speedMultiplier,
+                MathF.Sin(Player.Instance.direction) * dashSpeed * Universe.speedMultiplier
                 );
 
             Rectangle target = new Rectangle(
-                Player.Instance.rect.Location + increment,
+                (Player.Instance.position + increment).ToPoint(),
                 Player.Instance.rect.Size
                 );
 
             if(Map.IsValidPosition(target))
             {
                 Player.Instance.rect.Location = target.Location;
+                Player.Instance.position += increment;
             }
         }
     }

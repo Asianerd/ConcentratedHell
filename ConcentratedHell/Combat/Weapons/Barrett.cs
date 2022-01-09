@@ -29,6 +29,8 @@ namespace ConcentratedHell.Combat.Weapons
             base.Fire(origin);
 
             var x = new Projectiles.Sniper_round(origin, Cursor.Instance.playerToCursor);
+
+            SpawnEmptyCartridge();
         }
     }
 }

@@ -7,6 +7,8 @@ namespace ConcentratedHell.Combat.Weapons
 {
     class Gatling_gun:Weapon
     {
+        int cartridgeCounter = 0;
+
         public Gatling_gun():base(Type.Gatling_Gun, Projectiles.Projectile.Type.Small_round, 100f, 0.5f, Ammo.Type.Small, new GameValue(0, 1, 1), _ammoUsage:3)
         {
 
@@ -48,6 +50,13 @@ namespace ConcentratedHell.Combat.Weapons
             for (int i = 0; i < 3; i++)
             {
                 var y = new Particles.MuzzleFlashParticle(origin, Cursor.Instance.playerToCursor + (Main.random.Next(-400, 400) / 1000f), Main.random.Next(400, 1600) / 100f);
+            }
+
+            cartridgeCounter++;
+            if (cartridgeCounter >= 9)
+            {
+                SpawnEmptyCartridge();
+                cartridgeCounter = 0;
             }
         }
     }

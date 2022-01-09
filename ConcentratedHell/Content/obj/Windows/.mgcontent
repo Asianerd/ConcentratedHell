@@ -13,6 +13,24 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/cyborg/Eyes/neutral.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Enemy/healthbar.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Fonts/MainFont.spritefont</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Map/9slice/1.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Map/9slice/2.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Map/9slice/3.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Map/9slice/4.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Map/9slice/5.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Map/9slice/6.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Map/9slice/7.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Map/9slice/8.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Map/9slice/9.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Map/9slice/tileset.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Map/sprites/Default.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Map/Tileset.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Particles/AmmoCartridge/Large.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Particles/AmmoCartridge/Medium.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Particles/AmmoCartridge/Plasma.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Particles/AmmoCartridge/Rocket.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Particles/AmmoCartridge/Shell.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Particles/AmmoCartridge/Small.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Particles/BloodFloorSplatter/1.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Particles/Gore.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Particles/Muzzle_flash.png</File>
@@ -60,6 +78,24 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Shotgun.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
