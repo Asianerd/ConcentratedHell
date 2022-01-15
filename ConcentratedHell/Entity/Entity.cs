@@ -11,15 +11,22 @@ namespace ConcentratedHell.Entity
     {
         #region Static
         public static List<Entity> collection;
+        public static List<Entity> enemies;
 
         public static void Initialize()
         {
             collection = new List<Entity>();
+            enemies = new List<Entity>();
 
             var x = new Player();
 
             Main.UpdateEvent += StaticUpdate;
             Main.MidgroundDrawEvent += StaticDraw;
+        }
+
+        public static void OnCollectionUpdated()
+        {
+            enemies = collection.Where(n => n.type != Type.Player).ToList();
         }
 
         public static void StaticUpdate()
@@ -28,7 +35,14 @@ namespace ConcentratedHell.Entity
             {
                 x.Update();
             }
+            int _before = collection.Count;
             collection.RemoveAll(n => (n.type != Type.Player) && (!n.alive));
+            int _after = collection.Count;
+
+            if(_before != _after)
+            {
+                OnCollectionUpdated();
+            }
         }
 
         public static void StaticDraw()
@@ -85,6 +99,7 @@ namespace ConcentratedHell.Entity
             detectDistance = _detectionDistance;
 
             collection.Add(this);
+            OnCollectionUpdated();
 
             if (type != Type.Player)
             {
@@ -93,6 +108,7 @@ namespace ConcentratedHell.Entity
             }
             else
             {
+
             }
         }
 
