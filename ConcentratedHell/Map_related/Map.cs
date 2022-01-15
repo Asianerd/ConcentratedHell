@@ -4,33 +4,26 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ConcentratedHell.Map_related.Levels;
 
 namespace ConcentratedHell
 {
     class Map
     {
         public static Map currentMap;
-        public static Dictionary<Level, List<Tile>> tileSets;
-        public static Dictionary<Level, Texture2D> mapSprites;
+        public static Dictionary<Level, Map> maps;
         public static Texture2D placeholderSprite;
         public static Level level;
         public static List<Texture2D> slices;
 
-        public List<Tile> map;
-        public Texture2D sprite;
-
         public static void Initialize()
         {
-            InitializeTilesets();
-
-            currentMap = new Map();
-            currentMap.map = tileSets[Level.Default];
-            mapSprites = new Dictionary<Level, Texture2D>();
-            foreach (Level x in Enum.GetValues(typeof(Level)).Cast<Level>())
+            maps = new Dictionary<Level, Map>()
             {
-                mapSprites[x] = Main.Instance.Content.Load<Texture2D>($"Map/sprites/{x.ToString().ToLower()}");
-            }
-            currentMap.sprite = mapSprites[level];
+                { Level.Default, new Default() },
+            };
+
+            currentMap = new Default();
 
             slices = new List<Texture2D>();
             for (int i = 1; i <= 9; i++)
@@ -38,59 +31,29 @@ namespace ConcentratedHell
                 slices.Add(Main.Instance.Content.Load<Texture2D>($"Map/9slice/{i}"));
             }
 
-            Main.UpdateEvent += Update;
-            Main.MidgroundDrawEvent += Draw;
+            Main.UpdateEvent += StaticUpdate;
+            Main.MidgroundDrawEvent += StaticDraw;
         }
 
-        public static void InitializeTilesets()
+        public static void StaticUpdate()
         {
-            tileSets = new Dictionary<Level, List<Tile>>()
-            {
-                { Level.Default, new List<Tile>()
-                    {                    
-                        //new Tile(new Rectangle(-1024, -512, 2048, 32)), // Up
-                        /*new Tile(new Rectangle(-1024, -512, 32, 1024)), // Left
-                        new Tile(new Rectangle(3024, -512, 2032, 1024)), // Right
-                        new Tile(new Rectangle(-1024, 512, 2080, 32)), // Down*/
-
-                        new Tile(new Rectangle(-3024, -2512, 6048, 2032)),  // Up
-                        new Tile(new Rectangle(-3024, 512, 6048, 2032)),    // Down
-                        new Tile(new Rectangle(1024, -480, 2032, 992)),     // Right
-                        new Tile(new Rectangle(-3024, -480, 2032, 992)),    // Left
-
-                        new Tile(new Rectangle(-760, -120, 240, 240)),
-                        new Tile(new Rectangle(520, -120, 240, 240)),
-                    }
-                }
-            };
+            currentMap.Update();
         }
 
-        public static void Update()
+        public static void StaticDraw()
         {
-            foreach(Tile x in currentMap.map)
-            {
-                x.Update();
-            }
+            currentMap.Draw();
         }
 
-        public static void AdvanceLevel(Level ?_type)
+        public static void AdvanceLevel(Level? _type)
         {
             if (_type != null)
             {
                 level = (Level)Math.Clamp((int)_type + 1, 0, Enum.GetValues(typeof(Level)).Cast<Level>().Count() - 1);
-                currentMap.map = tileSets[level];
-                currentMap.sprite = mapSprites[level];
+                currentMap = maps[level];
             }
         }
 
-        public static void Draw()
-        {
-            foreach (Tile x in currentMap.map)
-            {
-                x.Draw();
-            }
-            //Main.spriteBatch.Draw(currentMap.sprite, Vector2.Zero, null, Color.White, 0f, currentMap.sprite.Bounds.Center.ToVector2(), 1f, SpriteEffects.None, 0f);
-        }
 
         #region Position validation
         // Split into many overloads to increase performance
@@ -129,6 +92,73 @@ namespace ConcentratedHell
                 }
             }
             return true;
+        }
+        #endregion
+
+        #region Object-related
+        public List<Tile> map;
+        public Vector2 playerSpawn;
+        public List<Vector2> enemySpawns;
+        public int wave = 0;
+        public GameValue waveCooldown;
+
+        public GameValue spawnCooldown;
+        public GameValue spawnProgress;
+
+        public Map(List<Tile> tiles, Vector2 spawnPosition, List<Vector2> _enemySpawns)
+        {
+            map = tiles;
+            playerSpawn = spawnPosition;
+            enemySpawns = _enemySpawns;
+
+            spawnProgress = new GameValue(0, 10, -1);
+            spawnCooldown = new GameValue(0, 30, 1);
+
+            waveCooldown = new GameValue(0, 300, 1, 0);
+        }
+
+        public virtual void Update()
+        {
+            foreach(Tile x in map)
+            {
+                x.Update();
+            }
+
+            if(Entity.Entity.enemies.Count <= 0f)
+            {
+                waveCooldown.Regenerate(Universe.speedMultiplier);
+            }
+
+            if((spawnProgress.Percent() <= 0f) && (waveCooldown.Percent() >= 1f))
+            {
+                wave++;
+                waveCooldown.AffectValue(0f);
+
+                spawnProgress.AffectMax(5d);
+                spawnProgress.AffectValue(1f);
+            }
+
+            spawnCooldown.Regenerate(Universe.speedMultiplier);
+            if((spawnCooldown.Percent() >= 1f) && (spawnProgress.Percent() > 0f))
+            {
+                var x = new Entity.Cyborg(new Rectangle(enemySpawns[Main.random.Next(0, enemySpawns.Count)].ToPoint(), new Point(64, 64)));
+                spawnCooldown.AffectValue(0f);
+                spawnProgress.Regenerate();
+            }
+        }
+
+        public virtual void Draw()
+        {
+            foreach(Tile x in map)
+            {
+                x.Draw();
+            }
+
+            string levelText = $"" +
+                $"Wave : {wave}\n" +
+                $"Enemies : {Entity.Entity.enemies.Count}/{spawnProgress.Max}\n";
+            Vector2 textOrigin = UI.UI.font.MeasureString(levelText) / 2f;
+            Main.spriteBatch.DrawString(UI.UI.font, levelText, Vector2.Zero, Color.White, 0f, textOrigin, 2f, SpriteEffects.None, 0f);
         }
         #endregion
 
