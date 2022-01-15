@@ -16,6 +16,7 @@ namespace ConcentratedHell.UI.SelectionWheel
         public float min, max;
 
         public GameValue progress;
+        GameValue scaleProgress;
 
         public WheelSection(Weapon.Type type, float _rotation, float _min, float _max)
         {
@@ -26,13 +27,21 @@ namespace ConcentratedHell.UI.SelectionWheel
             max = _max;
 
             progress = new GameValue(0, 10, 1, 0);
+            scaleProgress = new GameValue(0, 5, 1, 0);
         }
 
         public void Update()
         {
-            selected = (FullRadian(SelectionWheel.Instance.cursorAngle) > min) && (FullRadian(SelectionWheel.Instance.cursorAngle) < max);
+            selected = (SelectionWheel.Instance.fullCursorAngle > min) && (SelectionWheel.Instance.fullCursorAngle < max);
+
+            scaleProgress.Regenerate(selected ? 1 : -1);
 
             isEquipped = Player.Instance.equippedWeapon.type == weapon.type;
+
+            if(isEquipped)
+            {
+                scaleProgress.AffectValue(1f);
+            }
 
             if(selected && MouseInput.LMouse.active)
             {
@@ -40,18 +49,6 @@ namespace ConcentratedHell.UI.SelectionWheel
             }
 
             progress.Regenerate(isEquipped ? 1 : -1.5);
-        }
-
-        static float FullRadian(float radian)
-        {
-            if(radian < 0)
-            {
-                return (float)((Math.PI - MathF.Abs(radian)) + Math.PI);
-            }
-            else
-            {
-                return radian;
-            }
         }
 
         public void Draw(float _distance, float scale, Color color)
@@ -63,7 +60,7 @@ namespace ConcentratedHell.UI.SelectionWheel
                 MathF.Sin(rotation) * distance
                 ) + SelectionWheel.origin;
 
-            Main.spriteBatch.Draw(weapon.sprite, renderedPosition, null, color, 0f, weapon.sprite.Bounds.Center.ToVector2(), scale * 6f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(weapon.sprite, renderedPosition, null, color, 0f, weapon.sprite.Bounds.Center.ToVector2(), scale * 6f + (float)scaleProgress.Percent(), SpriteEffects.None, 0f);
 
             int ammoAmount = Player.Instance.ammoInventory[weapon.ammoType];
             string ammoText = ammoAmount.ToString();

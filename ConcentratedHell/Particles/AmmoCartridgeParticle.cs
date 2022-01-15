@@ -8,6 +8,8 @@ namespace ConcentratedHell.Particles
 {
     class AmmoCartridgeParticle:Particle
     {
+        Vector2 angledIncrement;
+
         float y = -5f;
         float x;
         float r = 0.2f;
@@ -20,8 +22,10 @@ namespace ConcentratedHell.Particles
         {
             renderedScale = 4f;
 
+            angledIncrement = new Vector2(MathF.Cos(_direction), MathF.Sin(_direction));
+
             rotation = MathF.PI * 2f * (Main.random.Next(0, 100) / 100f);
-            x = Main.random.Next(-100, 100) / 100f;
+            x = (Main.random.Next(-100, 100) / 100f) ;
 
             yCapM = (Main.random.Next(80, 120) / 100f);
             speed = Main.random.Next(90, 110) / 100f;
@@ -30,7 +34,7 @@ namespace ConcentratedHell.Particles
         public override void Update()
         {
             base.Update();
-            
+
             if (y*yCapM < (secondBounce?3.5f:5f))
             {
                 if (secondBounce && (y >= 2f))

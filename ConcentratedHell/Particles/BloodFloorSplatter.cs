@@ -16,7 +16,7 @@ namespace ConcentratedHell.Particles
             Depth.Background
             )
         {
-            renderedScale = scale;
+            renderedScale = scale / 4f;
             rotation = (Main.random.Next(0, 100) / 100f) * MathF.PI * 2f;
         }
 

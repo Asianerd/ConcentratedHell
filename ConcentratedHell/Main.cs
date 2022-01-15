@@ -134,7 +134,7 @@ namespace ConcentratedHell
             Player.Instance.AddWeapon(new Combat.Weapons.AutoShotgun());
             Player.Instance.AddWeapon(new Combat.Weapons.Gatling_gun());
 
-            Player.Instance.EquipWeapon(Weapon.Type.Auto_Shotgun);
+            Player.Instance.EquipWeapon(Weapon.Type.Gatling_Gun);
         }
 
         protected override void LoadContent()
@@ -178,7 +178,7 @@ namespace ConcentratedHell
             GraphicsDevice.Clear(Color.Gray);
 
             Matrix renderPosition = Matrix.CreateTranslation(new Vector3(Camera.Instance.offset, 0));
-            spriteBatch.Begin(samplerState:SamplerState.PointClamp, transformMatrix:renderPosition);
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: renderPosition);
             if (BackgroundDrawEvent != null)
             {
                 BackgroundDrawEvent();
@@ -195,7 +195,7 @@ namespace ConcentratedHell
             Particles.Particle.StaticForegroundDraw();
             spriteBatch.End();
 
-            spriteBatch.Begin(samplerState:SamplerState.PointClamp);
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             UI.UI.Draw();
             spriteBatch.End();
 

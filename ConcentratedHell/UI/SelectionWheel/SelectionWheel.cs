@@ -32,6 +32,7 @@ namespace ConcentratedHell.UI.SelectionWheel
         List<WheelSection> sections;
         public GameValue progress;
         public float cursorAngle = 0;
+        public float fullCursorAngle;
 
         public SelectionWheel()
         {
@@ -54,10 +55,24 @@ namespace ConcentratedHell.UI.SelectionWheel
                     Cursor.Instance.screenPosition.X - origin.X
                     );
 
+                fullCursorAngle = FullRadian(cursorAngle);
+
                 foreach (WheelSection x in sections)
                 {
                     x.Update();
                 }
+            }
+        }
+
+        static float FullRadian(float radian)
+        {
+            if (radian < 0)
+            {
+                return (float)((Math.PI - MathF.Abs(radian)) + Math.PI);
+            }
+            else
+            {
+                return radian;
             }
         }
 
