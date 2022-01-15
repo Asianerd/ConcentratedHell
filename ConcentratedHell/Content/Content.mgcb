@@ -632,6 +632,18 @@
 /processorParam:TextureFormat=Color
 /build:UI/CursorSprites/Default.png
 
+#begin UI/fire_cooldown_sprite.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/fire_cooldown_sprite.png
+
 #begin UI/healthbar.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -751,6 +763,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Weapons/Gatling_gun.png
+
+#begin Weapons/Gatling_gun1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Weapons/Gatling_gun1.png
+
+#begin Weapons/Gatling_gun2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Weapons/Gatling_gun2.png
 
 #begin Weapons/Hell.png
 /importer:TextureImporter

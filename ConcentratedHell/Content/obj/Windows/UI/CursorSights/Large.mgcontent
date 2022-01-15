@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/CursorSights/Large.png</SourceFile>
-  <SourceTime>2022-01-05T00:25:00.6383549+08:00</SourceTime>
+  <SourceTime>2022-01-16T00:33:36.2833121+08:00</SourceTime>
   <DestFile>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/bin/Windows/UI/CursorSights/Large.xnb</DestFile>
-  <DestTime>2022-01-05T16:57:33.8858918+08:00</DestTime>
+  <DestTime>2022-01-16T02:34:25.3968535+08:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+08:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

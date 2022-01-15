@@ -185,3 +185,6 @@ D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Particles\AmmoCartridge\Rocket.xnb
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Particles\AmmoCartridge\Shell.xnb
 D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Particles\AmmoCartridge\Small.xnb
+D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\UI\fire_cooldown_sprite.xnb
+D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Weapons\Gatling_gun1.xnb
+D:\GithubRepos\ConcentratedHell\ConcentratedHell\bin\Debug\netcoreapp3.1\Content\Weapons\Gatling_gun2.xnb
