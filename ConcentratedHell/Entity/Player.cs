@@ -76,7 +76,7 @@ namespace ConcentratedHell
                 rect.Location = position.ToPoint();
             }
 
-            speed = 8f * (Main.keyboardState.IsKeyDown(Keys.LeftControl) ? 0.5f : 1f) * Universe.speedMultiplier;
+            speed = 8f * (Main.keyboardState.IsKeyDown(Keys.LeftControl) ? 0.5f : 1f) * Universe.speedMultiplier * (equippedWeapon == null ? 1f : equippedWeapon.speedMultiplier);
 
             if (!UI.UI.selectionActive)
             {
