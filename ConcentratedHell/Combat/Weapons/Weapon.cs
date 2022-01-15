@@ -36,17 +36,34 @@ namespace ConcentratedHell.Combat
          */
 
         #region Static
-        public static Dictionary<Type, Texture2D> spriteTable;
+        public static Dictionary<Type, List<Texture2D>> spriteTable;
         public static Dictionary<Type, string> weaponNames;
         public static Dictionary<Type, string> weaponDescriptions;
 
         public static void Initialize()
         {
             string weaponSpritePath = "Weapons";
-            spriteTable = new Dictionary<Type, Texture2D>();
+            spriteTable = new Dictionary<Type, List<Texture2D>>();
             foreach(Type x in Enum.GetValues(typeof(Type)).Cast<Type>())
             {
-                spriteTable.Add(x, Main.Instance.Content.Load<Texture2D>($"{weaponSpritePath}/{x.ToString().ToLower()}"));
+                List<Texture2D> sprites = new List<Texture2D>();
+                switch(x)
+                {
+                    case Type.Gatling_Gun:
+                        sprites = new List<Texture2D>()
+                        {
+                            Main.Instance.Content.Load<Texture2D>($"{weaponSpritePath}/{x.ToString().ToLower()}1"),
+                            Main.Instance.Content.Load<Texture2D>($"{weaponSpritePath}/{x.ToString().ToLower()}2"),
+                        };
+                        break;
+                    default:
+                        sprites = new List<Texture2D>()
+                        {
+                            Main.Instance.Content.Load<Texture2D>($"{weaponSpritePath}/{x.ToString().ToLower()}")
+                        };
+                        break;
+                }
+                spriteTable.Add(x, sprites);
             }
 
             weaponNames = new Dictionary<Type, string>()
@@ -73,6 +90,8 @@ namespace ConcentratedHell.Combat
         #endregion
 
         public Texture2D sprite;
+        public List<Texture2D> sprites;
+        public int spriteIndex = 0;
         public Type type;
         public string name;
         public Projectile.Type projectileType;
@@ -81,8 +100,9 @@ namespace ConcentratedHell.Combat
         public GameValue cooldown;
         public float projectileSpawnDistance;
         public float knockback;
+        public float speedMultiplier = 1f;
 
-        public Weapon(Type _type, Projectile.Type _projectileType, float _projectileSpawnDistance, float _knockback, Ammo.Type _ammoType, GameValue _cooldown, int _ammoUsage = 1)
+        public Weapon(Type _type, Projectile.Type _projectileType, float _projectileSpawnDistance, float _knockback, Ammo.Type _ammoType, GameValue _cooldown, float _speedMultiplier = 1f, int _ammoUsage = 1)
         {
             type = _type;
             name = weaponNames[type];
@@ -94,14 +114,17 @@ namespace ConcentratedHell.Combat
             ammoUsage = _ammoUsage;
             cooldown = _cooldown;
 
-            sprite = spriteTable[type];
+            speedMultiplier = _speedMultiplier;
+
+            sprites = spriteTable[type];
+            sprite = sprites[spriteIndex];
         }
 
         public virtual void Update()
         {
             cooldown.Regenerate();
 
-            if (MouseInput.LMouse.isPressed && (cooldown.Percent() == 1f))
+            if (MouseInput.LMouse.isPressed && (cooldown.Percent() >= 1f))
             {
                 if (Player.Instance.ammoInventory[ammoType] >= ammoUsage)
                 {
@@ -155,6 +178,17 @@ namespace ConcentratedHell.Combat
                 MathF.Sin(Cursor.Instance.playerToCursor)
                 ) * (projectileSpawnDistance / 2f)) + Player.Instance.rect.Center.ToVector2();
             var z = new Particles.AmmoCartridgeParticle(type, cartridgeSpawn, 1f);
+        }
+
+        public virtual void AdvanceSprite()
+        {
+            spriteIndex++;
+            if(spriteIndex >= sprites.Count)
+            {
+                spriteIndex = 0;
+            }
+
+            sprite = sprites[spriteIndex];
         }
 
         public enum Type
