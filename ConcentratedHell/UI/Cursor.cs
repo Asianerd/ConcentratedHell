@@ -63,6 +63,28 @@ namespace ConcentratedHell
         public void Draw()
         {
             Main.spriteBatch.Draw(sprite, screenPosition, null, Color.White, 0f, systemCursor ? Vector2.Zero : sprite.Bounds.Center.ToVector2(), 5f, SpriteEffects.None, 0f);
+            /*if (Player.Instance.equippedWeapon != null)
+            {
+                *//*Main.spriteBatch.Draw(UI.UI.fireCooldownSprite, new Rectangle(
+
+                    UI.UI.fireCooldownRect.Location + screenPosition.ToPoint() + sprite.Bounds.Size,
+                    new Point(
+                        UI.UI.fireCooldownRect.Width,
+                        (int)(UI.UI.fireCooldownRect.Height * Player.Instance.equippedWeapon.cooldown.Percent()))
+                    )
+                    , Color.White);*//*
+                int offset = (int)(sprite.Bounds.Width * Player.Instance.equippedWeapon.cooldown.Percent() * 5f);
+                Main.spriteBatch.Draw(UI.UI.fireCooldownSprite, new Rectangle(
+                    new Point(
+                        (int)(screenPosition.X - (sprite.Bounds.Size.X * 2.5f) + 2.5f),
+                        (int)(screenPosition.Y + (sprite.Bounds.Size.Y * 4f))
+                        ),
+                    new Point(
+                        offset,
+                        UI.UI.fireCooldownRect.Height
+                    ))
+                    , Color.White);
+            }*/
         }
 
         public enum Type
