@@ -247,9 +247,11 @@ namespace ConcentratedHell.Entity
 
         public virtual void OnDeath(float _direction = -10f, float power = 3f, float spread = 0.1f)
         {
-            /*var x = new Pickups.AmmoPickup(
+            // Enum.GetValues(typeof(Ammo.Type)).Cast<Ammo.Type>().ToArray()[Main.random.Next(0, Enum.GetValues(typeof(Ammo.Type)).Length)]
+            var x = new Pickups.AmmoPickup(
                 Enum.GetValues(typeof(Ammo.Type)).Cast<Ammo.Type>().ToArray()[Main.random.Next(0, Enum.GetValues(typeof(Ammo.Type)).Length)],
-                Main.random.Next(1, 50), rect.Center.ToVector2());*/
+                Main.random.Next(1, 50),
+                rect.Center.ToVector2());
 
             Vector2 pos = rect.Center.ToVector2();
             for (int i = 0; i <= 10; i++)

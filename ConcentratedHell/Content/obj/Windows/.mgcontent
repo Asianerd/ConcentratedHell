@@ -49,6 +49,15 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Player/Blink/Blink4.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Player/Blink/Blink5.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/PlayerEyes.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/Button/9slice/1.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/Button/9slice/2.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/Button/9slice/3.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/Button/9slice/4.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/Button/9slice/5.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/Button/9slice/6.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/Button/9slice/7.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/Button/9slice/8.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/Button/9slice/9.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/CursorSights/Large.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/CursorSights/Medium.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/CursorSights/Plasma.png</File>
@@ -61,6 +70,7 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/Healthbar/Healthbar.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/Healthbar/Healthbar_case.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/overlay.png</File>
+    <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/PauseMenu/overlay.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/radialWheelSelection.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/UI/weapon_stat_sprite.png</File>
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Amongus_Shotgun.png</File>
@@ -81,6 +91,16 @@
     <File>D:/GithubRepos/ConcentratedHell/ConcentratedHell/Content/Weapons/Shotgun.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

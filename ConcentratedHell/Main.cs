@@ -48,36 +48,47 @@ namespace ConcentratedHell
 
         protected override void Initialize()
         {
+            base.Initialize();
+
+            StaticInitialize();
+        }
+
+        public static void StaticInitialize()
+        {
+            UpdateEvent = null;
+            ForegroundDrawEvent = null;
+            MidgroundDrawEvent = null;
+            BackgroundDrawEvent = null;
+
+            UI.MainMenu.Initialize();
+
             UI.UI.Initialize();
+            UI.PauseMenu.Initialize();
+            UI.Button.Initialize();
 
             Input.Initialize(new Dictionary<Keys, Input>()
             {
+                { Keys.Escape,
+                    new Input(Keys.Escape, () =>
+                    {
+                        Universe.paused = !Universe.paused;
+                    })
+                },
                 { Keys.F11,
                     new Input(Keys.F11, () => {
-                        graphics.IsFullScreen = !graphics.IsFullScreen;
-                        graphics.ApplyChanges();
-                    })
-                },
-                { Keys.LeftShift, new Input(Keys.LeftShift) },
-                { Keys.C,
-                    new Input(Keys.C, () => {
-                        Player.Instance.position = Cursor.Instance.worldPosition;
-                    })
-                },
-                { Keys.F,
-                    new Input(Keys.F, () =>
-                    {
-                        foreach(Pickups.Pickup x in Pickups.Pickup.pickups)
+                        if ( screenSize.Size == new Point(1920,1080) )
                         {
-                            x.detected = true;
+                            graphics.IsFullScreen = !graphics.IsFullScreen;
+                            graphics.ApplyChanges();
                         }
                     })
                 },
-                { Keys.G,
-                    new Input(Keys.G, () => {
-                        var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), new Point(64,64)));
+                { Keys.F4,
+                    new Input(Keys.F4, () => {
+                        Instance.Exit();
                     })
                 },
+                { Keys.LeftShift, new Input(Keys.LeftShift) },
                 { Keys.F3,
                     new Input(Keys.F3, () => {
                         UI.UI.showDebug = !UI.UI.showDebug;
@@ -85,30 +96,9 @@ namespace ConcentratedHell
                 }
             });
 
-            Map.placeholderSprite = Content.Load<Texture2D>("blank");
+            Map.placeholderSprite = Instance.Content.Load<Texture2D>("blank");
             Map.Initialize();
-            /*new List<Tile>(){
-                // Doors first to avoid weird graphic inconsistencies
-                new Door(new Rectangle(0, 0, 64, 128), new Vector2(416, 256), new Vector2(416, 128)),
-                new Door(new Rectangle(0, 0, 64, 128), new Vector2(896, 256), new Vector2(896, 128)),
-                new Door(new Rectangle(0, 0, 64, 128), new Vector2(-128, 256), new Vector2(-128, 128)),
-
-                new Tile(new Rectangle(-128, -128, 1152, 128)), // Up
-                new Tile(new Rectangle(-128, -128, 128, 384)),  // Left
-                new Tile(new Rectangle(-128, 384, 128, 384)),  // Left
-                new Tile(new Rectangle(896, -128, 128, 384)),   // Right
-                new Tile(new Rectangle(896, 384, 128, 384)),    // Right
-                new Tile(new Rectangle(-128, 640, 1152, 128)),  // Down
-
-                new Tile(new Rectangle(128, 128, 128, 128)),
-                new Tile(new Rectangle(128, 384, 128, 128)),
-                new Tile(new Rectangle(640, 256, 128, 128)),
-
-                new Tile(new Rectangle(384, 0, 128, 256)),
-                new Tile(new Rectangle(384, 384, 128, 256)),
-            });*/
-            //Player.Initialize();
-            Enemy.LoadContent(Content.Load<Texture2D>("Enemy/healthbar"));
+            Enemy.LoadContent(Instance.Content.Load<Texture2D>("Enemy/healthbar"));
 
             Entity.Entity.Initialize();
             Camera.Initialize();
@@ -124,8 +114,6 @@ namespace ConcentratedHell
 
             Particles.Particle.Initialize();
 
-            base.Initialize();
-
             /* For testing ; Remove later */
             Player.Instance.AddWeapon(new Combat.Weapons.Shotgun());
             Player.Instance.AddWeapon(new Combat.Weapons.Plasma_rifle());
@@ -134,38 +122,50 @@ namespace ConcentratedHell
             Player.Instance.AddWeapon(new Combat.Weapons.AutoShotgun());
             Player.Instance.AddWeapon(new Combat.Weapons.Gatling_gun());
 
-            Player.Instance.EquipWeapon(Weapon.Type.Gatling_Gun);
+            Player.Instance.EquipWeapon(Weapon.Type.Auto_Shotgun);
+
+            Cursor.LoadContent();
+            UI.UI.LoadContent(Instance.Content.Load<SpriteFont>("Fonts/mainFont"));
+
+            mainFont = Instance.Content.Load<SpriteFont>("Fonts/MainFont");
+            Player.LoadContent(Instance.Content.Load<Texture2D>("player"));
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            Cursor.LoadContent();
-            UI.UI.LoadContent(Content.Load<SpriteFont>("Fonts/mainFont"));
-
-            mainFont = Content.Load<SpriteFont>("Fonts/MainFont");
-            Player.LoadContent(Content.Load<Texture2D>("player"));
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             mouseState = Mouse.GetState();
             keyboardState = Keyboard.GetState();
 
-            Input.StaticUpdate();
-
-            if (keyboardState.IsKeyDown(Keys.T))
+            if(keyboardState.IsKeyDown(Keys.F4))
             {
-                var x = new Cyborg(new Rectangle(Cursor.Instance.worldPosition.ToPoint(), Player.Instance.rect.Size));
+                Exit();
             }
 
-            if (UpdateEvent != null)
+            Input.StaticUpdate();
+            Cursor.Instance.Update();
+
+            if (Universe.state == Universe.GameState.Main_menu)
             {
-                UpdateEvent();
+                UI.MainMenu.Update();
+            }
+            else
+            {
+                if (Universe.paused)
+                {
+                    UI.PauseMenu.Update();
+                }
+                else
+                {
+                    if (UpdateEvent != null)
+                    {
+                        UpdateEvent();
+                    }
+                }
             }
 
             base.Update(gameTime);
@@ -177,6 +177,14 @@ namespace ConcentratedHell
 
             GraphicsDevice.Clear(Color.Gray);
 
+            if(Universe.state == Universe.GameState.Main_menu)
+            {
+                spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+                UI.MainMenu.Draw();
+                Cursor.Instance.Draw();
+                spriteBatch.End();
+                return;
+            }
             Matrix renderPosition = Matrix.CreateTranslation(new Vector3(Camera.Instance.offset, 0));
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: renderPosition);
             if (BackgroundDrawEvent != null)
@@ -197,6 +205,12 @@ namespace ConcentratedHell
 
             spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             UI.UI.Draw();
+
+            if(Universe.paused)
+            {
+                UI.PauseMenu.Draw();
+            }
+            Cursor.Instance.Draw();
             spriteBatch.End();
 
             base.Draw(gameTime);

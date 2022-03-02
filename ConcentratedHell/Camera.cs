@@ -11,10 +11,7 @@ namespace ConcentratedHell
 
         public static void Initialize()
         {
-            if (Instance == null)
-            {
-                Instance = new Camera();
-            }
+            Instance = new Camera();
         }
 
         public static Vector2 ScreenToWorld(Vector2 position)

@@ -58,7 +58,6 @@ namespace ConcentratedHell.UI
         public static void Update()
         {
             PickupText.StaticUpdate();
-            Cursor.Instance.Update();
             SelectionWheel.SelectionWheel.Instance.Update();
             selectionActive = SelectionWheel.SelectionWheel.Instance.progress.Percent() > 0;
 
@@ -67,14 +66,12 @@ namespace ConcentratedHell.UI
 
         public static void Draw()
         {
-            if (Player.Instance.equippedWeapon != null)
+            if ((Player.Instance.equippedWeapon != null) && (!Universe.paused))
             {
                 int ammoAmount = Player.Instance.ammoInventory[Player.Instance.equippedWeapon.ammoType];
                 string ammoText = ammoAmount > 0 ? ammoAmount.ToString() : "Out of ammo!";
                 Vector2 origin = font.MeasureString(ammoText) / 2f;
-                Vector2 renderedPosition = Cursor.Instance.screenPosition + new Vector2(2, (Cursor.sprite.Bounds.Height*5f) + 15f);
-
-
+                Vector2 renderedPosition = Cursor.Instance.screenPosition + new Vector2(2, (Cursor.sprite.Bounds.Height * 5f) + 15f);
                 Main.spriteBatch.DrawString(font, ammoText, renderedPosition, ammoAmount >= Player.Instance.equippedWeapon.ammoUsage ? Color.White : errorColor, 0f, origin, 0.8f, SpriteEffects.None, 0f);
 
                 int offset = (int)(Cursor.sprite.Bounds.Width * Player.Instance.equippedWeapon.cooldown.Percent() * 5f);
@@ -88,7 +85,6 @@ namespace ConcentratedHell.UI
                         fireCooldownRect.Height
                     ))
                     , Color.White);
-                //Main.spriteBatch.DrawString(font, ammoText, (Main.screenSize.Size - ammoTextPositionOffset).ToVector2(), ammoAmount >= Player.Instance.equippedWeapon.ammoUsage ? Color.White : errorColor);
             }
 
             Main.spriteBatch.Draw(healthbarSprite, new Rectangle(
@@ -101,7 +97,7 @@ namespace ConcentratedHell.UI
 
             SelectionWheel.SelectionWheel.Instance.Draw();
 
-            Cursor.Instance.Draw();
+            //Cursor.Instance.Draw();
             PickupText.StaticDraw();
 
             string debugText = $"" +

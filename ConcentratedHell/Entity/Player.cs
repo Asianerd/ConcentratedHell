@@ -43,10 +43,7 @@ namespace ConcentratedHell
 
         public Player():base(new Rectangle(0, 0, 64, 64), Type.Player, new GameValue(0, 1000, 0.5f), 8f)
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
+            Instance = this;
 
             size = new Vector2(64, 64);
 

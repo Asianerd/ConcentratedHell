@@ -113,6 +113,7 @@ namespace ConcentratedHell.Combat
             ammoType = _ammoType;
             ammoUsage = _ammoUsage;
             cooldown = _cooldown;
+            cooldown.AffectValue(0f);
 
             speedMultiplier = _speedMultiplier;
 

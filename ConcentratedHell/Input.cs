@@ -55,6 +55,8 @@ namespace ConcentratedHell
 
         public static void StaticUpdate()
         {
+            MouseInput.StaticUpdate();
+
             foreach(Input x in inputs.Values)
             {
                 x.Update();
@@ -114,7 +116,7 @@ namespace ConcentratedHell
             RMouse = new MouseInput();
             LMouse = new MouseInput();
 
-            Main.UpdateEvent += StaticUpdate;
+            //Main.UpdateEvent += StaticUpdate;
         }
 
         public static void StaticUpdate()
